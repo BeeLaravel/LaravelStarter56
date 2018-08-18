@@ -1,0 +1,18 @@
+{
+    "Dashboard": "控制面板",
+    "Login": "登 录",
+    "Account / EMail Address / Phone Number": "账号 / 邮箱 / 手机号",
+    "Password": "密码",
+    "Remember Me": "记住密码",
+    "Not a member yet? Click :here to register.": "没有注册？点击 :here 注册",
+    "here": "这里",
+
+    "Register": "注 册",
+    "Name": "姓名",
+    "E-Mail Address": "电子邮箱地址",
+    "Confirm Password": "确认密码",
+    "Read and accept \":UserProtocal\" and \":PrivacyProtectionStatement\".": "阅读并接受《:UserProtocal》及《:PrivacyProtectionStatement》",
+    "User Protocal": "用户协议",
+    "Privacy Protection Statement": "隐私权保护声明",
+    "Already a member? Click :here to login.": "已经注册？点击 :here 登录"
+}

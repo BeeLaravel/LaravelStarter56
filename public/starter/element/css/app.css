@@ -1,0 +1,21 @@
+body {
+  margin: 0;
+}
+
+html,
+body,
+div#app,
+section.el-container,
+ul.el-menu {
+  height: 100%;
+}
+
+section.top-container > header.el-header {
+  -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+}
+
+section.top-container > header.el-header img.logo {
+  margin-top: 10px;
+}
+
