@@ -85,7 +85,7 @@
                     </a>
                     <ul class="dropdown-menu animated fadeInLeft">
                         <li class="arrow"></li>
-                        <li><a href="javascript:;">编辑资料 {{auth()->user()->id}}</a></li>
+                        <li><a href="javascript:;">编辑资料</a></li>
                         <li><a href="javascript:;"><span class="badge badge-danger pull-right">2</span> 邮箱</a></li>
                         <li><a href="javascript:;">日历</a></li>
                         <li><a href="javascript:;">设置</a></li>

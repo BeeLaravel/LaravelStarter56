@@ -14,7 +14,7 @@ class CreatePostPostContentsTable extends Migration
     public function up()
     {
         Schema::create('post_contents', function (Blueprint $table) {
-            $table->integer('post_id')->comment('文章ID');
+            $table->integer('post_id')->comment('文章 ID');
             $table->enum('language', ['zh-CN', 'zh-TW', 'zh-HK', 'en-US', 'en-GB', 'jp', 'kr'])->default('zh-CN')->comment('语言');
             $table->enum('content_type', ['MarkDown', 'reStructuredText', 'TinyMCE', 'UEditor'])->default('MarkDown')->comment('内容类型');
             $table->text('content')->comment('内容');

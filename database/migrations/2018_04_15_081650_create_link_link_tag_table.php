@@ -14,8 +14,8 @@ class CreateLinkLinkTagTable extends Migration
     public function up()
     {
         Schema::create('link_tag', function (Blueprint $table) {
-            $table->integer('link_id')->comment('链接ID');
-            $table->integer('tag_id')->comment('标签ID');
+            $table->integer('link_id')->comment('链接 ID');
+            $table->integer('tag_id')->comment('标签 ID');
 
             $table->comment = '链接 - 链接标签';
         });

@@ -14,8 +14,8 @@ class CreatePostPostTagTable extends Migration
     public function up()
     {
         Schema::create('post_tag', function (Blueprint $table) {
-            $table->integer('post_id')->comment('文章ID');
-            $table->integer('tag_id')->comment('标签ID');
+            $table->integer('post_id')->comment('文章 ID');
+            $table->integer('tag_id')->comment('标签 ID');
 
             $table->comment = '文章 - 文章标签';
         });

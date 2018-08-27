@@ -66,9 +66,11 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "repositories": {
-        "packagist": {
+        "packagist": [{
             "type": "composer",
             "url": "https://packagist.org"
-        }
+        }, {
+            "packagist": false
+        }]
     }
 }

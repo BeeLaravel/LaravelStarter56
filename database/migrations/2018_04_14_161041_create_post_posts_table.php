@@ -21,8 +21,8 @@ class CreatePostPostsTable extends Migration
             $table->string('keywords', 50)->nullable()->comment('关键词');
             $table->text('description')->nullable()->comment('描述');
 
-            $table->integer('user_id')->default(0)->comment('用户ID');
-            $table->integer('category_id')->default(0)->comment('分类ID');
+            $table->integer('user_id')->default(0)->comment('用户 ID');
+            $table->integer('category_id')->default(0)->comment('分类 ID');
             $table->unsignedTinyInteger('sort')->default(255);
             $table->timestamps();
             $table->softDeletes();
