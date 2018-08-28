@@ -29,14 +29,14 @@
                 @if ( count($errors)>0 )
                     <div class="alert alert-danger">
                         <ul>
-                            @foreach ( $errors as $error )
+                            @foreach ( $errors->all() as $error )
                                 <li>{{ $error }}</li>
                             @endforeach
                         </ul>
                     </div>
                 @endif
                 <div class="panel-body panel-form">
-                    <form class="form-horizontal form-bordered" action="{{ url('/admin/linktag') }}" method="POST" enctype="multipart/form-data">
+                    <form class="form-horizontal form-bordered" action="{{ url('/admin/post') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3" for="title">标题 * :</label>
@@ -53,7 +53,7 @@
                         <div class="form-group"><!-- 内容 -->
                             <label class="control-label col-md-3 col-sm-3" for="url">内容 * :</label>
                             <div class="col-md-8 col-sm-8">
-                                <textarea name="content" value="{{ $post['content'] }}" class="form-control" id='myEditor' data-parsley-required="true"></textarea>
+                                <textarea name="content" class="form-control" id='myEditor' data-parsley-required="true">{{ $post['content']['content'] }}</textarea>
                             </div>
                         </div>
                         <div class="form-group"><!-- 类型 -->
@@ -124,6 +124,8 @@
     <script src="{{ asset('template/color_admin/plugins/jquery-tag-it/js/tag-it.min.js')}} "></script>
     <!-- <script src="{{ asset('template/color_admin/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js')}} "></script> -->
     <!-- <script src="{{ asset('template/color_admin/plugins/bootstrap-tagsinput/bootstrap-tagsinput-typeahead.js')}} "></script> -->
+
+    @include('editor::head')
 
     <script src="{{ asset('template/color_admin/js/apps.min.js') }}"></script>
 

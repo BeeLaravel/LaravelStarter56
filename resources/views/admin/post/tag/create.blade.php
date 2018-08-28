@@ -7,8 +7,8 @@
 @section('content')
     <ol class="breadcrumb pull-right">
         <li><a href="{{url('/admin/')}}">首页</a></li>
-        <li><a href="{{url('/admin/design')}}">文章</a></li>
-        <li><a href="{{url('/admin/link')}}">标签</a></li>
+        <li><a href="{{url('/admin/post')}}">文章</a></li>
+        <li><a href="{{url('/admin/posttag')}}">标签</a></li>
         <li class="active">新增</li>
     </ol>
     <h1 class="page-header">标签 <small>文章管理器</small></h1>

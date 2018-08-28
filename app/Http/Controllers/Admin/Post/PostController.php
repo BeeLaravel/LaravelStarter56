@@ -104,6 +104,10 @@ class PostController extends Controller
         // $result->user_id = auth()->user()->id;
 
         if ( $result ) {
+            $result->content()->save(new Content([
+                'content' => $request->content,
+                'content_type' => $request->type,
+            ]));
             // $tags = $request->input('tags');
             // log_file($tags);
             // $exist_tags = Tag::where('title', 'in', $tags)->pluck('title', 'id');
@@ -152,7 +156,7 @@ class PostController extends Controller
         $tags = Tag::pluck('title');
         $tags = json_encode($tags);
 
-        $post = Post::find($id);
+        $post = Post::with('content')->find($id);
 
         return view('admin.post.post.edit', compact('types', 'tags', 'post'));
     }
@@ -167,8 +171,9 @@ class PostController extends Controller
             return redirect('/admin/post'); // 列表
         } else {
             flash('操作失败', 'error');
-
-            return back(); // 继续
+            $error = back()->withErrors();
+            dd($error);
+            // return back(); // 继续
         }
     }
     public function destroy(Request $request, int $id)

@@ -12,15 +12,17 @@ class Post extends Model
     use SoftDeletes;
     use ActionButtonTrait;
 
-    protected $fillable = [
+    protected $fillable = [ // 自动填充
         'title',
         'slug',
         'keywords',
         'description',
-        'content',
         'sort',
         'user_id',
         'category_id',
+    ];
+    protected $casts = [ // 类型转换
+        'keywords' => 'array',
     ];
 
     public function category() { // 分类

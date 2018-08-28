@@ -23,7 +23,7 @@ class Tag extends Model
     ];
 
     public function parent() { // 父级
-        return $this->belongsTo('App\Models\Link\Tag', 'parent_id');
+        return $this->belongsTo('App\Models\Post\Tag', 'parent_id');
     }
     public function user() { // 创建人
         return $this->belongsTo('App\Models\RBAC\User');

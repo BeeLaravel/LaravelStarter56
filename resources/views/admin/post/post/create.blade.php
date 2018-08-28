@@ -53,7 +53,7 @@
                         <div class="form-group"><!-- 内容 -->
                             <label class="control-label col-md-3 col-sm-3" for="url">内容 * :</label>
                             <div class="col-md-8 col-sm-8">
-                                <textarea name="content" value="{{ old('content') }}" class="form-control" id='myEditor' data-parsley-required="true"></textarea>
+                                <textarea name="content" class="form-control" id='myEditor' data-parsley-required="true">{{ old('content') }}</textarea>
                             </div>
                         </div>
                         <div class="form-group"><!-- 类型 -->
