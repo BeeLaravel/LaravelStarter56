@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Admin\Blog;
 
-use App\Models\Blog\Post;
 use Illuminate\Http\Request;
+
+use App\Models\Blog\Post;
+
+use App\Http\Resources\Post\PostResource;
 
 class PostController extends Controller
 {
@@ -36,7 +39,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return new PostResource($post);
     }
 
     /**

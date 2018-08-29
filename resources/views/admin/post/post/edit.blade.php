@@ -36,8 +36,10 @@
                     </div>
                 @endif
                 <div class="panel-body panel-form">
-                    <form class="form-horizontal form-bordered" action="{{ url('/admin/post') }}" method="POST" enctype="multipart/form-data">
+                    <form class="form-horizontal form-bordered" action="{{ url('/admin/post/'.$post['id']) }}" method="POST" enctype="multipart/form-data">
                         @csrf
+                        {{ method_field('PATCH') }}
+                        <input type="hidden" name="id" value="{{$post['id']}}">
                         <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3" for="title">标题 * :</label>
                             <div class="col-md-8 col-sm-8">

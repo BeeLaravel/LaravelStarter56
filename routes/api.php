@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 //     return $request->user();
 // });
 
-// $api = app('Dingo\Api\Routing\Router');
+$api = app('Dingo\Api\Routing\Router');
 
 // $api->version('v1', function ($api) {
 //     $api->get('users/{id}', 'App\Api\Controllers\UserController@show');
@@ -22,3 +22,8 @@ use Illuminate\Http\Request;
 // });
 
 // app('Dingo\Api\Routing\UrlGenerator')->version('v1')->route('users.index');
+
+$api->version('v1', function ($api) {
+    $api->get('posts', '\App\Http\Controllers\Api\Post\PostController@index');
+    $api->get('post/{id}', '\App\Http\Controllers\Api\Post\PostController@show');
+});

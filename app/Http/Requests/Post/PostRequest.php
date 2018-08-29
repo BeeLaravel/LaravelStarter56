@@ -23,8 +23,9 @@ class PostRequest extends FormRequest
      */
     public function rules()
     {
+        $id = request('id');
         return [
-            'slug' => 'required|unique:posts',
+            'slug' => 'required|unique:posts,slug,'.$id,
             'title' => 'required',
             'sort' => 'bail|integer|min:0|max:255',
         ];

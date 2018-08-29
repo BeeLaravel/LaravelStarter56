@@ -131,15 +131,15 @@ class PostController extends Controller
             
         }
 
-        if ( $result ) {
-            flash('操作成功', 'success');
+        // if ( $result ) {
+        //     flash('操作成功', 'success');
 
-            return redirect('/admin/post'); // 列表
-        } else {
-            flash('操作失败', 'error');
+        //     return redirect('/admin/post'); // 列表
+        // } else {
+        //     flash('操作失败', 'error');
 
-            return back(); // 继续
-        }
+        //     return back(); // 继续
+        // }
     }
     public function show(int $id)
     {
@@ -166,6 +166,9 @@ class PostController extends Controller
         $result = $post->update($request->all());
 
         if ( $result ) {
+            $post->content->content = $request->content;
+            $post->content->content_type = $request->type;
+
             flash('操作成功', 'success');
 
             return redirect('/admin/post'); // 列表

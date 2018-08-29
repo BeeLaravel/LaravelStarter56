@@ -1,9 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Blog;
+namespace App\Http\Controllers\Api\Post;
 
-use App\Models\Blog\Post;
+// ### 引用
+// #### 请求
 use Illuminate\Http\Request;
+// #### 模型
+use App\Models\Post\Post;
+// #### 资源
+use App\Http\Resources\Post\PostResource;
+use App\Http\Resources\Post\PostCollection;
 
 class PostController extends Controller
 {
@@ -14,7 +20,14 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        // return new PostCollection(Post::all());
+        return new PostCollection(Post::paginate())
+            ->additional(['meta' => [
+                'key' => 'value',
+            ]])
+            ->response()
+            ->header('X-Value', 'True');;
+        // return PostResource::collection(Post::all());
     }
 
     /**
@@ -34,9 +47,10 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show(int $id)
     {
-        //
+        $post = Post::findOrNew($id);
+        return new PostResource($post);
     }
 
     /**
