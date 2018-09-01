@@ -13,7 +13,7 @@ class CreateServerFtpsTable extends Migration
      */
     public function up()
     {
-        Schema::create('ftps', function (Blueprint $table) {
+        Schema::create('server_ftps', function (Blueprint $table) {
             $table->increments('id');
 
             $table->string('account', 50)->comment('账号');
@@ -25,7 +25,7 @@ class CreateServerFtpsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->comment = '服务器 - FTP服务器';
+            $table->comment = '服务器 - FTP';
         });
     }
 
@@ -36,6 +36,6 @@ class CreateServerFtpsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ftps');
+        Schema::dropIfExists('server_ftps');
     }
 }

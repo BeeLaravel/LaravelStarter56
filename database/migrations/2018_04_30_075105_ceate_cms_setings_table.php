@@ -19,8 +19,8 @@ class CeateCmsSetingsTable extends Migration
             $table->string('default_value');
             $table->string('description');
 
-            $table->integer('user_id')->default(1);
             $table->unsignedTinyInteger('sort')->default(255);
+            $table->integer('created_by');
             $table->timestamps();
             $table->softDeletes();
 

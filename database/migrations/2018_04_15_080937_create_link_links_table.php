@@ -23,8 +23,8 @@ class CreateLinkLinksTable extends Migration
             $table->string('title', 50)->comment('标题');
             $table->text('description')->nullable()->comment('描述');
 
-            $table->integer('user_id')->default(0);
             $table->unsignedTinyInteger('sort')->default(255);
+            $table->integer('created_by');
             $table->timestamps();
             $table->softDeletes();
 

@@ -21,6 +21,7 @@ class CreateRbacPermissionsTable extends Migration
             $table->integer('parent_id')->default(0)->comment('父 ID');
             $table->text('description')->nullable()->comment('描述');
 
+            $table->integer('created_by');
             $table->timestamps();
             $table->softDeletes();
 

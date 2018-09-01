@@ -19,12 +19,12 @@ class CeateCmsSettingValuesTable extends Migration
             $table->string('value');
             $table->integer('organization_id');
 
-            $table->integer('user_id')->default(1);
             $table->unsignedTinyInteger('sort')->default(255);
+            $table->integer('created_by');
             $table->timestamps();
             $table->softDeletes();
 
-            $table->comment = 'CMS - 机构';
+            $table->comment = 'CMS - 配置值';
         });
     }
 

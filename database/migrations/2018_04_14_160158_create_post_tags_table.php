@@ -20,9 +20,9 @@ class CreatePostTagsTable extends Migration
             $table->string('slug', 50)->comment('标识');
             $table->text('description')->nullable()->comment('描述');
 
-            $table->integer('user_id')->default(0)->comment('用户 ID');
             $table->integer('parent_id')->default(0)->comment('父 ID');
             $table->unsignedTinyInteger('sort')->default(255);
+            $table->integer('created_by');
             $table->timestamps();
             $table->softDeletes();
 

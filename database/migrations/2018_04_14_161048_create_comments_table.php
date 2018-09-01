@@ -4,7 +4,7 @@ use Jialeo\LaravelSchemaExtend\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePostCommentsTable extends Migration
+class CreateCommentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -19,10 +19,11 @@ class CreatePostCommentsTable extends Migration
             $table->morphs('morphs');
             $table->text('content')->comment('内容');
 
+            $table->integer('created_by');
             $table->timestamps();
             $table->softDeletes();
 
-            $table->comment = '文章 - 评论';
+            $table->comment = '评论';
         });
     }
 

@@ -13,7 +13,7 @@ class CreateServerSshsTable extends Migration
      */
     public function up()
     {
-        Schema::create('sshs', function (Blueprint $table) {
+        Schema::create('server_sshs', function (Blueprint $table) {
             $table->increments('id');
 
             $table->string('account', 50)->comment('账号');
@@ -25,7 +25,7 @@ class CreateServerSshsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->comment = '服务器 - SSH服务器';
+            $table->comment = '服务器 - SSH';
         });
     }
 
@@ -36,6 +36,6 @@ class CreateServerSshsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sshs');
+        Schema::dropIfExists('server_sshs');
     }
 }

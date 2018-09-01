@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
+use Jialeo\LaravelSchemaExtend\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CeateCmsOrganizationsTable extends Migration
+class CreateServersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,18 @@ class CeateCmsOrganizationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('cms_organizations', function (Blueprint $table) {
+        Schema::create('servers', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('slug');
-            $table->string('title');
-            $table->string('description');
 
-            $table->integer('user_id')->default(1);
+            $table->ipAddress('host')->comment('主机');
+            $table->unsignedSmallInteger('port_ssh')->default(22)->comment('端口-SSH');
+            $table->unsignedSmallInteger('port_ftp')->default(21)->comment('端口-FTP');
+
             $table->unsignedTinyInteger('sort')->default(255);
             $table->timestamps();
             $table->softDeletes();
 
-            $table->comment = 'CMS - 机构';
+            $table->comment = '服务器';
         });
     }
 
@@ -35,6 +35,6 @@ class CeateCmsOrganizationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cms_organizations');
+        Schema::dropIfExists('servers');
     }
 }
