@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
 
-            $table->comment = 'RBAC - 用户';
+            $table->comment = '用户';
         });
     }
 

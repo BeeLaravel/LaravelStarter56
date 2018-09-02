@@ -1,6 +1,14 @@
 <?php
 // ## Admin
 Auth::routes();
+
+// ### RBAC
+$router->resource('corporation', 'RBAC\CorporationController'); // 公司
+$router->get('/corporation/download/{type}', 'RBAC\CorporationController@download'); // 下载
+$router->resource('permission', 'RBAC\PermissionController'); // 权限
+$router->resource('role', 'RBAC\RoleController'); // 角色
+$router->resource('admin', 'RBAC\UserController'); // 用户
+
 // ### 链接
 $router->resource('linktag', 'Link\LinkTagController'); // 链接标签
 $router->resource('link', 'Link\LinkController'); // 链接
