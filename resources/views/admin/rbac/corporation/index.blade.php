@@ -31,14 +31,14 @@
                             <button type="button" class="btn btn-primary m-r-5 m-b-5"><i class="fa fa-plus-square-o"></i> 添加</button>
                         </a>
                     {{--@endif--}}
-                    <a href="{{ url('/admin/corporation/export') }}" class="pull-right">
-                        <button type="button" class="btn btn-white m-r-5 m-b-5"><i class="fa fa-export"></i> 导出</button>
-                    </a>
                     <a href="{{ url('/admin/corporation/download/template') }}" class="pull-right">
-                        <button type="button" class="btn btn-white m-r-5 m-b-5"><i class="fa fa-download"></i> 下载模板</button>
+                        <button type="button" class="btn btn-white m-r-5 m-b-5"><i class="fa fa-download"></i> 下载导入模板</button>
+                    </a>
+                    <a href="{{ url('/admin/corporation/export') }}" class="pull-right">
+                        <button type="button" class="btn btn-white m-r-5 m-b-5"><i class="fa fa-arrow-circle-o-down"></i> 导出</button>
                     </a>
                     <a href="{{ url('/admin/corporation/download/picture') }}" class="pull-right">
-                        <button type="button" class="btn btn-white m-r-5 m-b-5"><i class="fa fa-download"></i> 下载宣传图片</button>
+                        <button type="button" class="btn btn-white m-r-5 m-b-5"><i class="fa fa-download"></i> 导出宣传图片</button>
                     </a>
                     <form action="" method="POST" class="form-inline" style="margin-bottom: 5px;">
                         <div class="form-group">
