@@ -1,10 +1,12 @@
 <?php
-
 namespace App\Http\Controllers\Admin\RBAC;
 
 use Illuminate\Http\Request;
 
 use App\Models\RBAC\Corporation;
+
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\Admin\RBAC\CorporationExport;
 
 // RBAC - 公司
 class CorporationController extends Controller {
@@ -22,19 +24,22 @@ class CorporationController extends Controller {
     public function store(Request $request) {
         
     }
-    public function show(Server $server) {
+    public function show(Corporation $corporation) {
         
     }
-    public function edit(Server $server) {
+    public function edit(Corporation $corporation) {
         
     }
-    public function update(Request $request, Server $server) {
+    public function update(Request $request, Corporation $corporation) {
         
     }
-    public function destroy(Server $server) {
+    public function destroy(Corporation $corporation) {
         
     }
 
+    public function export() {
+        return Excel::download(new CorporationExport, 'corporations.xlsx');
+    }
     public function download($type) {
         $path = '';
 

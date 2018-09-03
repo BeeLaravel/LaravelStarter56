@@ -31,6 +31,9 @@
                             <button type="button" class="btn btn-primary m-r-5 m-b-5"><i class="fa fa-plus-square-o"></i> 添加</button>
                         </a>
                     {{--@endif--}}
+                    <a href="{{ url('/admin/corporation/export') }}" class="pull-right">
+                        <button type="button" class="btn btn-white m-r-5 m-b-5"><i class="fa fa-export"></i> 导出</button>
+                    </a>
                     <a href="{{ url('/admin/corporation/download/template') }}" class="pull-right">
                         <button type="button" class="btn btn-white m-r-5 m-b-5"><i class="fa fa-download"></i> 下载模板</button>
                     </a>
