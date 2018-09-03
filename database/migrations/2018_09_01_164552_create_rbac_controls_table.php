@@ -1,18 +1,10 @@
 <?php
-
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRbacControlsTable extends Migration
-{
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
+class CreateRbacControlsTable extends Migration {
+    public function up() {
         Schema::create('rbac_controls', function (Blueprint $table) {
             $table->increments('id');
 
@@ -31,14 +23,7 @@ class CreateRbacControlsTable extends Migration
             $table->comment = 'RBAC - 控制';
         });
     }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::dropIfExists('cms_ips');
+    public function down() {
+        Schema::dropIfExists('rbac_controls');
     }
 }
