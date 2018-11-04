@@ -42,7 +42,11 @@ return [
         ],
         'admin' => [
             'driver' => 'session',
-            'provider' => 'administrators',
+            'provider' => 'admins',
+        ],
+        'office' => [
+            'driver' => 'session',
+            'provider' => 'officers',
         ],
         'api' => [
             'driver' => 'token',
@@ -72,9 +76,13 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\Front\User::class,
         ],
-        'administrators' => [
+        'admins' => [
             'driver' => 'eloquent',
             'model' => App\Models\RBAC\User::class,
+        ],
+        'officers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Office\User::class,
         ],
 
         // 'users' => [
@@ -104,9 +112,14 @@ return [
             'table' => 'password_resets',
             'expire' => 60,
         ],
-        'administrators' => [
-            'provider' => 'administrators',
-            'table' => 'administrator_password_resets',
+        'admins' => [
+            'provider' => 'admin',
+            'table' => 'rbac_password_resets',
+            'expire' => 60,
+        ],
+        'officers' => [
+            'provider' => 'office',
+            'table' => 'office_password_resets',
             'expire' => 60,
         ],
     ],

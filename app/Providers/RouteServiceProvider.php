@@ -41,6 +41,8 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapAdminRoutes();
         $this->mapBackRoutes();
+        $this->mapOfficeRoutes();
+
         $this->mapFrontRoutes();
         $this->mapWapRoutes();
         $this->mapMobileRoutes();
@@ -76,6 +78,14 @@ class RouteServiceProvider extends ServiceProvider
              ->middleware('web')
              ->namespace($this->namespace.'\Back')
              ->group(base_path('routes/back.php'));
+    }
+
+    protected function mapOfficeRoutes()
+    {
+        Route::prefix('office')
+             ->middleware('web')
+             ->namespace($this->namespace.'\Office')
+             ->group(base_path('routes/office.php'));
     }
 
     protected function mapFrontRoutes()

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Auth;
+namespace App\Http\Controllers\Office\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -28,8 +28,8 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/admin/linktag';
-    protected $logoutRedirectTo = '/admin/login';
+    protected $redirectTo = '/office';
+    protected $logoutRedirectTo = '/office/login';
 
     /**
      * Create a new controller instance.
@@ -38,7 +38,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest:admin')->except('logout');
+        $this->middleware('guest:office')->except('logout');
     }
 
     public function showLoginForm()
@@ -51,7 +51,7 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
-        $this->guard('admin')->logout();
+        $this->guard('office')->logout();
 
         $request->session()->invalidate();
 
@@ -59,6 +59,6 @@ class LoginController extends Controller
     }
     protected function guard()
     {
-        return Auth::guard('admin');
+        return Auth::guard('office');
     }
 }
