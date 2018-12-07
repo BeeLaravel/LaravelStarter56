@@ -1,22 +1,20 @@
 let mix = require('laravel-mix');
 
-/*
- |--------------------------------------------------------------------------
- | Mix Asset Management
- |--------------------------------------------------------------------------
- |
- | Mix provides a clean, fluent API for defining some Webpack build steps
- | for your Laravel application. By default, we are compiling the Sass
- | file for the application as well as bundling up all the JS files.
- |
- */
-
 mix
-    .js('resources/assets/js/app.js', 'public/js')
-   .sass('resources/assets/sass/app.scss', 'public/css')
-   .js('resources/assets/js/cms.js', 'public/js')
-   .sass('resources/assets/sass/cms.scss', 'public/css')
+	// ### Starter
+	// #### vue
+    .js('resources/assets/vue/js/app.js', 'public/starter/vue/js')
+    .sass('resources/assets/vue/sass/app.scss', 'public/starter/vue/css')
 
-   .js('resources/assets/element/js/app.js', 'public/starter/element/js')
-   .sass('resources/assets/element/sass/app.scss', 'public/starter/element/css')
-   ;
+    // #### element
+    .js('resources/assets/element/js/app.js', 'public/starter/element/js')
+    .sass('resources/assets/element/sass/app.scss', 'public/starter/element/css')
+
+    // #### mint
+    // .js('resources/assets/mint/js/app.js', 'public/starter/mint/js')
+    // .sass('resources/assets/mint/sass/app.scss', 'public/starter/mint/css')
+
+    // ### 项目
+    // #### vue cms
+    // .sass('resources/assets/sass/cms.scss', 'public/css')
+;

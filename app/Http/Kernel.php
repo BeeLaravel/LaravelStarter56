@@ -21,6 +21,7 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\TrustProxies::class,
 
         // \App\Http\Middleware\CheckIP::class,
+        \App\Http\Middleware\Cors::class, // 跨域
     ];
 
     /**

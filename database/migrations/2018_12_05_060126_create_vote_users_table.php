@@ -18,7 +18,7 @@ class CreateVoteUsersTable extends Migration
 
             $table->string('title', 20)->comment('名称');
             $table->string('avatar', 20)->comment('头像');
-            $table->text('content', 20)->comment('内容');
+            $table->text('description', 20)->comment('描述');
             $table->integer('vote_id');
 
             $table->integer('vote_count')->comment('投票数');

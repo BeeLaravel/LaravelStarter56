@@ -1,13 +1,30 @@
 <?php
+// ## API
+// ### 原生
+// Route::get('votes', function() { // test
+//     return \App\Models\Vote\Vote::all();
+// });
 
-use Illuminate\Http\Request;
-
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
+// Route::middleware('auth:api')->get('/user', function (\Illuminate\Http\Request $request) {
 //     return $request->user();
 // });
 
+// ### Dingo API
 $api = app('Dingo\Api\Routing\Router');
 
+// $api->version('v1', function ($api) {
+	// $api->get('votes', function() { // test
+	//     return \App\Models\Vote\Vote::all();
+	// });
+
+	// $api->group(['middleware' => ['auth:api']], function ($api) {
+	// 	$api->get('/user', function (\Illuminate\Http\Request $request) {
+	// 	    return $request->user();
+	// 	});
+	// });
+// });
+
+// ### 其他
 // $api->version('v1', function ($api) {
 //     $api->get('users/{id}', 'App\Api\Controllers\UserController@show');
 // });
@@ -23,7 +40,19 @@ $api = app('Dingo\Api\Routing\Router');
 
 // app('Dingo\Api\Routing\UrlGenerator')->version('v1')->route('users.index');
 
+// $api->version('v1', function ($api) {
+//     $api->get('posts', '\App\Http\Controllers\Api\Post\PostController@index');
+//     $api->get('post/{id}', '\App\Http\Controllers\Api\Post\PostController@show');
+// });
+
+// $api->group(['middleware' => ['auth:api']], function ($api) {
+	$api->version('v1', function ($api) { // Vote
+	    $api->resource('votes', '\App\Http\Controllers\Api\Vote\VoteController'); // 投票 Vote
+	    $api->resource('vote/users', '\App\Http\Controllers\Api\Vote\UserController'); // 用户 User
+	    $api->resource('vote/logs', '\App\Http\Controllers\Api\Vote\LogController'); // 日志 Log
+	});
+// });
+
 $api->version('v1', function ($api) {
-    $api->get('posts', '\App\Http\Controllers\Api\Post\PostController@index');
-    $api->get('post/{id}', '\App\Http\Controllers\Api\Post\PostController@show');
+    $api->post('auth/register', '\App\Http\Controllers\Api\Auth\AuthController@register');
 });
