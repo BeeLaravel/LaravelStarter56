@@ -15,8 +15,8 @@ class UserTransformer extends TransformerAbstract {
             'avatar' => $user->avatar,
             'description' => $user->description,
 
-            'voted_count' => $user->voted_count,
-            'visited_count' => $user->visited_count,
+            'vote_count' => $user->vote_count,
+            'visit_count' => $user->visit_count,
 
             // 'created_at' => $user->created_at,
             // 'updated_at' => $user->updated_at,
