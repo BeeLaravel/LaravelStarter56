@@ -20,9 +20,9 @@ class VoteTransformer extends TransformerAbstract {
             'start_at' => $vote->start_at,
             'finish_at' => $vote->finish_at,
 
-            'attended_count' => $vote->attended_count,
-            'voted_count' => $vote->voted_count,
-            'visited_count' => $vote->visited_count,
+            'attend_count' => $vote->attend_count,
+            'vote_count' => $vote->vote_count,
+            'visit_count' => $vote->visit_count,
 
             'seo_title' => $vote->seo_title,
             'seo_keywords' => $vote->seo_keywords,
