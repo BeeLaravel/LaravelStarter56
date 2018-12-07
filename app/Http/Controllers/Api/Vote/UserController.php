@@ -7,8 +7,17 @@ use App\Models\Vote\User;
 use App\Transformers\Vote\UserTransformer;
 
 class UserController extends Controller { // 用户
-    public function index($page_size=10, $order='vote_count', $order_direction='desc') {
-        $users = User::order($order, $order_direction)->paginate($page_size);
+    public function index($vote_id=0, Request $request) {
+        $order_column = $request->query('order_column', 'vote_count');
+        $order_direction = $request->query('order_direction', 'desc');
+        $page_size = $request->query('page_size', 10);
+
+        $users = new User;
+        if ( $vote_id ) $users = $users->where('vote_id', $vote_id);
+        $users = $users
+            ->orderBy($order_column, $order_direction)
+            ->paginate($page_size);
+
         return $this->response->paginator($users, new UserTransformer);
     }
     public function show($id) {

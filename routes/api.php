@@ -48,8 +48,10 @@ $api = app('Dingo\Api\Routing\Router');
 // $api->group(['middleware' => ['auth:api']], function ($api) {
 	$api->version('v1', function ($api) { // Vote
 	    $api->resource('votes', '\App\Http\Controllers\Api\Vote\VoteController'); // 投票 Vote
-	    $api->resource('vote/users', '\App\Http\Controllers\Api\Vote\UserController'); // 用户 User
-	    $api->resource('vote/logs', '\App\Http\Controllers\Api\Vote\LogController'); // 日志 Log
+	    $api->resource('vote_users', '\App\Http\Controllers\Api\Vote\UserController'); // 用户 User
+	    $api->get('votes/{vote_id}/users', '\App\Http\Controllers\Api\Vote\UserController@index');
+	    $api->resource('vote_logs', '\App\Http\Controllers\Api\Vote\LogController'); // 日志 Log
+	    $api->get('vote_users/{user_id}/logs', '\App\Http\Controllers\Api\Vote\LogController@index');
 	});
 // });
 
