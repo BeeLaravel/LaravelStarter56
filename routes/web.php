@@ -29,3 +29,25 @@ Route::group([
 });
 
 Auth::routes();
+
+Route::group([
+	'prefix' => 'image'
+], function ($router) {
+	Route::group([
+		'prefix' => 'dropzone'
+	], function ($router) {
+		Route::get('/', ['as' => 'upload', 'uses' => 'Resource\ImageController@getUpload']);
+		Route::get('example-2', ['as' => 'upload-2', 'uses' => 'Resource\ImageController@getServerImagesPage']);
+		Route::get('example-3', ['as' => 'upload-3', 'uses' => 'Resource\ImageController@getUpload3']);
+
+		Route::post('upload', ['as' => 'upload-post', 'uses' =>'Resource\ImageController@postUpload']);
+		Route::post('upload/delete', ['as' => 'upload-remove', 'uses' =>'Resource\ImageController@deleteUpload']);
+		Route::get('server-images', ['as' => 'server-images', 'uses' => 'Resource\ImageController@getServerImages']);
+	});
+});
+
+Route::group([ // 案例
+	'prefix' => 'case'
+], function ($router) {
+	Route::get('/', ['as' => 'case', 'uses' => 'Project\Cases\IndexController@index']);
+});

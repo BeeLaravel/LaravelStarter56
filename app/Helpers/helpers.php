@@ -9,6 +9,7 @@ require __DIR__ . '/DateTime.php'; // 时间
 require __DIR__ . '/Agent.php'; // 终端
 require __DIR__ . '/File.php'; // 文件
 require __DIR__ . '/Log.php'; // 日志
+require __DIR__ . '/Structure.php'; // 结构
 // ### 接口
 require __DIR__ . '/Wechat.php'; // 微信
 // ### 基础

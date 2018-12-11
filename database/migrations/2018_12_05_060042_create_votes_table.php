@@ -24,9 +24,9 @@ class CreateVotesTable extends Migration
             $table->timestamp('start_at')->nullable()->comment('开始时间');
             $table->timestamp('finish_at')->nullable()->comment('结束时间');
             
-            $table->integer('attended_count')->comment('参赛数');
-            $table->integer('voted_count')->comment('投票数');
-            $table->integer('visited_count')->comment('访问数');
+            $table->integer('attend_count')->comment('参赛数');
+            $table->integer('vote_count')->comment('投票数');
+            $table->integer('visit_count')->comment('访问数');
             
             $table->string('seo_title', 20)->comment('标题');
             $table->text('seo_description')->comment('描述');
