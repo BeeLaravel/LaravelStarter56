@@ -53,3 +53,10 @@ Route::group([ // 案例
 	Route::get('/{id}/edit', ['as' => 'case', 'uses' => 'Project\Cases\IndexController@edit']);
 	Route::get('/{flag?}', ['as' => 'case', 'uses' => 'Project\Cases\IndexController@index']);
 });
+
+Route::group([ // 微信
+	'prefix' => 'wechat'
+], function ($router) {
+	Route::get('/official', ['as' => 'official', 'uses' => 'Wechat\Official\IndexController@index']);
+	Route::get('/personal', ['as' => 'personal', 'uses' => 'Wechat\Personal\IndexController@index']);
+});

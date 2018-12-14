@@ -19,6 +19,7 @@
         "laracasts/flash": "^3.0",
         "laravel/framework": "5.6.*",
         "laravel/passport": "^7.0",
+        "hanson/vbot": "^2.0",
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "^5.6.0",
         "league/html-to-markdown": "^4.6",
@@ -30,6 +31,15 @@
         "qcod/laravel-imageup": "^1.0",
         "spatie/laravel-glide": "^3.2",
         "tymon/jwt-auth": "^0.5.12",
+        
+        "vbot/tuling": "^1.0",
+        "vbot/find-movies": "^1.1",
+        "vbot/hot-girl": "^1.0",
+        "vbot/blacklist": "^1.0",
+        "vbot/express": "^1.0",
+        "vbot/http": "^1.0",
+        "vbot/guess-number": "^1.0",
+
         "yuanchao/laravel-5-markdown-editor": "dev-master",
         "zedisdog/laravel-schema-extend": "^1.0"
     },

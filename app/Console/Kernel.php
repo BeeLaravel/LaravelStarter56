@@ -16,6 +16,9 @@ class Kernel extends ConsoleKernel
         // Server
         Commands\Server\WebSocket::class,
         Commands\Server\WebSockets::class,
+
+        Commands\Server\WechatOfficial::class,
+        Commands\Server\WechatPersonal::class,
         // Tool
         Commands\Tool\GeneratePassword::class,
     ];
