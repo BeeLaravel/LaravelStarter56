@@ -4,13 +4,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Image upload with Dropzone</title>
+    <title>Dropzone 批量文件上传</title>
 
-    {!! HTML::style('/packages/bootstrap/css/bootstrap.min.css') !!}
-    {!! HTML::style('/assets/css/style.css') !!}
-    {!! HTML::script('https://code.jquery.com/jquery-2.1.4.min.js') !!}
+    <link rel="stylesheet" href="/vendor/jquery/bootstrap-3.3.5/css/bootstrap.min.css">
 
-    @yield('head')
+    <link rel="stylesheet" href="/resource/dropzone/style.css">
+
+    @yield('header')
 </head>
 <body>
     <div class="container">
@@ -21,13 +21,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">Dropzone + Laravel</a>
+                <a class="navbar-brand" href="/">文件上传</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="/">Upload</a></li>
-                    <li><a href="/example-2">Upload-2</a></li>
-                    <li><a href="/example-3">Upload-3</a></li>
+                    <li><a href="/upload">Upload</a></li>
+                    <li><a href="/upload2">Upload2</a></li>
+                    <li><a href="/upload3">Upload3</a></li>
                 </ul>
             </div>
         </div>

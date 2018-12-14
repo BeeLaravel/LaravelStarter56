@@ -36,9 +36,9 @@ Route::group([
 	Route::group([
 		'prefix' => 'dropzone'
 	], function ($router) {
-		Route::get('/', ['as' => 'upload', 'uses' => 'Resource\ImageController@getUpload']);
-		Route::get('example-2', ['as' => 'upload-2', 'uses' => 'Resource\ImageController@getServerImagesPage']);
-		Route::get('example-3', ['as' => 'upload-3', 'uses' => 'Resource\ImageController@getUpload3']);
+		Route::get('upload', ['as' => 'upload', 'uses' => 'Resource\ImageController@getUpload']);
+		Route::get('upload2', ['as' => 'upload2', 'uses' => 'Resource\ImageController@getServerImagesPage']);
+		Route::get('upload3', ['as' => 'upload3', 'uses' => 'Resource\ImageController@getUpload3']);
 
 		Route::post('upload', ['as' => 'upload-post', 'uses' =>'Resource\ImageController@postUpload']);
 		Route::post('upload/delete', ['as' => 'upload-remove', 'uses' =>'Resource\ImageController@deleteUpload']);
@@ -49,5 +49,7 @@ Route::group([
 Route::group([ // 案例
 	'prefix' => 'case'
 ], function ($router) {
-	Route::get('/', ['as' => 'case', 'uses' => 'Project\Cases\IndexController@index']);
+	Route::get('/batch-upload', ['as' => 'upload', 'uses' => 'Resource\ImageController@getUpload']);
+	Route::get('/{id}/edit', ['as' => 'case', 'uses' => 'Project\Cases\IndexController@edit']);
+	Route::get('/{flag?}', ['as' => 'case', 'uses' => 'Project\Cases\IndexController@index']);
 });

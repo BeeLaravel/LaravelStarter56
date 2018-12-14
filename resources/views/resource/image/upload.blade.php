@@ -1,34 +1,33 @@
-@extends('layout')
-
-@section('head')
-    {!! HTML::style('/packages/dropzone/dropzone.css') !!}
+@extends('resource.image.dropzone')
+@section('header')
+    <link rel="stylesheet" href="/vendor/jquery/dropzone/dropzone.css">
 @stop
-
 @section('footer')
-    {!! HTML::script('/packages/dropzone/dropzone.js') !!}
-    {!! HTML::script('/assets/js/dropzone-config.js') !!}
-@stop
+    <script type="text/javascript" src="/vendor/jquery/jquery-3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/vendor/jquery/dropzone/dropzone.js"></script>
 
+    <script type="text/javascript" src="/resource/dropzone/dropzone-config.js"></script>
+    <!-- <script type="text/javascript" src="/resource/dropzone/dropzone-config-2.js"></script> -->
+@stop
 @section('content')
     <div class="row">
         <div class="col-md-offset-1 col-md-10">
             <div class="jumbotron how-to-create" >
-                <h3>Images - 1<span id="photoCounter"></span></h3>
+                <h3>Images<span id="photoCounter"></span></h3>
                 <br />
-                {!! Form::open(['url' => route('upload-post'), 'class' => 'dropzone', 'files'=>true, 'id'=>'real-dropzone']) !!}
-                <div class="dz-message">
-                </div>
-                <div class="fallback">
-                    <input name="file" type="file" multiple />
-                </div>
-                <div class="dropzone-previews" id="dropzonePreview"></div>
-                <h4 style="text-align: center;color:#428bca;">Drop images in this area  <span class="glyphicon glyphicon-hand-down"></span></h4>
-                {!! Form::close() !!}
+                <form action="/image/dropzone/upload" class="dropzone" id="real-dropzone">
+                    <div class="dz-message"></div>
+                    <div class="fallback">
+                        <input name="file" type="file" multiple />
+                    </div>
+                    <div class="dropzone-previews" id="dropzonePreview"></div>
+                    <h4 style="text-align: center;color:#428bca;">Drop images in this area  <span class="glyphicon glyphicon-hand-down"></span></h4>
+                </form>
             </div>
             <div class="jumbotron how-to-create">
                 <ul>
-                    <li>Images are uploaded as soon as you drop them</li>
-                    <li>Maximum allowed size of image is 8MB</li>
+                    <li>图片拖入即刻上传</li>
+                    <li>最大图片大小 8 MB</li>
                 </ul>
             </div>
         </div>
@@ -66,8 +65,7 @@
                     </g>
                 </svg>
             </div>
-
         </div>
     </div>
-    {!! Form::hidden('csrf-token', csrf_token(), ['id' => 'csrf-token']) !!}
+    <input type="hidden" name="csrf-token" value="{{csrf_token()}}" id="csrf-token">
 @stop

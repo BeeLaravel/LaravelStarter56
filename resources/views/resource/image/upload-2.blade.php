@@ -1,53 +1,5 @@
-@extends('layout')
 
-@section('head')
-    {!! HTML::style('/packages/dropzone/dropzone.css') !!}
-@stop
-
-@section('footer')
-    {!! HTML::script('/packages/dropzone/dropzone.js') !!}
-    {!! HTML::script('/assets/js/dropzone-config-2.js') !!}
-@stop
-
-@section('content')
-
-    <div class="row">
-        <div class="col-md-offset-1 col-md-10">
-            <div class="jumbotron how-to-create" >
-
-                <h3>Images - 2<span id="photoCounter"></span></h3>
-                <br />
-
-                {!! Form::open(['url' => route('upload-post'), 'class' => 'dropzone', 'files'=>true, 'id'=>'real-dropzone']) !!}
-
-                <div class="dz-message">
-
-                </div>
-
-                <div class="fallback">
-                    <input name="file" type="file" multiple />
-                </div>
-
-                <div class="dropzone-previews" id="dropzonePreview"></div>
-
-                <h4 style="text-align: center;color:#428bca;">Drop images in this area  <span class="glyphicon glyphicon-hand-down"></span></h4>
-
-                {!! Form::close() !!}
-
-            </div>
-            <div class="jumbotron how-to-create">
-                <ul>
-                    <li>Images are uploaded as soon as you drop them</li>
-                    <li>Maximum allowed size of image is 8MB</li>
-                </ul>
-
-            </div>
-        </div>
-    </div>
-
-    <!-- Dropzone Preview Template -->
     <div id="preview-template" style="display: none;">
-
         <div class="dz-preview dz-file-preview">
             <div class="dz-image"><img data-dz-thumbnail=""></div>
             <input type="hidden" class="serverfilename"/>
@@ -61,7 +13,6 @@
 
             <div class="dz-success-mark">
                 <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
-                    <!-- Generator: Sketch 3.2.1 (9971) - http://www.bohemiancoding.com/sketch -->
                     <title>Check</title>
                     <desc>Created with Sketch.</desc>
                     <defs></defs>
@@ -73,7 +24,6 @@
 
             <div class="dz-error-mark">
                 <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
-                    <!-- Generator: Sketch 3.2.1 (9971) - http://www.bohemiancoding.com/sketch -->
                     <title>error</title>
                     <desc>Created with Sketch.</desc>
                     <defs></defs>
@@ -87,7 +37,3 @@
 
         </div>
     </div>
-    <!-- End Dropzone Preview Template -->
-    {!! Form::hidden('csrf-token', csrf_token(), ['id' => 'csrf-token']) !!}
-
-@stop

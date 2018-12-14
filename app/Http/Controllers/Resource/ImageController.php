@@ -3,8 +3,9 @@ namespace App\Http\Controllers\Resource;
 
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Input;
-use App\Models\Image;
-use App\Logic\Image\ImageRepository;
+
+use App\Models\Resource\Image;
+use App\Logics\Resource\ImageRepository;
 
 class ImageController extends Controller {
     protected $image;
@@ -25,24 +26,21 @@ class ImageController extends Controller {
 
     public function postUpload() {
         $photo = Input::all();
-        $response = $this->image->upload($photo);
-        return $response;
+        return $this->image->upload($photo);
     }
     public function deleteUpload() {
         $filename = Input::get('id');
 
         if ( !$filename ) return 0;
 
-        $response = $this->image->delete( $filename );
-
-        return $response;
+        return $this->image->delete($filename);
     }
     public function getServerImages() {
         $images = Image::get(['original_name', 'filename']);
 
         $imageAnswer = [];
 
-        foreach ($images as $image) {
+        foreach ( $images as $image ) {
             $imageAnswer[] = [
                 'original' => $image->original_name,
                 'server' => $image->filename,
