@@ -7,6 +7,11 @@ return [
         'ip' => env('SWOOLE_HOST', '127.0.0.1'),
         'port' => env('SWOOLE_PORT', '8866'),
     ],
+    'workerman' => [
+        'mode' => 'web', // web console
+        'ip' => '0.0.0.0',
+        'port' => 8866
+    ],
     'download' => [ // 下载
         'image' => true,
         'voice' => true,

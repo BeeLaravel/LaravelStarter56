@@ -6,11 +6,16 @@ use Illuminate\Support\Collection;
 use Hanson\Vbot\Foundation\Vbot;
 // 消息
 use Hanson\Vbot\Message\Text;
+// 观察者
+use App\Observers\Wechat\PersonalObserver; // 微信个人号 观察者
 // 扩展
-use App\Logics\Wechat\Personal\HelloWorld;
-use Vbot\GuessNumber\GuessNumber; // 猜数字
-use Vbot\Express\Express; // 快递
-use Vbot\Tuling\Tuling; // 图灵
+use App\Logics\Wechat\Personal\HelloWorld; // Hello World
+use App\Logics\Wechat\Personal\GuessNumber; // 猜数字
+use App\Logics\Wechat\Personal\Blacklist; // 黑名单
+use App\Logics\Wechat\Personal\Express; // 快递
+use App\Logics\Wechat\Personal\FindMovies; // 找电影
+use App\Logics\Wechat\Personal\HotGirl; // 辣妹图
+use App\Logics\Wechat\Personal\Tuling; // 图灵
 
 class WechatPersonal extends Command {
     protected $signature = 'server:wechatpersonal';
@@ -23,42 +28,33 @@ class WechatPersonal extends Command {
     public function handle() {
         $vbot = new Vbot(config('wechat_personal'));
 
+        WebServer::register();
+
         // 消息处理器
-		// $vbot->messageHandler->setHandler(function(Collection $message){
-		//     Text::send($message['from']['UserName'], 'hi');
-		// });
+		$vbot->messageHandler->setHandler(function(Collection $message){
+		    Text::send($message['from']['UserName'], 'hi');
+		});
 		$vbot->messageHandler->setCustomHandler(function(){
 		    Text::send('filehelper', date('Y-m-d H:i:s'));
 		});
 
-		// 事件监听器
-		$vbot->observer->setQrCodeObserver(function($qrCodeUrl){ // 二维码
-		    
-		});
-		$vbot->observer->setLoginSuccessObserver(function(){ // 登录成功
-		    
-		});
-		$vbot->observer->setReLoginSuccessObserver(function(){ // 免扫码成功
-		    
-		});
-		$vbot->observer->setExitObserver(function(){ // 程序退出
-		    
-		});
-		$vbot->observer->setFetchContactObserver(function(array $contacts){ // 好友
-
-		});
-		$vbot->observer->setBeforeMessageObserver(function(){ // 消息处理前
-
-		});
-		$vbot->observer->setNeedActivateObserver(function(){ // 异常监听器
-		    
-		});
-
+		// 观察者
+		$vbot->observer->setQrCodeObserver([PersonalObserver::class, 'setQrCodeObserver']); // 二维码
+        $vbot->observer->setLoginSuccessObserver([PersonalObserver::class, 'setLoginSuccessObserver']); // 登录成功
+        $vbot->observer->setReLoginSuccessObserver([PersonalObserver::class, 'setReLoginSuccessObserver']); // 免扫码成功
+        $vbot->observer->setExitObserver([PersonalObserver::class, 'setExitObserver']); // 程序退出
+        $vbot->observer->setFetchContactObserver([PersonalObserver::class, 'setFetchContactObserver']); // 好友
+        $vbot->observer->setBeforeMessageObserver([PersonalObserver::class, 'setBeforeMessageObserver']); // 消息处理前
+        $vbot->observer->setNeedActivateObserver([PersonalObserver::class, 'setNeedActivateObserver']); // 异常监听器
 		// 扩展
 		$vbot->messageExtension->load([
 		    HelloWorld::class,
 		    GuessNumber::class,
 		    Express::class,
+		    HelloWorld::class,
+		    GuessNumber::class,
+		    Express::class,
+		    Tuling::class,
 		    Tuling::class,
 		]);
 

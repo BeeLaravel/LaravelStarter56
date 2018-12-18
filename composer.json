@@ -32,6 +32,11 @@
         "spatie/laravel-glide": "^3.2",
         "tymon/jwt-auth": "^0.5.12",
         
+        "walkor/Workerman": "^3.5",
+        "radic/blade-extensions": "~7.1",
+        "wpb/string-blade-compiler": "~5.6",
+        "flynsarmy/db-blade-compiler": "1.*",
+
         "vbot/tuling": "^1.0",
         "vbot/find-movies": "^1.1",
         "vbot/hot-girl": "^1.0",
