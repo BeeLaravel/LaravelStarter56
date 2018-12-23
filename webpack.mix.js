@@ -3,7 +3,7 @@ let mix = require('laravel-mix');
 mix
 	// ### Starter
 	// #### vue
-    .js('resources/assets/vue/js/app.js', 'public/starter/vue/js')
+    // .js('resources/assets/vue/js/app.js', 'public/starter/vue/js')
     .sass('resources/assets/vue/sass/app.scss', 'public/starter/vue/css')
 
     // #### element
@@ -17,4 +17,5 @@ mix
     // ### 项目
     // #### vue cms
     // .sass('resources/assets/sass/cms.scss', 'public/css')
+    .sass('resources/assets/front/apps/link.scss', 'public/css')
 ;

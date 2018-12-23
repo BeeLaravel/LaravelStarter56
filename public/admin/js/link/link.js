@@ -45,11 +45,9 @@ $(document).ready(function(){
         'aLengthMenu': [20, 50, 100],
         "columns": [
             {"data": "id", "name": "id"},
-            {"data": "slug", "name": "slug", "orderable": false},
             {"data": "title", "name": "title", "orderable": false},
             {"data": "type", "name": "type", "orderable": false},
             {"data": "url", "name": "url", "orderable": false},
-            {"data": "user_name", "name": "user_name", "orderable": false},
             {"data": "created_at", "name": "created_at", "orderable": true},
             {"data": "updated_at", "name": "updated_at", "orderable": true},
             {"data": "button", "name": "button", 'type': 'html', "orderable": false}

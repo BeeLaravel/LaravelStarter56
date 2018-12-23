@@ -18,7 +18,6 @@ class CreateLinkLinksTable extends Migration
 
             $table->integer('category_id')->default(0)->comment('分类ID');
             $table->enum('type', ['Site','SubSite','Special','Category','Tag','Post','Discuss','Other'])->comment('类型');
-            $table->string('slug', 50)->comment('标识');
             $table->string('url')->comment('链接');
             $table->string('title', 50)->comment('标题');
             $table->text('description')->nullable()->comment('描述');

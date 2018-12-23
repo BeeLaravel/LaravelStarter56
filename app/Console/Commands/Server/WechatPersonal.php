@@ -7,10 +7,13 @@ use Hanson\Vbot\Foundation\Vbot;
 // 消息
 use Hanson\Vbot\Message\Text;
 // 扩展
-use App\Logics\Wechat\Personal\HelloWorld;
-use Vbot\GuessNumber\GuessNumber; // 猜数字
-use Vbot\Express\Express; // 快递
-use Vbot\Tuling\Tuling; // 图灵
+// use App\Logics\Wechat\Personal\HelloWorld;
+// use Vbot\GuessNumber\GuessNumber; // 猜数字
+// use Vbot\Blacklist\Blacklist; // 黑名单
+// use Vbot\Express\Express; // 快递
+// use Vbot\FindMovies\FindMovies; // 找电影
+use Vbot\HotGirl\HotGirl; // 辣妹图
+// use Vbot\Tuling\Tuling; // 图灵
 
 class WechatPersonal extends Command {
     protected $signature = 'server:wechatpersonal';
@@ -56,10 +59,13 @@ class WechatPersonal extends Command {
 
 		// 扩展
 		$vbot->messageExtension->load([
-		    HelloWorld::class,
-		    GuessNumber::class,
-		    Express::class,
-		    Tuling::class,
+		    // Blacklist::class,
+		    // HelloWorld::class,
+		    // GuessNumber::class,
+		    // Express::class,
+		    // FindMovies::class,
+		    HotGirl::class,
+		    // Tuling::class,
 		]);
 
 		// $friends = vbot('friends');

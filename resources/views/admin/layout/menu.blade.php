@@ -1,21 +1,21 @@
-{{ dd($menus) }}<ul class="nav"><!-- 侧边栏 导航 -->
+<ul class="nav"><!-- 侧边栏 导航 -->
     @foreach ( $menus as $menu_first )
-        <li class="nav-header">{{ $menu_first->title }}</li>
+        <li class="nav-header">{{ $menu_first['title'] }}</li>
         @if ( isset($menu_first['children']) )
             @foreach ( $menu_first['children'] as $menu_second )
                 <li class="@if ( isset($menu_second['children']) ) has-sub @endif">
-                    <a href="{{url('/admin'.$menu_second->slug)}}">
+                    <a href="{{ !isset($menu_second['children']) ? url('/admin'.$menu_second['slug']) : '#' }}">
                         @if ( isset($menu_second['children']) )<!-- 子集 -->
                             <b class="caret pull-right"></b>
                         @endif
                         @if ( false )
                             <span class="badge pull-right">10</span>
                         @endif
-                        @if ( !empty($menu_second->icon) )<!-- icon -->
-                            <i class="{{ $menu_second->icon }}"></i>
+                        @if ( !empty($menu_second['icon']) )<!-- icon -->
+                            <i class="{{ $menu_second['icon'] }}"></i>
                         @endif
                         <span>
-                            {{ $menu_second->title }}
+                            {{ $menu_second['title'] }}
                             @if ( false )
                                 <span class="label label-theme m-l-5">NEW</span>
                             @endif
@@ -25,11 +25,11 @@
                         <ul class="sub-menu">
                             @foreach ( $menu_second['children'] as $menu_third )
                                 <li class="@if ( isset($menu_third['children']) ) has-sub @endif">
-                                    <a href="{{url('/admin'.$menu_third->slug)}}" @if ( false ) target="_blank" @endif>
+                                    <a href="{{url('/admin'.$menu_third['slug'])}}" @if ( false ) target="_blank" @endif>
                                         @if ( isset($menu_third['children']) )<!-- 子集 -->
                                             <b class="caret pull-right"></b>
                                         @endif
-                                        {{ $menu_third->title }}
+                                        {{ $menu_third['title'] }}
                                         @if ( !empty($menu_third->icon) )<!-- icon -->
                                             <i class="{{ $menu_third->icon }} text-theme m-l-5"></i>
                                         @endif
@@ -45,9 +45,9 @@
                                                         @if ( isset($menu_forth['children']) )<!-- 子集 -->
                                                             <b class="caret pull-right"></b>
                                                         @endif
-                                                        {{ $menu_forth->title }}
-                                                        @if ( !empty($menu_forth->icon) )<!-- icon -->
-                                                            <i class="{{ $menu_forth->icon }} text-theme m-l-5"></i>
+                                                        {{ $menu_forth['title'] }}
+                                                        @if ( !empty($menu_forth['icon']) )<!-- icon -->
+                                                            <i class="{{ $menu_forth['icon'] }} text-theme m-l-5"></i>
                                                         @endif
                                                         @if ( false )
                                                             <span class="label label-theme m-l-5">NEW</span>
@@ -59,8 +59,8 @@
                                                                 <li>
                                                                     <a href="{{url('/admin'.$menu_fifth->slug)}}" @if ( false ) target="_blank" @endif>
                                                                         {{ $menu_fifth->title }}
-                                                                        @if ( !empty($menu_fifth->icon) )<!-- icon -->
-                                                                            <i class="{{ $menu_fifth->icon }} text-theme m-l-5"></i>
+                                                                        @if ( !empty($menu_fifth['icon']) )<!-- icon -->
+                                                                            <i class="{{ $menu_fifth['icon'] }} text-theme m-l-5"></i>
                                                                         @endif
                                                                         @if ( false )
                                                                             <span class="label label-theme m-l-5">NEW</span>

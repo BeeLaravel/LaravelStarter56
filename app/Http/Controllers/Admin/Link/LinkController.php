@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Admin\Link;
 
 use App\Models\Link\Link;
@@ -8,10 +7,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests\Link\LinkRequest;
 
-class LinkController extends Controller
-{
-    public function index(Request $request)
-    {
+class LinkController extends Controller {
+    public function index(Request $request) {
         if ( $request->ajax() ) {
             $draw = $request->input('draw', 1);
             $start = $request->input('start', 0);
@@ -81,8 +78,7 @@ class LinkController extends Controller
             return view('admin.link.link.index', compact('search', 'tags'));
         }
     }
-    public function create()
-    {
+    public function create() {
         $types = Link::$types;
 
         // $tags = Tag::get();
@@ -94,8 +90,7 @@ class LinkController extends Controller
 
         return view('admin.link.link.create', compact('types', 'tags'));
     }
-    public function store(LinkRequest $request)
-    {
+    public function store(LinkRequest $request) {
         $result = Link::create($request->all());
         // $result->user_id = auth()->user()->id;
 
@@ -133,12 +128,10 @@ class LinkController extends Controller
             return back(); // 继续
         }
     }
-    public function show(int $id)
-    {
+    public function show(int $id) {
         return 'link show';
     }
-    public function edit(int $id)
-    {
+    public function edit(int $id) {
         $types = Link::$types;
 
         // $tags = Tag::get();
@@ -152,8 +145,7 @@ class LinkController extends Controller
 
         return view('admin.link.link.edit', compact('types', 'tags', 'link'));
     }
-    public function update(LinkRequest $request, int $id)
-    {
+    public function update(LinkRequest $request, int $id) {
         $link = Link::find($id);
         $result = $link->update($request->all());
 
@@ -167,8 +159,7 @@ class LinkController extends Controller
             return back(); // 继续
         }
     }
-    public function destroy(Request $request, int $id)
-    {
+    public function destroy(Request $request, int $id) {
         $result = Link::destroy($id);
 
         if ( $result ) {

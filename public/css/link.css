@@ -1,0 +1,103 @@
+body {
+  margin: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+ul > li {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.container {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+header.header {
+  background-color: #eee;
+  color: #333;
+  font-size: 12px;
+  line-height: 20px;
+}
+
+.main ul.links > li > header {
+  padding: 2px;
+  text-align: center;
+  font-size: 20px;
+}
+
+.main ul.links > li > ul > li {
+  -webkit-box-shadow: 1px 1px 5px #eee;
+          box-shadow: 1px 1px 5px #eee;
+  margin-bottom: 5px;
+  border-radius: 3px;
+}
+
+.main ul.links > li > ul > li > header {
+  border-radius: 3px;
+  padding: 1px 5px;
+  background-color: #dee;
+  font-size: 18px;
+}
+
+.main ul.links > li > ul > li > ul > li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.main ul.links > li > ul > li > ul > li > header {
+  margin: 5px;
+  padding: 5px;
+  min-width: 130px;
+  -webkit-box-shadow: 1px 1px 1px #ddd;
+          box-shadow: 1px 1px 1px #ddd;
+  background-color: #fef;
+  text-align: center;
+}
+
+.main ul.links > li > ul > li > ul > li > ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  min-width: -webkit-min-content;
+  min-width: -moz-min-content;
+  min-width: min-content;
+}
+
+.main ul.links > li > ul > li > ul > li > ul > li {
+  margin: 5px;
+  width: 140px;
+  -webkit-box-shadow: 1px 1px 1px #eee;
+          box-shadow: 1px 1px 1px #eee;
+  background-color: #eff;
+  text-align: center;
+}
+
+.main ul.links > li > ul > li > ul > li > ul > li a {
+  display: block;
+}
+
+footer.footer {
+  background-color: #333;
+  text-align: center;
+  font-size: 12px;
+  line-height: 20px;
+  color: white;
+}
+
+footer.footer a {
+  color: white;
+}
+
