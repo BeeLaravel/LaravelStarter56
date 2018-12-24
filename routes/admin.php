@@ -10,6 +10,9 @@ $router->resource('permission', 'RBAC\PermissionController'); // 权限
 $router->resource('role', 'RBAC\RoleController'); // 角色
 $router->resource('admin', 'RBAC\UserController'); // 用户
 
+// ### 用户
+$router->resource('categories', 'User\CategoryController'); // 分类
+$router->resource('tags', 'User\TagController'); // 标签
 // ### 链接
 $router->resource('linktag', 'Link\LinkTagController'); // 链接标签
 $router->resource('link', 'Link\LinkController'); // 链接

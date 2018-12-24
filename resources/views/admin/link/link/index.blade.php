@@ -46,11 +46,9 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>标识</th>
                                 <th>标题</th>
                                 <th>类型</th>
                                 <th>链接</th>
-                                <th>创建人</th>
                                 <th>创建时间</th>
                                 <th>更新时间</th>
                                 <th>操作</th>

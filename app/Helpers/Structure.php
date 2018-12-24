@@ -12,3 +12,11 @@ function category($category_id, $parent_id=0) {
 
 	return $data;
 }
+function cate($category_id) {
+	if ( !is_integer($category_id) ) $category_id = Category::where('slug', $category_id)->value('id');
+
+	$data = CategoryItem::where('category_id', $category_id)
+		->all();
+
+	return $data;
+}

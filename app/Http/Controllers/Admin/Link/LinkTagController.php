@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Admin\Link;
 
 use App\Models\Link\Tag;
@@ -7,10 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests\Link\TagRequest;
 
-class LinkTagController extends Controller
-{
-    public function index(Request $request)
-    {
+class LinkTagController extends Controller {
+    public function index(Request $request) {
         if ( $request->ajax() ) {
             $draw = $request->input('draw', 1);
             $start = $request->input('start', 0);
@@ -80,8 +77,7 @@ class LinkTagController extends Controller
             return view('admin.link.tag.index', compact('search', 'tags'));
         }
     }
-    public function create()
-    {
+    public function create() {
         $tags = Tag::get();
 
         $tags = level_array($tags);
@@ -89,8 +85,7 @@ class LinkTagController extends Controller
 
         return view('admin.link.tag.create', compact('tags'));
     }
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         $result = Tag::create($request->all());
         // $result->user_id = auth()->user()->id;
 
@@ -104,12 +99,10 @@ class LinkTagController extends Controller
             return back(); // 继续
         }
     }
-    public function show(int $id)
-    {
+    public function show(int $id) {
         return 'linktag show';
     }
-    public function edit(int $id)
-    {
+    public function edit(int $id) {
         $tags = Tag::get();
 
         $tags = level_array($tags);
@@ -119,8 +112,7 @@ class LinkTagController extends Controller
 
         return view('admin.link.tag.edit', compact('tags', 'tag'));
     }
-    public function update(Request $request, int $id)
-    {
+    public function update(Request $request, int $id) {
         $tag = Tag::find($id);
         $result = $tag->update($request->all());
 
@@ -134,8 +126,7 @@ class LinkTagController extends Controller
             return back(); // 继续
         }
     }
-    public function destroy(Request $request, int $id)
-    {
+    public function destroy(Request $request, int $id) {
         $result = Tag::destroy($id);
 
         if ( $result ) {

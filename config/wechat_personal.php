@@ -1,5 +1,9 @@
 <?php
+
+use Hanson\Vbot\Message\Text;
+
 $path = storage_path('wechat/personal/');
+
 return [
     'path' => $path,
     'swoole' => [
@@ -48,11 +52,33 @@ return [
             'remark' => '',
             'nickname' => '',
         ],
+        'blacklist' => [ // 黑名单
+            'warn' => function($message){
+                return Text::send($message['from']['UserName'], '您不要再发重复消息啦！烦死啦！');
+            },
+            'block' => function($message){
+                return Text::send($message['from']['UserName'], '您已经被我加入黑名单了，等会再说吧！');
+            },
+            'type' => [
+                'text',
+                'picture',
+            ],
+        ],
         'tuling' => [
             'status' => true,
             'api' => 'http://www.tuling123.com/openapi/api',
             'key' => env('WECHAT_PERSONAL_TULING_KEY', ''),
             'error_message' => '图灵机器人失灵了，暂时没法陪聊了，T_T！',
+        ],
+    ],
+    'database' => [
+        'redis' => [
+            'default' => [
+                'host' => '127.0.0.1',
+                'port' => 6379,
+                'password' => 'root',
+                'database' => '',
+            ],
         ],
     ],
 ];

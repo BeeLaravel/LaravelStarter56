@@ -13,7 +13,6 @@ class Link extends Model
     use ActionButtonTrait;
 
     protected $fillable = [
-        'slug',
         'title',
         'url',
         'type',
@@ -30,6 +29,8 @@ class Link extends Model
         'Tag' => '标签',
         'Post' => '文章',
         'Discuss' => '讨论',
+        'GithubUser' => 'Github 用户',
+        'GithubRepo' => 'Github 仓库',
         'Other' => '其它',
     ];
 

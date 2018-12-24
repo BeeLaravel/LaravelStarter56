@@ -4,7 +4,7 @@ namespace App\Models\Structure;
 use Illuminate\Database\Eloquent\Model;
 
 class CategoryItem extends Model {
-	// 关联
+	// ### 关联
 	public function Category() { // 分类项 一对多
         return $this->belongsTo('App\Models\Structure\Category');
     }
@@ -16,5 +16,9 @@ class CategoryItem extends Model {
     }
 	public function creater() { // 创建人 一对一
         return $this->hasOne('App\Models\RBAC\User', 'created_by');
+    }
+    // #### 
+    public function links() { // 链接 一对多 反向
+        return $this->hasMany('App\Models\Link\Link', 'category_id');
     }
 }
