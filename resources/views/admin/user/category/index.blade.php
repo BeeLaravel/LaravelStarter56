@@ -12,6 +12,7 @@
         <li><a href="{{ url('admin/') }}">首页</a></li>
         <li><a href="{{ url('admin/user/') }}">用户</a></li>
         <li class="active">分类</li>
+        ({!! breadcrumbs($parent) !!})
     </ol>
     <h1 class="page-header">分类 <small>用户分类</small></h1>
     <div class="row">
@@ -27,7 +28,7 @@
                 </div>
                 <div class="panel-body">
 
-                        <a href="{{ url('admin/categories/create') }}" class="pull-right">
+                        <a href="{{ url('admin/categories/create'.'?'.http_build_query(['parent_id' => $search['parent_id']])) }}" class="pull-right">
                             <button type="button" class="btn btn-primary m-r-5 m-b-5"><i class="fa fa-plus-square-o"></i> 添加分类</button>
                         </a>
 

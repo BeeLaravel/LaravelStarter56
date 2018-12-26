@@ -98,7 +98,7 @@ class TagController extends Controller {
         }
     }
     public function show(int $id) {
-        return 'linktag show';
+        return 'user tag show';
     }
     public function edit(int $id) {
         $tags = Tag::get();
