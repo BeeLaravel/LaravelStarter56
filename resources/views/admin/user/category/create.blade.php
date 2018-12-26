@@ -64,11 +64,11 @@
                         <div class="form-group"><!-- 父级 -->
                             <label class="control-label col-md-4 col-sm-4" for="parent_id">父级 * :</label>
                             <div class="col-md-6 col-sm-6">
-                                <select name="parent_id" value="{{ old('') }}" placeholder="父级" class="form-control" id="parent_id">
+                                <select name="parent_id" placeholder="父级" class="form-control" id="parent_id">
                                     <option value="0">顶级</option>
                                     @if ( $categories )
                                         @foreach ( $categories as $id => $title )
-                                            <option value="{{ $id }}" @if ( old('parent_id')==$id ) @endif>{{ $title }}</option>
+                                            <option value="{{ $id }}" @if ( $parent_id==$id || old('parent_id')==$id ) selected="selected" @endif>{{ $title }}</option>
                                         @endforeach
                                     @endif
                                 </select>
@@ -77,7 +77,7 @@
                         <div class="form-group"><!-- 描述 -->
                             <label class="control-label col-md-4 col-sm-4" for="description">描述 :</label>
                             <div class="col-md-6 col-sm-6">
-                                <textarea class="form-control" name="description" placeholder="描述" id="description">{{old('description')}}</textarea>
+                                <textarea class="form-control" name="description" placeholder="描述" id="description">{{ old('description') }}</textarea>
                             </div>
                         </div>
                         <div class="form-group"><!-- 排序 -->

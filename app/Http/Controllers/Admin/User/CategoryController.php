@@ -69,21 +69,28 @@ class CategoryController extends Controller {
                 'data' => $model,
             ];
         } else {
+            $parent_id = $request->input('parent_id', 0);
+
             $search = [
-                'parent_id' => $request->input('parent_id', 0),
+                'parent_id' => $parent_id,
             ];
 
-            return view('admin.user.category.index', compact('search'));
+            $parent = null;
+            if ( $parent_id ) $parent = Category::find($parent_id);
+
+            return view('admin.user.category.index', compact('search', 'parent'));
         }
     }
-    public function create() {
+    public function create(Request $request) {
         $types = Category::$types;
 
         $category_array = Category::where('created_by', auth('admin')->user()->id)->get();
         $categories = level_array($category_array);
         $categories = plain_array($categories, 0, '==');
 
-        return view('admin.user.category.create', compact('types', 'categories'));
+        $parent_id = $request->query('parent_id', 0);
+
+        return view('admin.user.category.create', compact('types', 'categories', 'parent_id'));
     }
     public function store(CategoryRequest $request) {
         $result = Category::create(array_merge($request->all(), [
@@ -101,7 +108,7 @@ class CategoryController extends Controller {
         }
     }
     public function show(int $id) {
-        return 'category show';
+        return 'user category show';
     }
     public function edit(int $id) {
         $types = Category::$types;
