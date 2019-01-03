@@ -8,8 +8,8 @@
 @section('content')
     <ol class="breadcrumb pull-right">
         <li><a href="{{url('/admin/')}}">首页</a></li>
-        <li><a href="{{url('/admin/')}}">链接</a></li>
-        <li><a href="{{url('/admin/link')}}">链接</a></li>
+        <li><a href="{{url('/admin/users')}}">用户</a></li>
+        <li><a href="{{url('/admin/links')}}">链接</a></li>
         <li class="active">新增</li>
     </ol>
     <h1 class="page-header">链接 <small>链接仓库</small></h1>
@@ -35,7 +35,7 @@
                     </div>
                 @endif
                 <div class="panel-body panel-form">
-                    <form class="form-horizontal form-bordered" action="{{ url('/admin/link') }}" method="POST" enctype="multipart/form-data">
+                    <form class="form-horizontal form-bordered" action="{{ url('/admin/links') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group"><!-- 标题 -->
                             <label class="control-label col-md-4 col-sm-4" for="title">标题 * :</label>
@@ -61,19 +61,19 @@
                                 </select>
                             </div>
                         </div>
-                        {{--<div class="form-group">--}}<!-- 分类 -->
-                            {{--<label class="control-label col-md-4 col-sm-4" for="category_id">分类 * :</label>--}}
-                            {{--<div class="col-md-6 col-sm-6">--}}
-                                {{--<select name="category_id" value="{{ old('') }}" placeholder="分类" class="form-control" id="category_id">--}}
-                                    {{--<option value="0">未分类</option>--}}
-                                    {{--@if ( $tags )--}}
-                                        {{--@foreach ( $tags as $id => $title )--}}
-                                            {{--<option value="{{ $id }}" @if ( old('category_id')==$id ) @endif>{{ $title }}</option>--}}
-                                        {{--@endforeach--}}
-                                    {{--@endif--}}
-                                {{--</select>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
+                        <div class="form-group"><!-- 分类 -->
+                            <label class="control-label col-md-4 col-sm-4" for="category_id">分类 * :</label>
+                            <div class="col-md-6 col-sm-6">
+                                <select name="category_id" value="{{ old('') }}" placeholder="分类" class="form-control" id="category_id">
+                                    <option value="0">未分类</option>
+                                    @if ( $categories )
+                                        @foreach ( $categories as $id => $title )
+                                            <option value="{{ $id }}" @if ( old('category_id')==$id ) @endif>{{ $title }}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
+                            </div>
+                        </div>
                         <div class="form-group"><!-- 标签 -->
                             <label class="control-label col-md-4 col-sm-4">标签 * :</label>
                             <div class="col-md-6 col-sm-6">

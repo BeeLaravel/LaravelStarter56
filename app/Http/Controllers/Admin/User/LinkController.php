@@ -1,10 +1,11 @@
 <?php
-namespace App\Http\Controllers\Admin\Link;
+namespace App\Http\Controllers\Admin\User;
 
-use App\Models\Link\Link;
+use App\Models\User\Link;
+use App\Models\User\Category;
 use App\Models\Link\Tag;
-use Illuminate\Http\Request;
 
+use Illuminate\Http\Request;
 use App\Http\Requests\Link\LinkRequest;
 
 class LinkController extends Controller {
@@ -81,6 +82,10 @@ class LinkController extends Controller {
     public function create() {
         $types = Link::$types;
 
+        $category_array = Category::where('created_by', auth('admin')->user()->id)->get();
+        $categories = level_array($category_array);
+        $categories = plain_array($categories, 0, '==');
+
         // $tags = Tag::get();
         // $tags = level_array($tags);
         // $tags = plain_array($tags, 0, "==");
@@ -88,7 +93,7 @@ class LinkController extends Controller {
         $tags = Tag::pluck('title');
         $tags = json_encode($tags);
 
-        return view('admin.link.link.create', compact('types', 'tags'));
+        return view('admin.link.link.create', compact('types', 'categories', 'tags'));
     }
     public function store(LinkRequest $request) {
         $result = Link::create($request->all());

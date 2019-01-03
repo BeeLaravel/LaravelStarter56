@@ -34,12 +34,6 @@
 
                     <form method="POST" class="form-inline" style="margin-bottom: 5px;">
                         <input type="hidden" name="parent_id" value="{{ $search['parent_id'] }}">
-                        <div class="form-group">
-                            <label class="control-label">父级：</label>
-                            <select name="parent_id" class="form-control">
-                                <option value="">所有</option>
-                            </select>
-                        </div>
                     </form>
                     <table class="table table-bordered table-hover responsive dt-responsive" id="datatable" style="width: 100%;">
                         <thead>
