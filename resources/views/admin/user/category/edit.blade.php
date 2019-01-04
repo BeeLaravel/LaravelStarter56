@@ -8,8 +8,8 @@
 @section('content')
     <ol class="breadcrumb pull-right">
         <li><a href="{{url('/admin/')}}">首页</a></li>
-        <li><a href="{{url('/admin/linkmanage')}}">链接</a></li>
-        <li><a href="{{url('/admin/linktag')}}">链接</a></li>
+        <li><a href="{{url('/admin/user')}}">用户</a></li>
+        <li><a href="{{url('/admin/categories')}}">分类</a></li>
         <li class="active">新增</li>
     </ol>
     <h1 class="page-header">链接 <small>链接仓库</small></h1>
@@ -35,19 +35,19 @@
                     </div>
                 @endif
                 <div class="panel-body panel-form">
-                    <form class="form-horizontal form-bordered" action="{{ url('/admin/link/'.$link['id']) }}" method="POST" enctype="multipart/form-data">
+                    <form class="form-horizontal form-bordered" action="{{ url('/admin/categories/'.$item['id']) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         {{ method_field('PATCH') }}
                         <div class="form-group"><!-- 标题 -->
                             <label class="control-label col-md-4 col-sm-4" for="title">标题 * :</label>
                             <div class="col-md-6 col-sm-6">
-                                <input class="form-control" type="text" name="title" value="{{ $link['title'] }}" placeholder="标题" data-parsley-required="true" id="title" />
+                                <input class="form-control" type="text" name="title" value="{{ $item['title'] }}" placeholder="标题" data-parsley-required="true" id="title" />
                             </div>
                         </div>
-                        <div class="form-group"><!-- 链接 -->
-                            <label class="control-label col-md-4 col-sm-4" for="url">链接 * :</label>
+                        <div class="form-group"><!-- 标识 -->
+                            <label class="control-label col-md-4 col-sm-4" for="slug">标识 * :</label>
                             <div class="col-md-6 col-sm-6">
-                                <input class="form-control" type="url" name="url" value="{{ $link['url'] }}" placeholder="链接" data-parsley-required="true" id="url" />
+                                <input class="form-control" type="text" name="slug" value="{{ $item['slug'] }}" placeholder="标识" data-parsley-required="true" id="slug" />
                             </div>
                         </div>
                         <div class="form-group"><!-- 类型 -->
@@ -56,41 +56,35 @@
                                 <select class="form-control" name="type" id="type">
                                     @if ( $types )
                                         @foreach ( $types as $key => $value )
-                                            <option value="{{ $key }}" @if ( ($link['type']??'Other')==$key ) selected="selected" @endif>{{ $value }}</option>
+                                            <option value="{{ $key }}" @if ( ($item['type']??'Other')==$key ) selected="selected" @endif>{{ $value }}</option>
                                         @endforeach
                                     @endif
                                 </select>
                             </div>
                         </div>
-                        {{--<div class="form-group">--}}<!-- 分类 -->
-                            {{--<label class="control-label col-md-4 col-sm-4" for="category_id">分类 * :</label>--}}
-                            {{--<div class="col-md-6 col-sm-6">--}}
-                                {{--<select name="category_id" placeholder="分类" class="form-control" id="category_id">--}}
-                                    {{--<option value="0">未分类</option>--}}
-                                    {{--@if ( $tags )--}}
-                                        {{--@foreach ( $tags as $id => $title )--}}
-                                            {{--<option value="{{ $id }}" @if ( $id==$link['category_id'] ) @endif>{{ $title }}</option>--}}
-                                        {{--@endforeach--}}
-                                    {{--@endif--}}
-                                {{--</select>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                        <div class="form-group"><!-- 标签 -->
-                            <label class="control-label col-md-4 col-sm-4">标签 * :</label>
+                        <div class="form-group"><!-- 父级 -->
+                            <label class="control-label col-md-4 col-sm-4" for="parent_id">父级 * :</label>
                             <div class="col-md-6 col-sm-6">
-                                <ul id="tags" class="success"></ul>
+                                <select name="parent_id" placeholder="父级" class="form-control" id="parent_id">
+                                    <option value="0">顶级</option>
+                                    @if ( $categories )
+                                        @foreach ( $categories as $id => $title )
+                                            <option value="{{ $id }}" @if ( $id==$item['parent_id'] ) selected="selected" @endif>{{ $title }}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
                             </div>
                         </div>
                         <div class="form-group"><!-- 描述 -->
                             <label class="control-label col-md-4 col-sm-4" for="description">描述 :</label>
                             <div class="col-md-6 col-sm-6">
-                                <textarea class="form-control" name="description" placeholder="描述" id="description">{{ $link['description'] }}</textarea>
+                                <textarea class="form-control" name="description" placeholder="描述" id="description">{{ $item['description'] }}</textarea>
                             </div>
                         </div>
                         <div class="form-group"><!-- 排序 -->
                             <label class="control-label col-md-4 col-sm-4" for="sort">排序 :</label>
                             <div class="col-md-6 col-sm-6">
-                                <input class="form-control" type="number" name="sort" value="{{ $link['sort'] }}" placeholder="排序" data-parsley-required="true" id="sort" />
+                                <input class="form-control" type="number" name="sort" value="{{ $item['sort'] }}" placeholder="排序" data-parsley-required="true" id="sort" />
                             </div>
                         </div>
                         <div class="form-group">
@@ -117,13 +111,6 @@
         $(function(){
             App.init();
             $('form').parsley();
-            $("#tags").tagit({
-                fieldName: "tags[]",
-                availableTags: {!! $tags !!},
-                tagLimit: 5, // 最大标签数
-                placeholderText: '标签',
-                allowSpaces: true
-            });
         });
     </script>
 @endsection

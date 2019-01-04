@@ -10,7 +10,7 @@
 @section('content')
     <ol class="breadcrumb pull-right">
         <li><a href="{{ url('admin/') }}">首页</a></li>
-        <li><a href="{{ url('admin/design/') }}">链接</a></li>
+        <li><a href="{{ url('admin/users/') }}">用户</a></li>
         <li class="active">链接</li>
     </ol>
     <h1 class="page-header">链接 <small>链接仓库</small></h1>
@@ -27,7 +27,7 @@
                 </div>
                 <div class="panel-body">
 
-                        <a href="{{ url('admin/link/create') }}" class="pull-right">
+                        <a href="{{ url('admin/links/create') }}" class="pull-right">
                             <button type="button" class="btn btn-primary m-r-5 m-b-5"><i class="fa fa-plus-square-o"></i> 添加链接</button>
                         </a>
 
@@ -68,7 +68,7 @@
     <script type="text/javascript" src="{{ asset('template/color_admin/plugins/DataTables/media/js/dataTables.bootstrap.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('template/color_admin/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js') }}"></script>
 
-    <script type="text/javascript" src="{{ asset('admin/js/link/link.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('admin/js/user/link.js') }}"></script>
     <script src="{{ asset('template/color_admin/js/apps.min.js') }}"></script>
 
     <script type="text/javascript" >

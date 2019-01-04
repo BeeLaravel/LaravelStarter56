@@ -58,7 +58,7 @@ class CategoryController extends Controller {
                     // $item->parent_name = $item->parent_id ? $item->parent->title : '顶级';
                     // $item->user_name = $item->user_id ? $item->user->name : '未知';
                     $item->title = $item->children_count ? "<a href='".url('/admin/categories/').'?'.http_build_query(['parent_id' => $item->id])."'>".$item->title." (".$item->children_count.")</a>" : $item->title;
-                    $item->button = $item->getActionButtons('link');
+                    $item->button = $item->getActionButtons('categories');
                 }
             }
 
@@ -128,7 +128,7 @@ class CategoryController extends Controller {
         if ( $result ) {
             flash('操作成功', 'success');
 
-            return redirect('/admin/categories?'.http_build_query(['parent_id' => $result->parent_id])); // 列表
+            return redirect('/admin/categories'); // 列表
         } else {
             flash('操作失败', 'error');
 

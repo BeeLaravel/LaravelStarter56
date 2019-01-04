@@ -13,12 +13,12 @@ $router->resource('admin', 'RBAC\UserController'); // 用户
 // ### 用户
 $router->resource('categories', 'User\CategoryController'); // 分类
 $router->resource('tags', 'User\TagController'); // 标签
+$router->resource('links', 'User\LinkController'); // 链接
 // ### 链接
 $router->resource('linktag', 'Link\LinkTagController'); // 链接标签
-$router->resource('link', 'Link\LinkController'); // 链接
 // ### 文章
 $router->resource('posttag', 'Post\PostTagController'); // 文章标签
-$router->resource('post', 'Post\PostController'); // 文章
+$router->resource('posts', 'Post\PostController'); // 文章
 
 // ### 工具
 $router->get('compile/index', 'Tool\CompileController@index');

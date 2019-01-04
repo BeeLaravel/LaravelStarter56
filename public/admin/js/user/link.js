@@ -30,7 +30,7 @@ $(document).ready(function(){
 
         "serverSide": true,
         "ajax": {
-            'url': "/admin/link"
+            'url': "/admin/links"
         },
 
         'searchDelay': 300, // 搜索延时
