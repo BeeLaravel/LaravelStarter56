@@ -16,3 +16,5 @@ server
 task
 report
 
+###
+https://github.com/spatie/laravel-translatable

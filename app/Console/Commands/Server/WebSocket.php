@@ -10,8 +10,8 @@ class WebSocket extends Command {
     public function __construct() {
         parent::__construct();
 
-        $this->redis = new \Redis();
-        $this->redis->connect('127.0.0.1', 6379);
+        // $this->redis = new \Redis();
+        // $this->redis->connect('127.0.0.1', 6379);
     }
 
     public function handle() {

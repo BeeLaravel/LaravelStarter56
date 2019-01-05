@@ -1,2 +1,4 @@
-@extends('backend.layouts.bare')
+@extends('backend.layouts.master')
+@section('page')
 
+@endsection
