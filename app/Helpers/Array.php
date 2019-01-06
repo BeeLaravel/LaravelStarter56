@@ -36,3 +36,6 @@ function plain_array($data, $level=0, $char="\t", $field='title', $children='chi
 
     return $return_data;
 }
+function json_implode($data, $separator=",") {
+    return implode($separator, json_decode($data, true));
+}

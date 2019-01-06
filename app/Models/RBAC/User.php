@@ -1,13 +1,11 @@
 <?php
-
 namespace App\Models\RBAC;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 // RBAC - 用户
-class User extends Authenticatable
-{
+class User extends Authenticatable {
     use Notifiable;
 
     protected $table = 'rbac_users';
@@ -31,5 +29,9 @@ class User extends Authenticatable
     }
     public function creater() { // 创建人
         return $this->belongsTo('App\Models\RBAC\User', 'created_by');
+    }
+
+    public function profile() { // 个人信息 一对一
+        return $this->hasOne('App\Models\RBAC\Profile');
     }
 }

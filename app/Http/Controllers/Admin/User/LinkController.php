@@ -3,7 +3,7 @@ namespace App\Http\Controllers\Admin\User;
 
 use App\Models\User\Link;
 use App\Models\User\Category;
-use App\Models\Link\Tag;
+use App\Models\User\Tag;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\Link\LinkRequest;
@@ -100,12 +100,9 @@ class LinkController extends Controller {
         // $result->user_id = auth()->user()->id;
 
         if ( $result ) {
-            $tags = $request->input('tags');
-            log_file($tags);
+            $tags = $request->input('tags', []);
             $exist_tags = Tag::where('title', 'in', $tags)->pluck('title', 'id');
-            log_file($exist_tags, 'exist_tags');
-            $not_exist_tags = array_diff($tags, $exist_tags);
-            log_file($not_exist_tags, 'not_exist_tags');
+            $not_exist_tags = array_diff($tags, $exist_tags?:[]);
 
             if ( $not_exist_tags ) {
                 $temp = [];

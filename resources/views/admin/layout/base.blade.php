@@ -1,20 +1,23 @@
 @extends('admin.layout.page')
 @section('page')
-    <div id="header" class="header navbar navbar-default navbar-fixed-top"><!-- header -->
-        <div class="container-fluid"><!-- container-fluid -->
-            <div class="navbar-header"><!-- mobile sidebar expand / collapse button -->
-                <a href="{{url('template/color/index')}}" class="navbar-brand"><i class="fa fa-github fa-2x"></i> <span style="font-size: 30px; font-weight: bolder;">BeeSoft</span></a>
+    <div id="header" class="header navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="{{url('template/color/index')}}" class="navbar-brand"><!-- logo -->
+                    <i class="fa fa-github fa-2x"></i>
+                    <span style="font-size: 30px; font-weight: bold;">BeeSoft</span>
+                </a>
                 <button type="button" class="navbar-toggle" data-click="sidebar-toggled">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
             </div>
-            <ul class="nav navbar-nav navbar-right"><!-- header right -->
+            <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <form class="navbar-form full-width">
+                    <form class="navbar-form full-width"><!-- 搜索 -->
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="输入关键词" />
+                            <input type="text" name="search" class="form-control" placeholder="输入关键词" />
                             <button type="submit" class="btn btn-search"><i class="fa fa-search"></i></button>
                         </div>
                     </form>
@@ -85,10 +88,11 @@
                     </a>
                     <ul class="dropdown-menu animated fadeInLeft">
                         <li class="arrow"></li>
-                        <li><a href="javascript:;">编辑资料</a></li>
-                        <li><a href="javascript:;"><span class="badge badge-danger pull-right">2</span> 邮箱</a></li>
-                        <li><a href="javascript:;">日历</a></li>
-                        <li><a href="javascript:;">设置</a></li>
+                        <li><a href="{{ url('/admin/profile') }}">编辑资料</a></li>
+                        <li><a href="{{ url('/admin/profile/configures') }}">个人配置</a></li>
+                        <li><a href="{{ url('/admin/profile/avatar') }}">修改头修</a></li>
+                        <li><a href="{{ url('/admin/profile/password') }}">修改密码</a></li>
+                        <li><a href="{{ url('/admin/profile/email') }}"><span class="badge badge-danger pull-right">2</span> 邮箱</a></li>
                         <li class="divider"></li>
                         <li><a href="javascript:;" onclick="exit()">退出</a></li>
                         <form action="{{ url('/admin/logout') }}" method="POST" id="exit_form">
