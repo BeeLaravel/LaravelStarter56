@@ -12,21 +12,21 @@ class Tag extends Model {
 
     protected $table = 'user_tags';
     protected $fillable = [
-        'parent_id',
-        'slug',
         'title',
+        'slug',
+        'type',
         'description',
-        'sort',
-        'user_id',
+        'created_by',
     ];
 
     public function user() { // 创建人
-        return $this->belongsTo('App\Models\RBAC\User');
+        return $this->belongsTo('App\Models\RBAC\User', 'created_by');
     }
+
     public function links() { // 链接
-        return $this->belongsToMany('App\Models\Link\Link');
+        return $this->belongsToMany('App\Models\User\Link');
     }
     public function posts() { // 文章
-        return $this->belongsToMany('App\Models\Post\Post');
+        return $this->belongsToMany('App\Models\User\Post');
     }
 }

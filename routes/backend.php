@@ -5,4 +5,4 @@ Auth::routes();
 // Route::group(['middleware' => ['auth:admin']], function ($router) {
 // });
 
-$router->resource('link', 'Link\LinkController'); // 链接
+$router->resource('links', 'User\LinkController'); // 链接

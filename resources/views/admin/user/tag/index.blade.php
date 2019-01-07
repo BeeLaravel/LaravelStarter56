@@ -9,8 +9,8 @@
 
 @section('content')
     <ol class="breadcrumb pull-right">
-        <li><a href="{{ url('admin/') }}">首页</a></li>
-        <li><a href="{{ url('admin/user/') }}">用户</a></li>
+        <li><a href="{{ url('admin') }}">首页</a></li>
+        <li><a href="{{ url('admin/users') }}">用户</a></li>
         <li class="active">标签</li>
     </ol>
     <h1 class="page-header">标签 <small>用户标签</small></h1>
@@ -44,8 +44,8 @@
                             <tr>
                                 <th>ID</th>
                                 <th>标题</th>
+                                <th>标识</th>
                                 <th>类型</th>
-                                <th>链接</th>
                                 <th>创建时间</th>
                                 <th>更新时间</th>
                                 <th>操作</th>

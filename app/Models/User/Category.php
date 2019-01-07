@@ -12,27 +12,29 @@ class Category extends Model {
 
     protected $table = 'user_categories';
     protected $fillable = [
-        'type',
         'parent_id',
-        'slug',
         'title',
+        'slug',
+        'type',
         'description',
         'sort',
         'created_by',
     ];
-    public static $types = [
-        'commons' => '通用',
-        'links' => '链接',
-        'posts' => '文章',
-    ];
 
-    public function parent() { // 父级
+    public function parent() { // 父级 一对多 反向
         return $this->belongsTo(self::class, 'parent_id');
     }
-    public function children() { // 子级
+    public function children() { // 子级 一对多
         return $this->hasMany(self::class, 'parent_id');
     }
     public function user() { // 创建人
-        return $this->belongsTo('App\Models\RBAC\User');
+        return $this->belongsTo('App\Models\RBAC\User', 'created_by');
+    }
+
+    public function links() { // 链接
+        return $this->belongsToMany('App\Models\User\Link');
+    }
+    public function posts() { // 文章
+        return $this->belongsToMany('App\Models\User\Post');
     }
 }

@@ -55,8 +55,7 @@ class CategoryController extends Controller {
 
             if ( $model ) {
                 foreach ( $model as $item ) {
-                    // $item->parent_name = $item->parent_id ? $item->parent->title : '顶级';
-                    // $item->user_name = $item->user_id ? $item->user->name : '未知';
+                    // $item->user_name = $item->created_at ? $item->user->name : '未知';
                     $item->title = $item->children_count ? "<a href='".url('/admin/categories/').'?'.http_build_query(['parent_id' => $item->id])."'>".$item->title." (".$item->children_count.")</a>" : $item->title;
                     $item->button = $item->getActionButtons('categories');
                 }
@@ -82,7 +81,8 @@ class CategoryController extends Controller {
         }
     }
     public function create(Request $request) {
-        $types = Category::$types;
+        $types = auth('admin')->user()->profile->categories;
+        $types = json_decode($types, true);
 
         $category_array = Category::where('created_by', auth('admin')->user()->id)->get();
         $categories = level_array($category_array);
@@ -111,7 +111,8 @@ class CategoryController extends Controller {
         return 'user category show';
     }
     public function edit(int $id) {
-        $types = Category::$types;
+        $types = auth('admin')->user()->profile->categories;
+        $types = json_decode($types, true);
 
         $category_array = Category::where('created_by', auth('admin')->user()->id)->get();
         $categories = level_array($category_array);

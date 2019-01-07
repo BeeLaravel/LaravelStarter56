@@ -10,6 +10,7 @@ class Link extends Model {
     use SoftDeletes;
     use ActionButtonTrait;
 
+    protected $table = 'user_links';
     protected $fillable = [
         'title',
         'url',
@@ -17,28 +18,16 @@ class Link extends Model {
         'category_id',
         'description',
         'sort',
-        'user_id',
-    ];
-    public static $types = [
-        'Site' => '站点',
-        'SubSite' => '子站点',
-        'Special' => '专题',
-        'Category' => '分类',
-        'Tag' => '标签',
-        'Post' => '文章',
-        'Discuss' => '讨论',
-        'GithubUser' => 'Github 用户',
-        'GithubRepo' => 'Github 仓库',
-        'Other' => '其它',
+        'created_by',
     ];
 
     public function category() { // 分类
-        return $this->belongsTo('App\Models\Link\Tag', 'category_id');
+        return $this->belongsTo('App\Models\User\Category', 'category_id');
+    }
+    public function tags() { // 标签
+        return $this->belongsToMany(Tag::class);
     }
     public function user() { // 创建人
-        return $this->belongsTo('App\Models\RBAC\User');
-    }
-    public function tags() {
-        return $this->belongsToMany(Tag::class);
+        return $this->belongsTo('App\Models\RBAC\User', 'created_by');
     }
 }

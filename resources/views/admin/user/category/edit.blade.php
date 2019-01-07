@@ -7,12 +7,12 @@
 
 @section('content')
     <ol class="breadcrumb pull-right">
-        <li><a href="{{url('/admin/')}}">首页</a></li>
-        <li><a href="{{url('/admin/user')}}">用户</a></li>
+        <li><a href="{{url('/admin')}}">首页</a></li>
+        <li><a href="{{url('/admin/users')}}">用户</a></li>
         <li><a href="{{url('/admin/categories')}}">分类</a></li>
-        <li class="active">新增</li>
+        <li class="active">编辑</li>
     </ol>
-    <h1 class="page-header">链接 <small>链接仓库</small></h1>
+    <h1 class="page-header">分类 <small>用户分类</small></h1>
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-inverse" data-sortable-id="form-validation-1">
@@ -23,7 +23,7 @@
                         <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
                         <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                     </div>
-                    <h4 class="panel-title">新增</h4>
+                    <h4 class="panel-title">编辑</h4>
                 </div>
                 @if ( $errors->any() )
                     <div class="alert alert-danger">
@@ -55,8 +55,8 @@
                             <div class="col-md-6 col-sm-6">
                                 <select class="form-control" name="type" id="type">
                                     @if ( $types )
-                                        @foreach ( $types as $key => $value )
-                                            <option value="{{ $key }}" @if ( ($item['type']??'Other')==$key ) selected="selected" @endif>{{ $value }}</option>
+                                        @foreach ( $types as $type )
+                                            <option value="{{ $type }}" @if ( ($item['type']??'commons')==$type ) selected="selected" @endif>{{ $type }}</option>
                                         @endforeach
                                     @endif
                                 </select>

@@ -1,14 +1,15 @@
 <?php
 namespace App\Http\Controllers\Admin\User;
 
-use App\Models\User\Link;
-use App\Models\User\Category;
+use App\Models\User\Post;
+use App\Models\User\Content;
 use App\Models\User\Tag;
+use App\Models\User\Keyword;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\Link\LinkRequest;
+use App\Http\Requests\User\PostRequest;
 
-class LinkController extends Controller {
+class PostController extends Controller {
     public function index(Request $request) {
         if ( $request->ajax() ) {
             $draw = $request->input('draw', 1);
@@ -20,7 +21,7 @@ class LinkController extends Controller {
             $search['value'] = $request->input('search.value', ''); // 搜索字段
             $search['regex'] = $request->input('search.regex', false); // 是否正则
 
-            $model = Link::where('created_by', auth('admin')->user()->id);
+            $model = Post::where('created_by', auth('admin')->user()->id);
             // # 搜索
             $columns = $request->input('columns');
             foreach ( $columns as $key => $value ) { // 字段搜索
@@ -58,9 +59,8 @@ class LinkController extends Controller {
 
             if ( $model ) {
                 foreach ( $model as $item ) {
-                    $item->parent_name = $item->parent_id ? $item->parent->title : '顶级';
-                    $item->user_name = $item->created_by ? $item->user->name : '未知';
-                    $item->button = $item->getActionButtons('link');
+                    // $item->user_name = $item->created_by ? $item->user->name : '未知';
+                    $item->button = $item->getActionButtons('posts');
                 }
             }
 
@@ -71,73 +71,77 @@ class LinkController extends Controller {
                 'data' => $model,
             ];
         } else {
+            $types = Content::$types;
             $search = [
-                'parent_id' => 0,
+                'type' => '',
+                'category_id' => 0,
             ];
             $tags = Tag::pluck('title', 'id');
 
-            return view('admin.user.link.index', compact('search', 'tags'));
+            return view('admin.user.post.index', compact('search', 'types', 'tags'));
         }
     }
     public function create() {
-        $types = auth('admin')->user()->profile->links;
-        $types = json_decode($types, true);
-
-        $category_array = Category::where('created_by', auth('admin')->user()->id)->get();
-        $categories = level_array($category_array);
-        $categories = plain_array($categories, 0, '==');
-
-        // $tags = Tag::get();
-        // $tags = level_array($tags);
-        // $tags = plain_array($tags, 0, "==");
+        $types = Content::$types;
+        $tags = Tag::get();
+        $tags = level_array($tags);
+        $tags = plain_array($tags, 0, "==");
         
-        $tags = Tag::pluck('title');
-        $tags = json_encode($tags);
+        // $tags = Tag::pluck('title');
+        // $tags = json_encode($tags);
+        // $keywords = Keyword::pluck('title');
+        // $keywords = json_encode($keywords);
 
-        return view('admin.user.link.create', compact('types', 'categories', 'tags'));
+        return view('admin.user.post.create', compact('types', 'tags'));
     }
-    public function store(LinkRequest $request) {
-        $result = Link::create(array_merge($request->all(), [
-            'user_id' => auth('admin')->user()->id,
+    public function store(PostRequest $request) {
+        $result = Post::create(array_merge($request->all(), [
+            'created_by' => auth('admin')->user()->id,
         ]));
 
         if ( $result ) {
-            $tags = $request->input('tags', []);
-            $exist_tags = Tag::where('title', 'in', $tags)->pluck('title', 'id');
-            $not_exist_tags = array_diff($tags, $exist_tags);
+            $result->content()->save(new Content([
+                'content' => $request->content,
+                'content_type' => $request->type,
+            ]));
+            // $tags = $request->input('tags');
+            // log_file($tags);
+            // $exist_tags = Tag::where('title', 'in', $tags)->pluck('title', 'id');
+            // log_file($exist_tags, 'exist_tags');
+            // $not_exist_tags = array_diff($tags, $exist_tags);
+            // log_file($not_exist_tags, 'not_exist_tags');
 
-            if ( $not_exist_tags ) {
-                $temp = [];
-                foreach ( $not_exist_tags as $tag ) {
-                    $temp[] = [
-                        'slug' => str_slug($tag),
-                        'title' => $tag,
-                        'user_id' => 0, // todo user_id slug
-                    ];
-                }
-                $create_result = Tag::create($temp);
-                log_file($create_result);
-            }
+            // if ( $not_exist_tags ) {
+            //     $temp = [];
+            //     foreach ( $not_exist_tags as $tag ) {
+            //         $temp[] = [
+            //             'slug' => str_slug($tag),
+            //             'title' => $tag,
+            //             'user_id' => 0, // todo user_id slug
+            //         ];
+            //     }
+            //     $create_result = Tag::create($temp);
+            //     log_file($create_result);
+            // }
 
             
         }
 
-        if ( $result ) {
-            flash('操作成功', 'success');
+        // if ( $result ) {
+        //     flash('操作成功', 'success');
 
-            return redirect('/admin/link'); // 列表
-        } else {
-            flash('操作失败', 'error');
+        //     return redirect('/admin/post'); // 列表
+        // } else {
+        //     flash('操作失败', 'error');
 
-            return back(); // 继续
-        }
+        //     return back(); // 继续
+        // }
     }
     public function show(int $id) {
-        return 'link show';
+        return 'user post show';
     }
     public function edit(int $id) {
-        $types = auth('admin')->user()->profile->links;
-        $types = json_decode($types, true);
+        $types = Content::$types;
 
         // $tags = Tag::get();
         // $tags = level_array($tags);
@@ -146,26 +150,30 @@ class LinkController extends Controller {
         $tags = Tag::pluck('title');
         $tags = json_encode($tags);
 
-        $link = Link::find($id);
+        $item = Post::with('content')->find($id);
 
-        return view('admin.user.link.edit', compact('types', 'tags', 'link'));
+        return view('admin.user.post.edit', compact('types', 'tags', 'item'));
     }
-    public function update(LinkRequest $request, int $id) {
-        $link = Link::find($id);
-        $result = $link->update($request->all());
+    public function update(PostRequest $request, int $id) {
+        $post = Post::find($id);
+        $result = $post->update($request->all());
 
         if ( $result ) {
+            $post->content->content = $request->content;
+            $post->content->content_type = $request->type;
+
             flash('操作成功', 'success');
 
-            return redirect('/admin/link'); // 列表
+            return redirect('/admin/post'); // 列表
         } else {
             flash('操作失败', 'error');
-
-            return back(); // 继续
+            $error = back()->withErrors();
+            dd($error);
+            // return back(); // 继续
         }
     }
     public function destroy(Request $request, int $id) {
-        $result = Link::destroy($id);
+        $result = Post::destroy($id);
 
         if ( $result ) {
             flash('删除成功', 'success');
@@ -173,6 +181,6 @@ class LinkController extends Controller {
             flash('删除失败', 'error');
         }
 
-        return redirect('admin/link');
+        return redirect('admin/post');
     }
 }

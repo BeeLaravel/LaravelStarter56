@@ -9,10 +9,10 @@
     <ol class="breadcrumb pull-right">
         <li><a href="{{url('/admin')}}">首页</a></li>
         <li><a href="{{url('/admin/users')}}">用户</a></li>
-        <li><a href="{{url('/admin/tags')}}">标签</a></li>
+        <li><a href="{{url('/admin/links')}}">链接</a></li>
         <li class="active">新增</li>
     </ol>
-    <h1 class="page-header">标签 <small>用户标签</small></h1>
+    <h1 class="page-header">链接 <small>用户链接</small></h1>
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-inverse" data-sortable-id="form-validation-1">
@@ -35,7 +35,7 @@
                     </div>
                 @endif
                 <div class="panel-body panel-form">
-                    <form class="form-horizontal form-bordered" action="{{ url('/admin/tags') }}" method="POST" enctype="multipart/form-data">
+                    <form class="form-horizontal form-bordered" action="{{ url('/admin/links') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group"><!-- 标题 -->
                             <label class="control-label col-md-4 col-sm-4" for="title">标题 * :</label>
@@ -43,31 +43,55 @@
                                 <input class="form-control" type="text" name="title" value="{{ old('title') }}" placeholder="标题" data-parsley-required="true" id="title" />
                             </div>
                         </div>
-                        <div class="form-group"><!-- 标识 -->
-                            <label class="control-label col-md-4 col-sm-4" for="slug">标识 * :</label>
+                        <div class="form-group"><!-- 链接 -->
+                            <label class="control-label col-md-4 col-sm-4" for="url">链接 * :</label>
                             <div class="col-md-6 col-sm-6">
-                                <input class="form-control" type="slug" name="slug" value="{{ old('slug') }}" placeholder="标识" data-parsley-required="true" id="slug" />
+                                <input class="form-control" type="url" name="url" value="{{ old('url') }}" placeholder="链接" data-parsley-required="true" id="url" />
                             </div>
                         </div>
                         <div class="form-group"><!-- 类型 -->
                             <label class="control-label col-md-4 col-sm-4" for="type">类型 * :</label>
                             <div class="col-md-6 col-sm-6">
                                 <select class="form-control" name="type" id="type">
-                                    @forelse ( $types as $type )
-                                        <option value="{{ $type }}" @if ( (old('type')??'common')==$type ) selected="selected" @endif>{{ $type }}</option>
-                                    @empty
-                                        <option value="common">通用</option>
-                                    @endforelse
+                                    @if ( $types )
+                                        @foreach ( $types as $key => $value )
+                                            <option value="{{ $key }}" @if ( (old('type')??'Other')==$key ) selected="selected" @endif>{{ $value }}</option>
+                                        @endforeach
+                                    @endif
                                 </select>
+                            </div>
+                        </div>
+                        <div class="form-group"><!-- 分类 -->
+                            <label class="control-label col-md-4 col-sm-4" for="category_id">分类 * :</label>
+                            <div class="col-md-6 col-sm-6">
+                                <select name="category_id" value="{{ old('') }}" placeholder="分类" class="form-control" id="category_id">
+                                    <option value="0">未分类</option>
+                                    @if ( $categories )
+                                        @foreach ( $categories as $id => $title )
+                                            <option value="{{ $id }}" @if ( old('category_id')==$id ) @endif>{{ $title }}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group"><!-- 标签 -->
+                            <label class="control-label col-md-4 col-sm-4">标签 * :</label>
+                            <div class="col-md-6 col-sm-6">
+                                <ul id="tags" class="success"></ul>
                             </div>
                         </div>
                         <div class="form-group"><!-- 描述 -->
                             <label class="control-label col-md-4 col-sm-4" for="description">描述 :</label>
                             <div class="col-md-6 col-sm-6">
-                                <textarea class="form-control" name="description" placeholder="描述" id="description">{{ old('description') }}</textarea>
+                                <textarea class="form-control" name="description" placeholder="描述" id="description">{{old('description')}}</textarea>
                             </div>
                         </div>
-
+                        <div class="form-group"><!-- 排序 -->
+                            <label class="control-label col-md-4 col-sm-4" for="sort">排序 :</label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control" type="number" name="sort" value="{{ old('sort')??config('beesoft.sort_default') }}" placeholder="排序" data-parsley-required="true" id="sort" />
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label class="control-label col-md-4 col-sm-4"></label>
                             <div class="col-md-6 col-sm-6">
@@ -92,6 +116,13 @@
         $(function(){
             App.init();
             $('form').parsley();
+            $("#tags").tagit({
+                fieldName: "tags[]",
+                availableTags: {!! $tags !!},
+                tagLimit: 5, // 最大标签数
+                placeholderText: '标签',
+                allowSpaces: true
+            });
         });
     </script>
 @endsection

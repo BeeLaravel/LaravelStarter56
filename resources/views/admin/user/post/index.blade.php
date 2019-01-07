@@ -9,12 +9,11 @@
 
 @section('content')
     <ol class="breadcrumb pull-right">
-        <li><a href="{{ url('admin') }}">首页</a></li>
-        <li><a href="{{ url('admin/users') }}">用户</a></li>
-        <li class="active">分类</li>
-        ({!! breadcrumbs($parent) !!})
+        <li><a href="{{url('admin')}}">首页</a></li>
+        <li><a href="{{url('admin/users')}}">用户</a></li>
+        <li class="active">文章</li>
     </ol>
-    <h1 class="page-header">分类 <small>用户分类</small></h1>
+    <h1 class="page-header">文章 <small>用户文章</small></h1>
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-inverse" data-sortable-id="table-basic-5">
@@ -27,13 +26,21 @@
                     <h4 class="panel-title">列表</h4>
                 </div>
                 <div class="panel-body">
-
-                        <a href="{{ url('admin/categories/create'.'?'.http_build_query(['parent_id' => $search['parent_id']])) }}" class="pull-right">
-                            <button type="button" class="btn btn-primary m-r-5 m-b-5"><i class="fa fa-plus-square-o"></i> 添加分类</button>
+                    {{--@if ( auth('admin')->user()->can('post.add') )--}}
+                        <a href="{{ url('admin/posts/create') }}" class="pull-right">
+                            <button type="button" class="btn btn-primary m-r-5 m-b-5"><i class="fa fa-plus-square-o"></i> 添加文章</button>
                         </a>
-
-                    <form method="POST" class="form-inline" style="margin-bottom: 5px;">
-                        <input type="hidden" name="parent_id" value="{{ $search['parent_id'] }}">
+                    {{--@endif--}}
+                    <form action="" method="POST" class="form-inline" style="margin-bottom: 5px;">
+                        <div class="form-group">
+                            <label class="control-label">类型：</label>
+                            <select name="type" class="form-control">
+                                <option value="">所有</option>
+                                @foreach ( $types as $key => $value )
+                                    <option value="{{$key}}" @if ( $search['type']==$key ) selected="selected" @endif>{{$value}}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </form>
                     <table class="table table-bordered table-hover responsive dt-responsive" id="datatable" style="width: 100%;">
                         <thead>
@@ -42,7 +49,6 @@
                                 <th>标题</th>
                                 <th>标识</th>
                                 <th>类型</th>
-                                <th>排序</th>
                                 <th>创建时间</th>
                                 <th>更新时间</th>
                                 <th>操作</th>
@@ -62,7 +68,7 @@
     <script type="text/javascript" src="{{ asset('template/color_admin/plugins/DataTables/media/js/dataTables.bootstrap.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('template/color_admin/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js') }}"></script>
 
-    <script type="text/javascript" src="{{ asset('admin/js/user/category.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('admin/js/user/post.js') }}"></script>
     <script src="{{ asset('template/color_admin/js/apps.min.js') }}"></script>
 
     <script type="text/javascript" >

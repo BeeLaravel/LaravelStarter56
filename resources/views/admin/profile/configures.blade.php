@@ -58,6 +58,26 @@
                                 </ul>
                             </div>
                         </div>
+                        <div class="form-group"><!-- 链接 -->
+                            <label class="control-label col-md-4 col-sm-4" for="links">链接 * :</label>
+                            <div class="col-md-6 col-sm-6">
+                                <ul id="links" class="form-control success">
+                                    @foreach( json_decode($item->profile->links, true) as $i )
+                                        <li>{{ $i }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="form-group"><!-- 文章 -->
+                            <label class="control-label col-md-4 col-sm-4" for="posts">文章 * :</label>
+                            <div class="col-md-6 col-sm-6">
+                                <ul id="posts" class="form-control success">
+                                    @foreach( json_decode($item->profile->posts, true) as $i )
+                                        <li>{{ $i }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
 
                         <div class="form-group">
                             <label class="control-label col-md-4 col-sm-4"></label>

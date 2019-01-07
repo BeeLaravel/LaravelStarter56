@@ -1,4 +1,4 @@
-$(function(){
+$(document).ready(function(){
     var lang = {
         "sProcessing": "处理中...",
         "sLengthMenu": "每页 _MENU_ 项",
@@ -26,16 +26,16 @@ $(function(){
     };
     var table = $('#datatable').DataTable({
         "processing": true,
-        "language": lang,
+        'language': lang,
 
         "serverSide": true,
         "ajax": {
-            'url': "/admin/tags"
+            'url': "/admin/posts"
         },
 
-        "searchDelay": 300, // 搜索延时
-        "search": {
-           "regex": true // 是否开启模糊搜索
+        'searchDelay': 300, // 搜索延时
+        'search': {
+            regex : true // 是否开启模糊搜索
         },
         "order": [
             [0, "desc"]
@@ -45,16 +45,17 @@ $(function(){
         'aLengthMenu': [20, 50, 100],
         "columns": [
             {"data": "id", "name": "id"},
-            {"data": "title", "name": "title", "orderable": true},
-            {"data": "slug", "name": "slug", "orderable": true},
-            {"data": "type", "name": "type", "orderable": true},
+            {"data": "title", "name": "title", "orderable": false},
+            {"data": "slug", "name": "slug", "orderable": false},
+            // {"data": "type", "name": "type", "orderable": false},
+            {"data": "user_name", "name": "user_name", "orderable": false},
             {"data": "created_at", "name": "created_at", "orderable": true},
             {"data": "updated_at", "name": "updated_at", "orderable": true},
             {"data": "button", "name": "button", 'type': 'html', "orderable": false}
         ]
     });
-    // $('select[name=parent_id]').change(function(){ // 父标识
-    //     var parent_id = $(this).val();
-    //     table.column(3).search(parent_id).draw();
-    // });
+    $('select[name=type]').change(function(){ // 类型
+        var type = $(this).val();
+        table.column(2).search(type).draw();
+    });
 });

@@ -2,8 +2,8 @@
 namespace App\Http\Controllers\Admin\User;
 
 use App\Models\User\Tag;
-use Illuminate\Http\Request;
 
+use Illuminate\Http\Request;
 use App\Http\Requests\User\TagRequest;
 
 class TagController extends Controller {
@@ -18,7 +18,7 @@ class TagController extends Controller {
             $search['value'] = $request->input('search.value', ''); // 搜索字段
             $search['regex'] = $request->input('search.regex', false); // 是否正则
 
-            $model = new Tag();
+            $model = Tag::where('created_by', auth('admin')->user()->id);
             // # 搜索
             $columns = $request->input('columns');
             foreach ( $columns as $key => $value ) { // 字段搜索
@@ -57,8 +57,8 @@ class TagController extends Controller {
             if ( $model ) {
                 foreach ( $model as $item ) {
                     $item->parent_name = $item->parent_id ? $item->parent->title : '顶级';
-                    $item->user_name = $item->user_id ? $item->user->name : '未知';
-                    $item->button = $item->getActionButtons('linktag');
+                    $item->user_name = $item->created_by ? $item->user->name : '未知';
+                    $item->button = $item->getActionButtons('tags');
                 }
             }
 
@@ -76,21 +76,20 @@ class TagController extends Controller {
         }
     }
     public function create() {
-        $tags = Tag::get();
+        $types = auth('admin')->user()->profile->tags;
+        $types = json_decode($types, true);
 
-        $tags = level_array($tags);
-        $tags = plain_array($tags, 0, "==");
-
-        return view('admin.link.tag.create', compact('tags'));
+        return view('admin.user.tag.create', compact('types'));
     }
     public function store(Request $request) {
-        $result = Tag::create($request->all());
-        // $result->user_id = auth()->user()->id;
+        $result = Tag::create(array_merge($request->all(), [
+            'created_by' => auth('admin')->user()->id,
+        ]));
 
         if ( $result ) {
             flash('操作成功', 'success');
 
-            return redirect('/admin/linktag'); // 列表
+            return redirect('/admin/tags'); // 列表
         } else {
             flash('操作失败', 'error');
 
@@ -101,18 +100,16 @@ class TagController extends Controller {
         return 'user tag show';
     }
     public function edit(int $id) {
-        $tags = Tag::get();
+        $item = Tag::find($id);
 
-        $tags = level_array($tags);
-        $tags = plain_array($tags, 0, "==");
+        $types = auth('admin')->user()->profile->tags;
+        $types = json_decode($types, true);
 
-        $tag = Tag::find($id);
-
-        return view('admin.user.tag.edit', compact('tags', 'tag'));
+        return view('admin.user.tag.edit', compact('types', 'item'));
     }
     public function update(Request $request, int $id) {
-        $tag = Tag::find($id);
-        $result = $tag->update($request->all());
+        $items = Tag::find($id);
+        $result = $items->update($request->all());
 
         if ( $result ) {
             flash('操作成功', 'success');
