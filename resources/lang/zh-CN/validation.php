@@ -146,5 +146,9 @@ return [
         'time' => '时间',
         'available' => '可用的',
         'size' => '大小',
+
+        'id' => 'ID',
+        'slug' => '标识',
+        'sort' => '排序',
     ],
 ];

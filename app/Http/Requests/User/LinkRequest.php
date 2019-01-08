@@ -10,6 +10,7 @@ class LinkRequest extends FormRequest {
     public function rules() {
         return [
             'title' => 'required',
+            'url' => 'required',
             'sort' => 'bail|integer|min:0|max:255',
         ];
     }

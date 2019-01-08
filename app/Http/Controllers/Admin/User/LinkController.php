@@ -6,9 +6,18 @@ use App\Models\User\Category;
 use App\Models\User\Tag;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\Link\LinkRequest;
+use App\Http\Requests\User\LinkRequest;
 
 class LinkController extends Controller {
+    private $show = [
+        'id',
+        'title',
+        'type',
+        'url',
+        'created_at',
+        'updated_at',
+    ];
+
     public function index(Request $request) {
         if ( $request->ajax() ) {
             $draw = $request->input('draw', 1);
@@ -21,14 +30,12 @@ class LinkController extends Controller {
             $search['regex'] = $request->input('search.regex', false); // 是否正则
 
             $model = Link::where('created_by', auth('admin')->user()->id);
+
             // # 搜索
             $columns = $request->input('columns');
             foreach ( $columns as $key => $value ) { // 字段搜索
                 if ( $value['search']['value'] ) {
                     switch ( $key ) {
-                        case 3: // parent_id
-                            $model = $model->where('parent_id', $value['search']['value']);
-                        break;
                         default:
                             if ( $value['search']['value'] ) { // 有内容
                                 if ( $value['search']['regex']=='true' ) { // 正则
@@ -40,13 +47,14 @@ class LinkController extends Controller {
                     }
                 }
             }
+
             if ( $search['value'] ) { // 搜索
                 if ( $search['regex'] == 'true' ) { // 正则匹配
-                    $model = $model->where('slug', 'like', "%{$search['value']}%")
+                    $model = $model->where('url', 'like', "%{$search['value']}%")
                         ->orWhere('title', 'like', "%{$search['value']}%")
                         ->orWhere('description', 'like', "%{$search['value']}%");
                 } else { // 完全匹配
-                    $model = $model->where('slug', $search['value'])
+                    $model = $model->where('url', $search['value'])
                         ->orWhere('title', $search['value'])
                         ->orWhere('description', $search['value']);
                 }
@@ -58,9 +66,7 @@ class LinkController extends Controller {
 
             if ( $model ) {
                 foreach ( $model as $item ) {
-                    $item->parent_name = $item->parent_id ? $item->parent->title : '顶级';
-                    $item->user_name = $item->created_by ? $item->user->name : '未知';
-                    $item->button = $item->getActionButtons('link');
+                    $item->button = $item->getActionButtons('links');
                 }
             }
 
@@ -71,15 +77,16 @@ class LinkController extends Controller {
                 'data' => $model,
             ];
         } else {
-            $search = [
-                'parent_id' => 0,
-            ];
-            $tags = Tag::pluck('title', 'id');
+            $types = auth('admin')->user()->profile->links;
+            $types = json_decode($types, true);
 
-            return view('admin.user.link.index', compact('search', 'tags'));
+            $search = [
+            ];
+
+            return view('admin.user.link.index', compact('types', 'search'));
         }
     }
-    public function create() {
+    public function create(Request $request) {
         $types = auth('admin')->user()->profile->links;
         $types = json_decode($types, true);
 
@@ -87,45 +94,52 @@ class LinkController extends Controller {
         $categories = level_array($category_array);
         $categories = plain_array($categories, 0, '==');
 
-        // $tags = Tag::get();
-        // $tags = level_array($tags);
-        // $tags = plain_array($tags, 0, "==");
-        
-        $tags = Tag::pluck('title');
+        $tags = Tag::where('created_by', auth('admin')->user()->id)->whereIn('type', ['commons', 'links'])->pluck('title');
         $tags = json_encode($tags);
 
         return view('admin.user.link.create', compact('types', 'categories', 'tags'));
     }
     public function store(LinkRequest $request) {
         $result = Link::create(array_merge($request->all(), [
-            'user_id' => auth('admin')->user()->id,
+            'created_by' => auth('admin')->user()->id,
         ]));
 
         if ( $result ) {
             $tags = $request->input('tags', []);
-            $exist_tags = Tag::where('title', 'in', $tags)->pluck('title', 'id');
+            $exist_tags = Tag::where('created_by', auth('admin')->user()->id)
+                ->whereIn('type', ['commons', 'links'])
+                ->whereIn('title', $tags)
+                ->pluck('title', 'id')->toArray();
             $not_exist_tags = array_diff($tags, $exist_tags);
 
             if ( $not_exist_tags ) {
                 $temp = [];
                 foreach ( $not_exist_tags as $tag ) {
                     $temp[] = [
-                        'slug' => str_slug($tag),
                         'title' => $tag,
-                        'user_id' => 0, // todo user_id slug
+                        'slug' => str_slug($tag),
+                        'type' => 'commons',
+                        'description' => $tag,
+                        'created_by' => auth('admin')->user()->id,
                     ];
                 }
-                $create_result = Tag::create($temp);
-                log_file($create_result);
+                $create_result = Tag::insert($temp);
             }
 
-            
+            if ( $tags ) {
+                $tags = Tag::where('created_by', auth('admin')->user()->id)
+                    ->whereIn('type', ['commons', 'links'])
+                    ->whereIn('title', $tags)
+                    ->pluck('id')->toArray();
+                $tags = array_combine($tags, array_fill(0, count($tags), ['table' => 'links']));
+                $result->tags()->attach($tags);
+            }
         }
 
         if ( $result ) {
             flash('操作成功', 'success');
 
-            return redirect('/admin/link'); // 列表
+            return redirect('/admin/links'); // 列表
         } else {
             flash('操作失败', 'error');
 
@@ -133,31 +147,64 @@ class LinkController extends Controller {
         }
     }
     public function show(int $id) {
-        return 'link show';
+        return 'user link show';
     }
     public function edit(int $id) {
         $types = auth('admin')->user()->profile->links;
         $types = json_decode($types, true);
 
-        // $tags = Tag::get();
-        // $tags = level_array($tags);
-        // $tags = plain_array($tags, 0, "==");
+        $category_array = Category::where('created_by', auth('admin')->user()->id)->get();
+        $categories = level_array($category_array);
+        $categories = plain_array($categories, 0, '==');
 
-        $tags = Tag::pluck('title');
+        $tags = Tag::where('created_by', auth('admin')->user()->id)->whereIn('type', ['commons', 'links'])->pluck('title');
         $tags = json_encode($tags);
 
-        $link = Link::find($id);
+        $item = Link::with('tags')->find($id);
 
-        return view('admin.user.link.edit', compact('types', 'tags', 'link'));
+        return view('admin.user.link.edit', compact('types', 'categories', 'tags', 'item'));
     }
     public function update(LinkRequest $request, int $id) {
-        $link = Link::find($id);
-        $result = $link->update($request->all());
+        $item = Link::find($id);
+        $result = $item->update($request->all());
+
+        if ( $result ) {
+            $tags = $request->input('tags', []);
+            $exist_tags = Tag::where('created_by', auth('admin')->user()->id)
+                ->whereIn('type', ['commons', 'links'])
+                ->whereIn('title', $tags)
+                ->pluck('title', 'id')->toArray();
+            $not_exist_tags = array_diff($tags, $exist_tags);
+
+            if ( $not_exist_tags ) {
+                $temp = [];
+                foreach ( $not_exist_tags as $tag ) {
+                    $temp[] = [
+                        'title' => $tag,
+                        'slug' => str_slug($tag),
+                        'type' => 'commons',
+                        'description' => $tag,
+                        'created_by' => auth('admin')->user()->id,
+                    ];
+                }
+                $create_result = Tag::insert($temp);
+            }
+
+            if ( $tags ) {
+                $tags = Tag::where('created_by', auth('admin')->user()->id)
+                    ->whereIn('type', ['commons', 'links'])
+                    ->whereIn('title', $tags)
+                    ->pluck('id')->toArray();
+                $tags = array_combine($tags, array_fill(0, count($tags), ['table' => 'links']));
+                $item->tags()->detach();
+                $item->tags()->attach($tags);
+            }
+        }
 
         if ( $result ) {
             flash('操作成功', 'success');
 
-            return redirect('/admin/link'); // 列表
+            return redirect('/admin/links'); // 列表
         } else {
             flash('操作失败', 'error');
 
@@ -173,6 +220,6 @@ class LinkController extends Controller {
             flash('删除失败', 'error');
         }
 
-        return redirect('admin/link');
+        return redirect('admin/links');
     }
 }

@@ -2,7 +2,6 @@
 // ## Back
 Route::group([
 	'prefix' => 'core'
-	// 'middleware' => ['auth:admin']
 ], function ($router) {
 	$router->get('/', 'CoreController@index');
 	$router->get('charts', 'CoreController@charts');

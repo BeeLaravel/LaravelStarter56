@@ -3,13 +3,22 @@ namespace App\Http\Controllers\Admin\User;
 
 use App\Models\User\Post;
 use App\Models\User\Content;
+use App\Models\User\Category;
 use App\Models\User\Tag;
-use App\Models\User\Keyword;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\User\PostRequest;
 
 class PostController extends Controller {
+    private $show = [
+        'id',
+        'title',
+        'type',
+        'url',
+        'created_at',
+        'updated_at',
+    ];
+
     public function index(Request $request) {
         if ( $request->ajax() ) {
             $draw = $request->input('draw', 1);
@@ -81,7 +90,7 @@ class PostController extends Controller {
             return view('admin.user.post.index', compact('search', 'types', 'tags'));
         }
     }
-    public function create() {
+    public function create(Request $request) {
         $types = Content::$types;
         $tags = Tag::get();
         $tags = level_array($tags);

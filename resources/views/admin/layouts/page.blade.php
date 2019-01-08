@@ -20,7 +20,7 @@
     <link href="{{asset('template/color_admin/css/style-responsive.min.css')}}" rel="stylesheet" />
     <link href="{{asset('template/color_admin/css/theme/default.css')}}" rel="stylesheet" id="theme" />
     <!-- ================== END BASE CSS STYLE ================== -->
-    @yield('stylesheet')
+    @yield('styles')
     <!-- ================== BEGIN BASE JS ================== -->
     <script src="{{asset('template/color_admin/plugins/pace/pace.min.js')}}"></script>
     <!-- ================== END BASE JS ================== -->
@@ -46,6 +46,6 @@
     <script src="{{asset('template/color_admin/plugins/jquery-cookie/jquery.cookie.js')}}"></script>
     <!-- ================== END BASE JS ================== -->
     
-    @yield('script')
+    @yield('scripts')
 </body>
 </html>

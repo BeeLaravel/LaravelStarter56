@@ -45,9 +45,9 @@ $(document).ready(function(){
         'aLengthMenu': [20, 50, 100],
         "columns": [
             {"data": "id", "name": "id"},
-            {"data": "title", "name": "title", "orderable": false},
-            {"data": "type", "name": "type", "orderable": false},
-            {"data": "url", "name": "url", "orderable": false},
+            {"data": "title", "name": "title", "orderable": true},
+            {"data": "type", "name": "type", "orderable": true},
+            {"data": "url", "name": "url", "orderable": true},
             {"data": "created_at", "name": "created_at", "orderable": true},
             {"data": "updated_at", "name": "updated_at", "orderable": true},
             {"data": "button", "name": "button", 'type': 'html', "orderable": false}

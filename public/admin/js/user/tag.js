@@ -53,8 +53,8 @@ $(function(){
             {"data": "button", "name": "button", 'type': 'html', "orderable": false}
         ]
     });
-    // $('select[name=parent_id]').change(function(){ // 父标识
-    //     var parent_id = $(this).val();
-    //     table.column(3).search(parent_id).draw();
-    // });
+    $('select[name=type]').change(function(){ // 父标识
+        var type = $(this).val();
+        table.column(3).search(type).draw();
+    });
 });

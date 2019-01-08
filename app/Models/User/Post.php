@@ -24,6 +24,10 @@ class Post extends Model {
         'keywords' => 'array',
     ];
 
+    public function user() { // 创建人
+        return $this->belongsTo('App\Models\RBAC\User', 'created_by');
+    }
+
     public function category() { // 分类 一对多 反向
         return $this->belongsTo('App\Models\User\Category');
     }
@@ -32,8 +36,5 @@ class Post extends Model {
     }
     public function content() { // 内容 一对一
         return $this->hasOne('App\Models\User\Content')->withDefault();
-    }
-    public function user() { // 创建人
-        return $this->belongsTo('App\Models\RBAC\User', 'created_by');
     }
 }

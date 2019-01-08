@@ -3,7 +3,7 @@ namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PostRequest extends FormRequest {
+class PageRequest extends FormRequest {
     public function authorize() {
         return true;
     }

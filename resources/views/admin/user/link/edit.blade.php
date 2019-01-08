@@ -1,6 +1,6 @@
-@extends('admin.layout.base')
+@extends('admin.layouts.base')
 
-@section('stylesheet')
+@section('styles')
     <link rel="stylesheet" type="text/css" href="{{ asset('template/color_admin/plugins/parsley/src/parsley.css') }}" />
     <link href="{{asset('template/color_admin/plugins/jquery-tag-it/css/jquery.tagit.css')}}" rel="stylesheet" />
 @endsection
@@ -35,62 +35,68 @@
                     </div>
                 @endif
                 <div class="panel-body panel-form">
-                    <form class="form-horizontal form-bordered" action="{{ url('/admin/link/'.$link['id']) }}" method="POST" enctype="multipart/form-data">
+                    <form class="form-horizontal form-bordered" action="{{ url('/admin/links/'.$item['id']) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         {{ method_field('PATCH') }}
                         <div class="form-group"><!-- 标题 -->
                             <label class="control-label col-md-4 col-sm-4" for="title">标题 * :</label>
                             <div class="col-md-6 col-sm-6">
-                                <input class="form-control" type="text" name="title" value="{{ $link['title'] }}" placeholder="标题" data-parsley-required="true" id="title" />
+                                <input class="form-control" type="text" name="title" value="{{ $item['title'] }}" placeholder="标题" data-parsley-required="true" id="title" />
                             </div>
                         </div>
                         <div class="form-group"><!-- 链接 -->
                             <label class="control-label col-md-4 col-sm-4" for="url">链接 * :</label>
                             <div class="col-md-6 col-sm-6">
-                                <input class="form-control" type="url" name="url" value="{{ $link['url'] }}" placeholder="链接" data-parsley-required="true" id="url" />
+                                <input class="form-control" type="url" name="url" value="{{ $item['url'] }}" placeholder="链接" data-parsley-required="true" id="url" />
                             </div>
                         </div>
                         <div class="form-group"><!-- 类型 -->
-                            <label class="control-label col-md-4 col-sm-4" for="type">类型 * :</label>
+                            <label class="control-label col-md-4 col-sm-4" for="type">类型 :</label>
                             <div class="col-md-6 col-sm-6">
                                 <select class="form-control" name="type" id="type">
                                     @if ( $types )
                                         @foreach ( $types as $key => $value )
-                                            <option value="{{ $key }}" @if ( ($link['type']??'Other')==$key ) selected="selected" @endif>{{ $value }}</option>
+                                            <option value="{{ $key }}" @if ( ($item['type']??'Other')==$key ) selected="selected" @endif>{{ $value }}</option>
                                         @endforeach
                                     @endif
                                 </select>
                             </div>
                         </div>
-                        {{--<div class="form-group">--}}<!-- 分类 -->
-                            {{--<label class="control-label col-md-4 col-sm-4" for="category_id">分类 * :</label>--}}
-                            {{--<div class="col-md-6 col-sm-6">--}}
-                                {{--<select name="category_id" placeholder="分类" class="form-control" id="category_id">--}}
-                                    {{--<option value="0">未分类</option>--}}
-                                    {{--@if ( $tags )--}}
-                                        {{--@foreach ( $tags as $id => $title )--}}
-                                            {{--<option value="{{ $id }}" @if ( $id==$link['category_id'] ) @endif>{{ $title }}</option>--}}
-                                        {{--@endforeach--}}
-                                    {{--@endif--}}
-                                {{--</select>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                        <div class="form-group"><!-- 标签 -->
-                            <label class="control-label col-md-4 col-sm-4">标签 * :</label>
+                        <div class="form-group"><!-- 分类 -->
+                            <label class="control-label col-md-4 col-sm-4" for="category_id">分类 :</label>
                             <div class="col-md-6 col-sm-6">
-                                <ul id="tags" class="success"></ul>
+                                <select name="category_id" placeholder="分类" class="form-control" id="category_id">
+                                    <option value="0">未分类</option>
+                                    @if ( $categories )
+                                        @foreach ( $categories as $id => $title )
+                                            <option value="{{ $id }}" @if ( $id==$item['category_id'] ) selected="selected" @endif>{{ $title }}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group"><!-- 标签 -->
+                            <label class="control-label col-md-4 col-sm-4">标签 :</label>
+                            <div class="col-md-6 col-sm-6">
+                                <ul id="tags" class="success">
+                                    @if ( $item->tags )
+                                        @foreach ( $item->tags as $tag )
+                                            <li>{{ $tag->title }}</li>
+                                        @endforeach
+                                    @endif
+                                </ul>
                             </div>
                         </div>
                         <div class="form-group"><!-- 描述 -->
                             <label class="control-label col-md-4 col-sm-4" for="description">描述 :</label>
                             <div class="col-md-6 col-sm-6">
-                                <textarea class="form-control" name="description" placeholder="描述" id="description">{{ $link['description'] }}</textarea>
+                                <textarea class="form-control" name="description" placeholder="描述" id="description">{{ $item['description'] }}</textarea>
                             </div>
                         </div>
                         <div class="form-group"><!-- 排序 -->
                             <label class="control-label col-md-4 col-sm-4" for="sort">排序 :</label>
                             <div class="col-md-6 col-sm-6">
-                                <input class="form-control" type="number" name="sort" value="{{ $link['sort'] }}" placeholder="排序" data-parsley-required="true" id="sort" />
+                                <input class="form-control" type="number" name="sort" value="{{ $item['sort'] }}" placeholder="排序" data-parsley-required="true" id="sort" />
                             </div>
                         </div>
                         <div class="form-group">
@@ -106,7 +112,7 @@
     </div>
 @endsection
 
-@section('script')
+@section('scripts')
     <script src="{{ asset('template/color_admin/plugins/parsley/dist/parsley.min.js') }}"></script>
     <script src="{{ asset('template/color_admin/plugins/parsley/src/i18n/zh_cn.js') }}"></script>
     <script src="{{ asset('template/color_admin/plugins/jquery-tag-it/js/tag-it.min.js')}} "></script>
@@ -117,9 +123,10 @@
         $(function(){
             App.init();
             $('form').parsley();
+
             $("#tags").tagit({
                 fieldName: "tags[]",
-                availableTags: {!! $tags !!},
+                availableTags: {!! $tags??[] !!},
                 tagLimit: 5, // 最大标签数
                 placeholderText: '标签',
                 allowSpaces: true

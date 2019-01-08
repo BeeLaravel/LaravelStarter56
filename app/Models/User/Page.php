@@ -10,7 +10,7 @@ class Page extends Model {
     use SoftDeletes;
     use ActionButtonTrait;
 
-    protected $table = 'user_posts';
+    protected $table = 'user_pages';
     protected $fillable = [ // 自动填充
         'title',
         'slug',
@@ -32,13 +32,14 @@ class Page extends Model {
         'UEditor' => 'UEditor',
     ];
 
+    public function user() { // 创建人
+        return $this->belongsTo('App\Models\RBAC\User', 'created_by');
+    }
+
     public function category() { // 分类 一对多 反向
         return $this->belongsTo('App\Models\User\Category');
     }
     public function tags() { // 标签 多对多 反向
         return $this->belongsToMany(Tag::class);
-    }
-    public function user() { // 创建人
-        return $this->belongsTo('App\Models\RBAC\User', 'created_by');
     }
 }

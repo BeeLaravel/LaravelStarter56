@@ -56,6 +56,6 @@ $(document).ready(function(){
     });
     $('select[name=type]').change(function(){ // 类型
         var type = $(this).val();
-        table.column(2).search(type).draw();
+        table.column(3).search(type).draw();
     });
 });

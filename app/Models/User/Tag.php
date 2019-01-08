@@ -19,14 +19,17 @@ class Tag extends Model {
         'created_by',
     ];
 
-    public function user() { // 创建人
+    public function user() { // 创建人 一对多 反向
         return $this->belongsTo('App\Models\RBAC\User', 'created_by');
     }
 
-    public function links() { // 链接
+    public function links() { // 链接 多对多
         return $this->belongsToMany('App\Models\User\Link');
     }
-    public function posts() { // 文章
+    public function posts() { // 文章 多对多
         return $this->belongsToMany('App\Models\User\Post');
+    }
+    public function pages() { // 页面 多对多
+        return $this->belongsToMany('App\Models\User\Page');
     }
 }

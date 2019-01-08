@@ -1,5 +1,5 @@
-@extends('admin.layout.page')
-@section('stylesheet')
+@extends('admin.layouts.page')
+@section('styles')
     <link href="{{asset('template/color_admin/plugins/ionicons/css/ionicons.min.css')}}" rel="stylesheet" />
 @endsection
 @section('login-cover')
@@ -47,11 +47,9 @@
         <li><a href="#" data-click="change-bg"><img src="{{asset('template/color_admin/img/login-bg/bg-6.jpg')}}" alt="" /></a></li>
     </ul>
 @endsection
-@section('script')
-	<!-- ================== BEGIN PAGE LEVEL JS ================== -->
+@section('scripts')
 	<script src="{{asset('template/color_admin/js/login-v2.demo.min.js')}}"></script>
 	<script src="{{asset('template/color_admin/js/apps.min.js')}}"></script>
-	<!-- ================== END PAGE LEVEL JS ================== -->
 
 	<script>
 		$(document).ready(function() {

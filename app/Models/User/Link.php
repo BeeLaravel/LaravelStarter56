@@ -21,13 +21,14 @@ class Link extends Model {
         'created_by',
     ];
 
-    public function category() { // 分类
-        return $this->belongsTo('App\Models\User\Category', 'category_id');
-    }
-    public function tags() { // 标签
-        return $this->belongsToMany(Tag::class);
-    }
     public function user() { // 创建人
         return $this->belongsTo('App\Models\RBAC\User', 'created_by');
+    }
+
+    public function category() { // 分类 一对多 反向
+        return $this->belongsTo('App\Models\User\Category', 'category_id');
+    }
+    public function tags() { // 标签 多对多 反向
+        return $this->belongsToMany('App\Models\User\Tag', 'user_tag', 'id')->wherePivot('table', 'links');
     }
 }

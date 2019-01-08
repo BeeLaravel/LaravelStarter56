@@ -2,12 +2,22 @@
 namespace App\Http\Controllers\Admin\User;
 
 use App\Models\User\Page;
+use App\Models\User\Category;
 use App\Models\User\Tag;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\User\PageRequest;
 
 class PageController extends Controller {
+    private $show = [
+        'id',
+        'title',
+        'type',
+        'url',
+        'created_at',
+        'updated_at',
+    ];
+
     public function index(Request $request) {
         if ( $request->ajax() ) {
             $draw = $request->input('draw', 1);
@@ -79,7 +89,7 @@ class PageController extends Controller {
             return view('admin.user.page.index', compact('search', 'types', 'tags'));
         }
     }
-    public function create() {
+    public function create(Request $request) {
         $types = Page::$types;
         $tags = Tag::get();
         $tags = level_array($tags);
@@ -92,7 +102,7 @@ class PageController extends Controller {
 
         return view('admin.user.page.create', compact('types', 'tags'));
     }
-    public function store(PostRequest $request) {
+    public function store(PageRequest $request) {
         $result = Post::create(array_merge($request->all(), [
             'created_by' => auth('admin')->user()->id,
         ]));
@@ -152,7 +162,7 @@ class PageController extends Controller {
 
         return view('admin.user.page.edit', compact('types', 'tags', 'item'));
     }
-    public function update(PostRequest $request, int $id) {
+    public function update(PageRequest $request, int $id) {
         $post = Post::find($id);
         $result = $post->update($request->all());
 

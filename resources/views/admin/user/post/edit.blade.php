@@ -1,4 +1,4 @@
-@extends('admin.layout.base')
+@extends('admin.layouts.base')
 
 @section('stylesheet')
     <link rel="stylesheet" type="text/css" href="{{ asset('template/color_admin/plugins/parsley/src/parsley.css') }}" />

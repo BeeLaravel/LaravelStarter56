@@ -7,6 +7,16 @@ use Illuminate\Http\Request;
 use App\Http\Requests\User\CategoryRequest;
 
 class CategoryController extends Controller {
+    private $show = [
+        'id',
+        'title',
+        'slug',
+        'type',
+        'sort',
+        'created_at',
+        'updated_at',
+    ];
+
     public function index(Request $request) {
         if ( $request->ajax() ) {
             $draw = $request->input('draw', 1); // 页面次序
@@ -18,7 +28,9 @@ class CategoryController extends Controller {
             $search['value'] = $request->input('search.value', ''); // 搜索字段
             $search['regex'] = $request->input('search.regex', false); // 是否正则
 
-            $model = Category::where('created_by', auth('admin')->user()->id);
+            $model = Category::where('created_by', auth('admin')->user()->id); // 筛选用户
+            $model = $model->where('parent_id', $request->query('parent_id', 0)); // 筛选层级
+
             // # 搜索
             $columns = $request->input('columns');
             foreach ( $columns as $key => $value ) { // 字段搜索
@@ -35,7 +47,6 @@ class CategoryController extends Controller {
                     }
                 }
             }
-            $model = $model->where('parent_id', $request->query('parent_id', 0));
 
             if ( $search['value'] ) { // 搜索
                 if ( $search['regex'] == 'true' ) { // 正则匹配
@@ -55,7 +66,6 @@ class CategoryController extends Controller {
 
             if ( $model ) {
                 foreach ( $model as $item ) {
-                    // $item->user_name = $item->created_at ? $item->user->name : '未知';
                     $item->title = $item->children_count ? "<a href='".url('/admin/categories/').'?'.http_build_query(['parent_id' => $item->id])."'>".$item->title." (".$item->children_count.")</a>" : $item->title;
                     $item->button = $item->getActionButtons('categories');
                 }
@@ -68,6 +78,9 @@ class CategoryController extends Controller {
                 'data' => $model,
             ];
         } else {
+            $types = auth('admin')->user()->profile->categories;
+            $types = json_decode($types, true);
+
             $parent_id = $request->input('parent_id', 0);
 
             $search = [
@@ -77,7 +90,7 @@ class CategoryController extends Controller {
             $parent = null;
             if ( $parent_id ) $parent = Category::find($parent_id);
 
-            return view('admin.user.category.index', compact('search', 'parent'));
+            return view('admin.user.category.index', compact('types', 'search', 'parent'));
         }
     }
     public function create(Request $request) {

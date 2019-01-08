@@ -1,21 +1,14 @@
 <?php
 namespace App\Http\Controllers\Admin\User;
 
+use App\Models\User\Page;
+use App\Models\User\Category;
 use App\Models\User\Tag;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\User\TagRequest;
+use App\Http\Requests\User\CommentRequest;
 
-class TagController extends Controller {
-    private $show = [
-        'id',
-        'title',
-        'slug',
-        'type',
-        'created_at',
-        'updated_at',
-    ];
-
+class CommentController extends Controller {
     public function index(Request $request) {
         if ( $request->ajax() ) {
             $draw = $request->input('draw', 1);
@@ -27,13 +20,15 @@ class TagController extends Controller {
             $search['value'] = $request->input('search.value', ''); // 搜索字段
             $search['regex'] = $request->input('search.regex', false); // 是否正则
 
-            $model = Tag::where('created_by', auth('admin')->user()->id);
-
+            $model = Page::where('created_by', auth('admin')->user()->id);
             // # 搜索
             $columns = $request->input('columns');
             foreach ( $columns as $key => $value ) { // 字段搜索
                 if ( $value['search']['value'] ) {
                     switch ( $key ) {
+                        case 3: // parent_id
+                            $model = $model->where('parent_id', $value['search']['value']);
+                        break;
                         default:
                             if ( $value['search']['value'] ) { // 有内容
                                 if ( $value['search']['regex']=='true' ) { // 正则
@@ -45,7 +40,6 @@ class TagController extends Controller {
                     }
                 }
             }
-
             if ( $search['value'] ) { // 搜索
                 if ( $search['regex'] == 'true' ) { // 正则匹配
                     $model = $model->where('slug', 'like', "%{$search['value']}%")
@@ -64,9 +58,8 @@ class TagController extends Controller {
 
             if ( $model ) {
                 foreach ( $model as $item ) {
-                    $item->parent_name = $item->parent_id ? $item->parent->title : '顶级';
-                    $item->user_name = $item->created_by ? $item->user->name : '未知';
-                    $item->button = $item->getActionButtons('tags');
+                    // $item->user_name = $item->created_by ? $item->user->name : '未知';
+                    $item->button = $item->getActionButtons('pages');
                 }
             }
 
@@ -77,63 +70,106 @@ class TagController extends Controller {
                 'data' => $model,
             ];
         } else {
-            $types = auth('admin')->user()->profile->tags;
-            $types = json_decode($types, true);
-
+            $types = Page::$types;
             $search = [
+                'type' => '',
+                'category_id' => 0,
             ];
+            $tags = Tag::pluck('title', 'id');
 
-            return view('admin.user.tag.index', compact('types', 'search'));
+            return view('admin.user.page.index', compact('search', 'types', 'tags'));
         }
     }
     public function create(Request $request) {
-        $types = auth('admin')->user()->profile->tags;
-        $types = json_decode($types, true);
+        $types = Page::$types;
+        $tags = Tag::get();
+        $tags = level_array($tags);
+        $tags = plain_array($tags, 0, "==");
+        
+        // $tags = Tag::pluck('title');
+        // $tags = json_encode($tags);
+        // $keywords = Keyword::pluck('title');
+        // $keywords = json_encode($keywords);
 
-        return view('admin.user.tag.create', compact('types'));
+        return view('admin.user.page.create', compact('types', 'tags'));
     }
-    public function store(TagRequest $request) {
-        $result = Tag::create(array_merge($request->all(), [
+    public function store(PageRequest $request) {
+        $result = Post::create(array_merge($request->all(), [
             'created_by' => auth('admin')->user()->id,
         ]));
 
         if ( $result ) {
-            flash('操作成功', 'success');
+            $result->content()->save(new Content([
+                'content' => $request->content,
+                'content_type' => $request->type,
+            ]));
+            // $tags = $request->input('tags');
+            // log_file($tags);
+            // $exist_tags = Tag::where('title', 'in', $tags)->pluck('title', 'id');
+            // log_file($exist_tags, 'exist_tags');
+            // $not_exist_tags = array_diff($tags, $exist_tags);
+            // log_file($not_exist_tags, 'not_exist_tags');
 
-            return redirect('/admin/tags'); // 列表
-        } else {
-            flash('操作失败', 'error');
+            // if ( $not_exist_tags ) {
+            //     $temp = [];
+            //     foreach ( $not_exist_tags as $tag ) {
+            //         $temp[] = [
+            //             'slug' => str_slug($tag),
+            //             'title' => $tag,
+            //             'user_id' => 0, // todo user_id slug
+            //         ];
+            //     }
+            //     $create_result = Tag::create($temp);
+            //     log_file($create_result);
+            // }
 
-            return back(); // 继续
+            
         }
+
+        // if ( $result ) {
+        //     flash('操作成功', 'success');
+
+        //     return redirect('/admin/pages'); // 列表
+        // } else {
+        //     flash('操作失败', 'error');
+
+        //     return back(); // 继续
+        // }
     }
     public function show(int $id) {
-        return 'user tag show';
+        return 'user page show';
     }
     public function edit(int $id) {
-        $types = auth('admin')->user()->profile->tags;
-        $types = json_decode($types, true);
+        $types = Page::$types;
 
-        $item = Tag::find($id);
+        // $tags = Tag::get();
+        // $tags = level_array($tags);
+        // $tags = plain_array($tags, 0, "==");
 
-        return view('admin.user.tag.edit', compact('types', 'item'));
+        $tags = Tag::pluck('title');
+        $tags = json_encode($tags);
+
+        $item = Page::find($id);
+
+        return view('admin.user.page.edit', compact('types', 'tags', 'item'));
     }
-    public function update(TagRequest $request, int $id) {
-        $items = Tag::find($id);
-        $result = $items->update($request->all());
+    public function update(PageRequest $request, int $id) {
+        $post = Post::find($id);
+        $result = $post->update($request->all());
 
         if ( $result ) {
             flash('操作成功', 'success');
 
-            return redirect('/admin/tags'); // 列表
+            return redirect('/admin/pages'); // 列表
         } else {
             flash('操作失败', 'error');
-
-            return back(); // 继续
+            $error = back()->withErrors();
+            dd($error);
+            // return back(); // 继续
         }
     }
     public function destroy(Request $request, int $id) {
-        $result = Tag::destroy($id);
+        $result = Post::destroy($id);
 
         if ( $result ) {
             flash('删除成功', 'success');
@@ -141,6 +177,6 @@ class TagController extends Controller {
             flash('删除失败', 'error');
         }
 
-        return redirect('admin/tags');
+        return redirect('admin/pages');
     }
 }

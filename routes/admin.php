@@ -2,7 +2,9 @@
 // ## Admin
 Auth::routes();
 
-Route::group(['middleware' => ['auth:admin']], function ($router) {
+Route::group([
+	'middleware' => ['auth:admin']
+], function ($router) {
 	// ### 个人
 	Route::group([
 		'prefix' => 'profile',
@@ -18,12 +20,12 @@ Route::group(['middleware' => ['auth:admin']], function ($router) {
 		$router->patch('password', 'Profile\IndexController@updatePassword'); // 修改密码
 	});
 	// ### RBAC
-	$router->get('/corporation/export', 'RBAC\CorporationController@export'); // 导出
-	$router->get('/corporation/download/{type}', 'RBAC\CorporationController@download'); // 下载
-	$router->resource('corporation', 'RBAC\CorporationController'); // 公司
-	$router->resource('permission', 'RBAC\PermissionController'); // 权限
-	$router->resource('role', 'RBAC\RoleController'); // 角色
-	$router->resource('admin', 'RBAC\UserController'); // 用户
+	$router->get('corporation/export', 'RBAC\CorporationController@export'); // 导出
+	$router->get('corporation/download/{type}', 'RBAC\CorporationController@download'); // 下载
+	$router->resource('corporations', 'RBAC\CorporationController'); // 公司
+	$router->resource('permissions', 'RBAC\PermissionController'); // 权限
+	$router->resource('roles', 'RBAC\RoleController'); // 角色
+	$router->resource('administrators', 'RBAC\UserController'); // 用户
 	// ### 用户
 	$router->resource('categories', 'User\CategoryController'); // 分类
 	$router->resource('tags', 'User\TagController'); // 标签

@@ -1,6 +1,6 @@
-@extends('admin.layout.base')
+@extends('admin.layouts.base')
 
-@section('stylesheet')
+@section('styles')
     <link rel="stylesheet" type="text/css" href="{{ asset('template/color_admin/plugins/parsley/src/parsley.css') }}" />
     <link href="{{asset('template/color_admin/plugins/jquery-tag-it/css/jquery.tagit.css')}}" rel="stylesheet" />
 @endsection
@@ -50,7 +50,7 @@
                             </div>
                         </div>
                         <div class="form-group"><!-- 类型 -->
-                            <label class="control-label col-md-4 col-sm-4" for="type">类型 * :</label>
+                            <label class="control-label col-md-4 col-sm-4" for="type">类型 :</label>
                             <div class="col-md-6 col-sm-6">
                                 <select class="form-control" name="type" id="type">
                                     @if ( $types )
@@ -62,7 +62,7 @@
                             </div>
                         </div>
                         <div class="form-group"><!-- 分类 -->
-                            <label class="control-label col-md-4 col-sm-4" for="category_id">分类 * :</label>
+                            <label class="control-label col-md-4 col-sm-4" for="category_id">分类 :</label>
                             <div class="col-md-6 col-sm-6">
                                 <select name="category_id" value="{{ old('') }}" placeholder="分类" class="form-control" id="category_id">
                                     <option value="0">未分类</option>
@@ -75,7 +75,7 @@
                             </div>
                         </div>
                         <div class="form-group"><!-- 标签 -->
-                            <label class="control-label col-md-4 col-sm-4">标签 * :</label>
+                            <label class="control-label col-md-4 col-sm-4">标签 :</label>
                             <div class="col-md-6 col-sm-6">
                                 <ul id="tags" class="success"></ul>
                             </div>
@@ -105,7 +105,7 @@
     </div>
 @endsection
 
-@section('script')
+@section('scripts')
     <script src="{{ asset('template/color_admin/plugins/parsley/dist/parsley.min.js') }}"></script>
     <script src="{{ asset('template/color_admin/plugins/parsley/src/i18n/zh_cn.js') }}"></script>
     <script src="{{ asset('template/color_admin/plugins/jquery-tag-it/js/tag-it.min.js')}} "></script>
@@ -116,9 +116,10 @@
         $(function(){
             App.init();
             $('form').parsley();
+
             $("#tags").tagit({
                 fieldName: "tags[]",
-                availableTags: {!! $tags !!},
+                availableTags: {!! $tags??'' !!},
                 tagLimit: 5, // 最大标签数
                 placeholderText: '标签',
                 allowSpaces: true

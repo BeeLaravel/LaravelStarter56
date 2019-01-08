@@ -1,8 +1,7 @@
-@extends('admin.layout.base')
+@extends('admin.layouts.base')
 
-@section('stylesheet')
+@section('styles')
     <link rel="stylesheet" type="text/css" href="{{ asset('template/color_admin/plugins/parsley/src/parsley.css') }}" />
-    <link href="{{asset('template/color_admin/plugins/jquery-tag-it/css/jquery.tagit.css')}}" rel="stylesheet" />
 @endsection
 
 @section('content')
@@ -41,17 +40,19 @@
                         <div class="form-group"><!-- 标题 -->
                             <label class="control-label col-md-4 col-sm-4" for="title">标题 * :</label>
                             <div class="col-md-6 col-sm-6">
-                                <input class="form-control" type="text" name="title" value="{{ $item['title'] }}" placeholder="标题" data-parsley-required="true" id="title" />
+                                <input class="form-control" type="text" name="title" value="{{ $item['title'] }}" placeholder="标题" id="title"
+                                required />
                             </div>
                         </div>
                         <div class="form-group"><!-- 标识 -->
                             <label class="control-label col-md-4 col-sm-4" for="slug">标识 * :</label>
                             <div class="col-md-6 col-sm-6">
-                                <input class="form-control" type="text" name="slug" value="{{ $item['slug'] }}" placeholder="标识" data-parsley-required="true" id="slug" />
+                                <input class="form-control" type="text" name="slug" value="{{ $item['slug'] }}" placeholder="标识" id="slug"
+                                required />
                             </div>
                         </div>
                         <div class="form-group"><!-- 类型 -->
-                            <label class="control-label col-md-4 col-sm-4" for="type">类型 * :</label>
+                            <label class="control-label col-md-4 col-sm-4" for="type">类型 :</label>
                             <div class="col-md-6 col-sm-6">
                                 <select class="form-control" name="type" id="type">
                                     @forelse ( $types as $type )
@@ -82,10 +83,9 @@
     </div>
 @endsection
 
-@section('script')
+@section('scripts')
     <script src="{{ asset('template/color_admin/plugins/parsley/dist/parsley.min.js') }}"></script>
     <script src="{{ asset('template/color_admin/plugins/parsley/src/i18n/zh_cn.js') }}"></script>
-    <script src="{{ asset('template/color_admin/plugins/jquery-tag-it/js/tag-it.min.js')}} "></script>
 
     <script src="{{ asset('template/color_admin/js/apps.min.js') }}"></script>
 
