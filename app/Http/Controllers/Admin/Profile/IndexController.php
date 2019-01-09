@@ -50,6 +50,8 @@ class IndexController extends Controller {
 
         $user->profile->categories = json_encode($request->categories);
         $user->profile->tags = json_encode($request->tags);
+        $user->profile->links = json_encode($request->links);
+        $user->profile->posts = json_encode($request->posts);
 
         $result = $user->profile->save();
 

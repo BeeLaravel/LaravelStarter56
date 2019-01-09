@@ -22,8 +22,6 @@
                 </div>
             </div>
         </div>
-        <!--/.col-->
-
         <div class="col-sm-6 col-lg-3">
             <div class="card card-inverse card-info">
                 <div class="card-block pb-0">
@@ -38,8 +36,6 @@
                 </div>
             </div>
         </div>
-        <!--/.col-->
-
         <div class="col-sm-6 col-lg-3">
             <div class="card card-inverse card-warning">
                 <div class="card-block pb-0">
@@ -61,8 +57,6 @@
                 </div>
             </div>
         </div>
-        <!--/.col-->
-
         <div class="col-sm-6 col-lg-3">
             <div class="card card-inverse card-danger">
                 <div class="card-block pb-0">
@@ -84,7 +78,6 @@
                 </div>
             </div>
         </div>
-        <!--/.col-->
     </div>
     <div class="card">
         <div class="card-block">
@@ -93,7 +86,6 @@
                     <h4 class="card-title mb-0">Traffic</h4>
                     <div class="small text-muted">November 2017</div>
                 </div>
-                <!--/.col-->
                 <div class="col-sm-7 hidden-sm-down">
                     <button type="button" class="btn btn-primary float-right"><i class="icon-cloud-download"></i>
                     </button>
@@ -111,9 +103,7 @@
                         </div>
                     </div>
                 </div>
-                <!--/.col-->
             </div>
-            <!--/.row-->
             <div class="chart-wrapper" style="height:300px;margin-top:40px;">
                 <canvas id="main-chart" class="chart" height="300"></canvas>
             </div>
@@ -176,9 +166,7 @@
                     </li>
                 </ul>
             </div>
-            <!--/.social-box-->
         </div>
-        <!--/.col-->
 
         <div class="col-sm-6 col-lg-3">
             <div class="social-box twitter">
@@ -197,12 +185,9 @@
                     </li>
                 </ul>
             </div>
-            <!--/.social-box-->
         </div>
-        <!--/.col-->
 
         <div class="col-sm-6 col-lg-3">
-
             <div class="social-box linkedin">
                 <i class="fa fa-linkedin"></i>
                 <div class="chart-wrapper">
@@ -219,9 +204,7 @@
                     </li>
                 </ul>
             </div>
-            <!--/.social-box-->
         </div>
-        <!--/.col-->
 
         <div class="col-sm-6 col-lg-3">
             <div class="social-box google-plus">
@@ -240,9 +223,7 @@
                     </li>
                 </ul>
             </div>
-            <!--/.social-box-->
         </div>
-        <!--/.col-->
     </div>
     <div class="row">
         <div class="col-md-12">
@@ -264,7 +245,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!--/.col-->
                                 <div class="col-sm-6">
                                     <div class="callout callout-danger">
                                         <small class="text-muted">Recuring Clients</small>
@@ -275,9 +255,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!--/.col-->
                             </div>
-                            <!--/.row-->
                             <hr class="mt-0">
                             <ul class="horizontal-bars">
                                 <li>
@@ -379,7 +357,6 @@
                                 </li>
                             </ul>
                         </div>
-                        <!--/.col-->
                         <div class="col-sm-6 col-lg-4">
                             <div class="row">
                                 <div class="col-sm-6">
@@ -403,9 +380,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!--/.col-->
                             </div>
-                            <!--/.row-->
                             <hr class="mt-0">
                             <ul class="horizontal-bars type-2">
                                 <li>
@@ -483,7 +458,6 @@
                                 </li>
                             </ul>
                         </div>
-                        <!--/.col-->
                         <div class="col-sm-6 col-lg-4">
                             <div class="row">
                                 <div class="col-sm-6">
@@ -507,9 +481,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!--/.col-->
                             </div>
-                            <!--/.row-->
                             <hr class="mt-0">
                             <ul class="icons-list">
                                 <li>
@@ -623,9 +595,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <!--/.col-->
                     </div>
-                    <!--/.row-->
                     <br>
                     <table class="table table-hover table-outline mb-0 hidden-sm-down">
                         <thead class="thead-default">

@@ -1,6 +1,6 @@
 @extends('admin.layouts.base')
 
-@section('stylesheet')
+@section('styles')
     <link rel="stylesheet" type="text/css" href="{{asset('template/color_admin/plugins/gritter/css/jquery.gritter.css')}}"><!-- jquery.gritter 弹窗 -->
     <link rel="stylesheet" type="text/css" href="{{asset('template/color_admin/plugins/bootstrap-sweetalert-master/dist/sweetalert.css')}}"><!-- bootstrap-sweetalert 弹窗 -->
     <link rel="stylesheet" type="text/css" href="{{asset('template/color_admin/plugins/DataTables/media/css/dataTables.bootstrap.min.css')}}">
@@ -26,18 +26,16 @@
                     <h4 class="panel-title">列表</h4>
                 </div>
                 <div class="panel-body">
-                    {{--@if ( auth('admin')->user()->can('post.add') )--}}
-                        <a href="{{ url('admin/posts/create') }}" class="pull-right">
-                            <button type="button" class="btn btn-primary m-r-5 m-b-5"><i class="fa fa-plus-square-o"></i> 添加文章</button>
-                        </a>
-                    {{--@endif--}}
+                    <a href="{{ url('admin/posts/create') }}" class="pull-right">
+                        <button type="button" class="btn btn-primary m-r-5 m-b-5"><i class="fa fa-plus-square-o"></i> 添加文章</button>
+                    </a>
                     <form action="" method="POST" class="form-inline" style="margin-bottom: 5px;">
                         <div class="form-group">
                             <label class="control-label">类型：</label>
                             <select name="type" class="form-control">
                                 <option value="">所有</option>
-                                @foreach ( $types as $key => $value )
-                                    <option value="{{$key}}" @if ( $search['type']==$key ) selected="selected" @endif>{{$value}}</option>
+                                @foreach ( $types as $type )
+                                    <option value="{{ $type }}" @if ( $search['type']==$type ) selected="selected" @endif>{{ $type }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -61,7 +59,7 @@
     </div>
 @endsection
 
-@section('script')
+@section('scripts')
     <script type="text/javascript" src="{{ asset('template/color_admin/plugins/gritter/js/jquery.gritter.js') }}"></script>
     <script type="text/javascript" src="{{ asset('template/color_admin/plugins/bootstrap-sweetalert-master/dist/sweetalert.js') }}"></script>
     <script type="text/javascript" src="{{ asset('template/color_admin/plugins/DataTables/media/js/jquery.dataTables.js') }}"></script>

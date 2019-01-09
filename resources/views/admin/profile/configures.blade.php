@@ -1,6 +1,6 @@
-@extends('admin.layout.base')
+@extends('admin.layouts.base')
 
-@section('stylesheet')
+@section('styles')
     <link rel="stylesheet" type="text/css" href="{{asset('template/color_admin/plugins/gritter/css/jquery.gritter.css')}}"><!-- jquery.gritter 弹窗 -->
     <link rel="stylesheet" type="text/css" href="{{asset('template/color_admin/plugins/bootstrap-sweetalert-master/dist/sweetalert.css')}}"><!-- bootstrap-sweetalert 弹窗 -->
     <link rel="stylesheet" type="text/css" href="{{asset('template/color_admin/plugins/jquery-tag-it/css/jquery.tagit.css')}}" />
@@ -92,7 +92,7 @@
     </div>
 @endsection
 
-@section('script')
+@section('scripts')
     <script src="{{ asset('template/color_admin/plugins/parsley/dist/parsley.min.js') }}"></script>
     <script src="{{ asset('template/color_admin/plugins/parsley/src/i18n/zh_cn.js') }}"></script>
     <script src="{{ asset('template/color_admin/plugins/jquery-tag-it/js/tag-it.min.js')}} "></script>
@@ -115,6 +115,22 @@
             $("#tags").tagit({
                 fieldName: "tags[]",
                 availableTags: ["commons", "links", "posts"],
+                tagLimit: 10,
+                placeholderText: '标签',
+                removeConfirmation: true,
+                allowSpaces: true
+            });
+            $("#links").tagit({
+                fieldName: "links[]",
+                availableTags: ["site", "subsite", "special", "category", "tag", "post", "discuss", "githubuser", "githubrepo"],
+                tagLimit: 10,
+                placeholderText: '分类',
+                removeConfirmation: true,
+                allowSpaces: true
+            });
+            $("#posts").tagit({
+                fieldName: "posts[]",
+                availableTags: ["tutorial", "document", "discuss"],
                 tagLimit: 10,
                 placeholderText: '标签',
                 removeConfirmation: true,

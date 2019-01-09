@@ -1,4 +1,4 @@
-@extends('back.layouts.bare')
+@extends('backend.layouts.bare')
 @section('styles')
 @endsection
 @section('page')
@@ -6,34 +6,35 @@
         <div class="card-group mb-0">
             <div class="card p-2">
                 <div class="card-block">
-                    <h1>Login</h1>
-                    <p class="text-muted">Sign In to your account</p>
-                    <div class="input-group mb-1">
-                        <span class="input-group-addon"><i class="icon-user"></i>
-                        </span>
-                        <input type="text" class="form-control" placeholder="Username">
-                    </div>
-                    <div class="input-group mb-2">
-                        <span class="input-group-addon"><i class="icon-lock"></i>
-                        </span>
-                        <input type="password" class="form-control" placeholder="Password">
-                    </div>
-                    <div class="row">
-                        <div class="col-6">
-                            <button type="button" class="btn btn-primary px-2">Login</button>
+                    <form method="post">
+                        <h1>@lang('view.login')</h1>
+                        <p class="text-muted">@lang('view.login_desc')</p>
+                        @csrf
+                        <div class="input-group mb-1">
+                            <span class="input-group-addon"><i class="icon-user"></i></span>
+                            <input type="text" class="form-control" placeholder="@lang('view.username')">
                         </div>
-                        <div class="col-6 text-right">
-                            <button type="button" class="btn btn-link px-0">Forgot password?</button>
+                        <div class="input-group mb-2">
+                            <span class="input-group-addon"><i class="icon-lock"></i></span>
+                            <input type="password" class="form-control" placeholder="@lang('view.password')">
                         </div>
-                    </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <button type="submit" class="btn btn-primary px-2">@lang('view.login')</button>
+                            </div>
+                            <div class="col-6 text-right">
+                                <a href="/backend/password/reset" role="button" class="btn btn-link px-0">@lang('view.forgot_password')</a>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
             <div class="card card-inverse card-primary py-3 hidden-md-down" style="width:44%">
                 <div class="card-block text-center">
                     <div>
-                        <h2>Sign up</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                        <button type="button" class="btn btn-primary active mt-1">Register Now!</button>
+                        <h2>@lang('view.sign_up')</h2>
+                        <p>@lang('view.sign_up_desc')</p>
+                        <a href="/backend/register" role="button" class="btn btn-primary active mt-1">@lang('view.register_now')</a>
                     </div>
                 </div>
             </div>

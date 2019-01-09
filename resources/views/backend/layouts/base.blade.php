@@ -17,7 +17,7 @@
     <link href="/template/coreui/css/style.css" rel="stylesheet">
     @yield('styles')
 </head>
-<body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden @isset($page_style) flex-row align-items-center @endisset">
+<body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden {{ $style['body-class'] ?? '' }}">
     @yield('body')
 
     @section('scripts')

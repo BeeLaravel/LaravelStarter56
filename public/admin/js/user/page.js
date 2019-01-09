@@ -45,10 +45,9 @@ $(document).ready(function(){
         'aLengthMenu': [20, 50, 100],
         "columns": [
             {"data": "id", "name": "id"},
-            {"data": "title", "name": "title", "orderable": false},
-            {"data": "slug", "name": "slug", "orderable": false},
-            // {"data": "type", "name": "type", "orderable": false},
-            {"data": "user_name", "name": "user_name", "orderable": false},
+            {"data": "title", "name": "title", "orderable": true},
+            {"data": "slug", "name": "slug", "orderable": true},
+            {"data": "type", "name": "type", "orderable": true},
             {"data": "created_at", "name": "created_at", "orderable": true},
             {"data": "updated_at", "name": "updated_at", "orderable": true},
             {"data": "button", "name": "button", 'type': 'html', "orderable": false}
@@ -56,6 +55,6 @@ $(document).ready(function(){
     });
     $('select[name=type]').change(function(){ // 类型
         var type = $(this).val();
-        table.column(2).search(type).draw();
+        table.column(3).search(type).draw();
     });
 });

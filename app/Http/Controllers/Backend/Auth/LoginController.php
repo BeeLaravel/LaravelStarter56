@@ -1,64 +1,37 @@
 <?php
-
 namespace App\Http\Controllers\Backend\Auth;
 
 use App\Http\Controllers\Controller;
+
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class LoginController extends Controller
-{
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
-
+class LoginController extends Controller {
     use AuthenticatesUsers;
 
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/admin/linktag';
-    protected $logoutRedirectTo = '/admin/login';
+    protected $redirectTo = '/backend/links';
+    protected $logoutRedirectTo = '/backend/login';
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('guest:admin')->except('logout');
+    public function __construct() {
+        $this->middleware('guest:backend')->except('logout');
     }
 
-    public function showLoginForm()
-    {
+    public function showLoginForm() {
         $style = [
-            'body-class' => 'bg-white',
+            'body-class' => 'flex-row align-items-center',
         ];
-        return view('admin.auth.login_v3', compact('style'));
+        return view('backend.auth.login', compact('style'));
     }
-
-    public function logout(Request $request)
-    {
-        $this->guard('admin')->logout();
+    public function logout(Request $request) {
+        $this->guard('backend')->logout();
 
         $request->session()->invalidate();
 
         return redirect($this->logoutRedirectTo);
     }
-    protected function guard()
-    {
-        return Auth::guard('admin');
+    protected function guard() {
+        return Auth::guard('backend');
     }
 }

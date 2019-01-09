@@ -13,8 +13,8 @@ class PostController extends Controller {
     private $show = [
         'id',
         'title',
+        'slug',
         'type',
-        'url',
         'created_at',
         'updated_at',
     ];
@@ -31,14 +31,12 @@ class PostController extends Controller {
             $search['regex'] = $request->input('search.regex', false); // 是否正则
 
             $model = Post::where('created_by', auth('admin')->user()->id);
+
             // # 搜索
             $columns = $request->input('columns');
             foreach ( $columns as $key => $value ) { // 字段搜索
                 if ( $value['search']['value'] ) {
                     switch ( $key ) {
-                        case 3: // parent_id
-                            $model = $model->where('parent_id', $value['search']['value']);
-                        break;
                         default:
                             if ( $value['search']['value'] ) { // 有内容
                                 if ( $value['search']['regex']=='true' ) { // 正则
@@ -50,14 +48,17 @@ class PostController extends Controller {
                     }
                 }
             }
+
             if ( $search['value'] ) { // 搜索
                 if ( $search['regex'] == 'true' ) { // 正则匹配
                     $model = $model->where('slug', 'like', "%{$search['value']}%")
                         ->orWhere('title', 'like', "%{$search['value']}%")
+                        ->orWhere('keywords', 'like', "%{$search['value']}%")
                         ->orWhere('description', 'like', "%{$search['value']}%");
                 } else { // 完全匹配
                     $model = $model->where('slug', $search['value'])
                         ->orWhere('title', $search['value'])
+                        ->orWhere('keywords', $search['value'])
                         ->orWhere('description', $search['value']);
                 }
             }
@@ -68,7 +69,6 @@ class PostController extends Controller {
 
             if ( $model ) {
                 foreach ( $model as $item ) {
-                    // $item->user_name = $item->created_by ? $item->user->name : '未知';
                     $item->button = $item->getActionButtons('posts');
                 }
             }
@@ -80,14 +80,19 @@ class PostController extends Controller {
                 'data' => $model,
             ];
         } else {
-            $types = Content::$types;
+            $types = auth('admin')->user()->profile->posts;
+            $types = json_decode($types, true);
+
+            $content_types = Content::$types;
+
             $search = [
                 'type' => '',
                 'category_id' => 0,
             ];
+
             $tags = Tag::pluck('title', 'id');
 
-            return view('admin.user.post.index', compact('search', 'types', 'tags'));
+            return view('admin.user.post.index', compact('types', 'content_types', 'search', 'tags'));
         }
     }
     public function create(Request $request) {
@@ -190,6 +195,6 @@ class PostController extends Controller {
             flash('删除失败', 'error');
         }
 
-        return redirect('admin/post');
+        return redirect('admin/posts');
     }
 }

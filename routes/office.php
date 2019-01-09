@@ -1,11 +1,13 @@
 <?php
 // ## Office
-Auth::routes();
+// Auth::routes();
 
 $router->get('/', 'Procedure\IndexController@index');
 
 // ### Procedure
 $router->get('/procedure', 'Procedure\IndexController@index'); // 流程
 
-Route::group(['middleware' => ['auth:admin']], function ($router) {
+Route::group([
+	'middleware' => ['auth:office']
+], function ($router) {
 });

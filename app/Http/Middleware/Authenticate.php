@@ -14,6 +14,11 @@ class Authenticate {
                     case 'admin':
                         $path = 'admin/login';
                     break;
+                    case 'backend':
+                        $path = 'backend/login';
+                    break;
+                    case 'office':
+                        $path = 'office/login';
                     break;
                     default:
                         $path = 'user/login';

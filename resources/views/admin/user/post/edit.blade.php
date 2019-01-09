@@ -1,6 +1,6 @@
 @extends('admin.layouts.base')
 
-@section('stylesheet')
+@section('styles')
     <link rel="stylesheet" type="text/css" href="{{ asset('template/color_admin/plugins/parsley/src/parsley.css') }}" />
     <link href="{{asset('template/color_admin/plugins/jquery-tag-it/css/jquery.tagit.css')}}" rel="stylesheet" />
     <!-- <link href="{{asset('template/color_admin/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css')}}" rel="stylesheet" /> -->
@@ -121,7 +121,7 @@
     </div>
 @endsection
 
-@section('script')
+@section('scripts')
     <script src="{{ asset('template/color_admin/plugins/parsley/dist/parsley.min.js') }}"></script>
     <script src="{{ asset('template/color_admin/plugins/parsley/src/i18n/zh_cn.js') }}"></script>
     <script src="{{ asset('template/color_admin/plugins/jquery-tag-it/js/tag-it.min.js')}} "></script>

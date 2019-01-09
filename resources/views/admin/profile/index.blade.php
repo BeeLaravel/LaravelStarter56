@@ -1,6 +1,6 @@
-@extends('admin.layout.base')
+@extends('admin.layouts.base')
 
-@section('stylesheet')
+@section('styles')
     <link rel="stylesheet" type="text/css" href="{{asset('template/color_admin/plugins/gritter/css/jquery.gritter.css')}}"><!-- jquery.gritter 弹窗 -->
     <link rel="stylesheet" type="text/css" href="{{asset('template/color_admin/plugins/bootstrap-sweetalert-master/dist/sweetalert.css')}}"><!-- bootstrap-sweetalert 弹窗 -->
     <link rel="stylesheet" type="text/css" href="{{asset('template/color_admin/plugins/DataTables/media/css/dataTables.bootstrap.min.css')}}">
@@ -42,38 +42,39 @@
                         <div class="form-group"><!-- 昵称 -->
                             <label class="control-label col-md-4 col-sm-4" for="name">昵称 * :</label>
                             <div class="col-md-6 col-sm-6">
-                                <input class="form-control" type="text" name="name" value="{{ $item->name }}" placeholder="昵称" data-parsley-required="true" id="name" />
+                                <input class="form-control" type="text" name="name" value="{{ $item->name }}" placeholder="昵称" id="name"
+                                required />
                             </div>
                         </div>
 
                         <div class="form-group"><!-- QQ -->
                             <label class="control-label col-md-4 col-sm-4" for="qq">QQ * :</label>
                             <div class="col-md-6 col-sm-6">
-                                <input class="form-control" type="text" name="qq" value="{{ $item->profile->qq }}" placeholder="QQ" data-parsley-required="true" id="qq" />
+                                <input class="form-control" type="text" name="qq" value="{{ $item->profile->qq }}" placeholder="QQ" id="qq" />
                             </div>
                         </div>
                         <div class="form-group"><!-- 微信 -->
                             <label class="control-label col-md-4 col-sm-4" for="wechat">微信 * :</label>
                             <div class="col-md-6 col-sm-6">
-                                <input class="form-control" type="text" name="wechat" value="{{ $item->profile->wechat }}" placeholder="微信" data-parsley-required="true" id="wechat" />
+                                <input class="form-control" type="text" name="wechat" value="{{ $item->profile->wechat }}" placeholder="微信" id="wechat" />
                             </div>
                         </div>
                         <div class="form-group"><!-- 微博 -->
                             <label class="control-label col-md-4 col-sm-4" for="weibo">微博 * :</label>
                             <div class="col-md-6 col-sm-6">
-                                <input class="form-control" type="text" name="weibo" value="{{ $item->profile->weibo }}" placeholder="微博" data-parsley-required="true" id="weibo" />
+                                <input class="form-control" type="text" name="weibo" value="{{ $item->profile->weibo }}" placeholder="微博" id="weibo" />
                             </div>
                         </div>
                         <div class="form-group"><!-- GitHub -->
-                            <label class="control-label col-md-4 col-sm-4" for="github">GitHub * :</label>
+                            <label class="control-label col-md-4 col-sm-4" for="github">GitHub :</label>
                             <div class="col-md-6 col-sm-6">
-                                <input class="form-control" type="text" name="github" value="{{ $item->profile->github }}" placeholder="GitHub" data-parsley-required="true" id="github" />
+                                <input class="form-control" type="text" name="github" value="{{ $item->profile->github }}" placeholder="GitHub" id="github" />
                             </div>
                         </div>
                         <div class="form-group"><!-- Gitee -->
-                            <label class="control-label col-md-4 col-sm-4" for="gitee">Gitee * :</label>
+                            <label class="control-label col-md-4 col-sm-4" for="gitee">Gitee :</label>
                             <div class="col-md-6 col-sm-6">
-                                <input class="form-control" type="text" name="gitee" value="{{ $item->profile->gitee }}" placeholder="Gitee" data-parsley-required="true" id="gitee" />
+                                <input class="form-control" type="text" name="gitee" value="{{ $item->profile->gitee }}" placeholder="Gitee" id="gitee" />
                             </div>
                         </div>
 
@@ -97,7 +98,7 @@
     </div>
 @endsection
 
-@section('script')
+@section('scripts')
     <script src="{{ asset('template/color_admin/plugins/parsley/dist/parsley.min.js') }}"></script>
     <script src="{{ asset('template/color_admin/plugins/parsley/src/i18n/zh_cn.js') }}"></script>
 
