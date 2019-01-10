@@ -5,29 +5,45 @@
     <div class="col-md-6">
         <div class="card mx-2">
             <div class="card-block p-2">
-                <h1>@lang('view.register')</h1>
-                <p class="text-muted">@lang('view.register_desc')</p>
-                <div class="input-group mb-1">
-                    <span class="input-group-addon"><i class="icon-user"></i></span>
-                    <input type="text" class="form-control" placeholder="@lang('view.username')">
-                </div>
-
-                <div class="input-group mb-1">
-                    <span class="input-group-addon">@</span>
-                    <input type="text" class="form-control" placeholder="@lang('view.email')">
-                </div>
-
-                <div class="input-group mb-1">
-                    <span class="input-group-addon"><i class="icon-lock"></i></span>
-                    <input type="password" class="form-control" placeholder="@lang('view.password')">
-                </div>
-
-                <div class="input-group mb-2">
-                    <span class="input-group-addon"><i class="icon-lock"></i></span>
-                    <input type="password" class="form-control" placeholder="@lang('view.repeat_password')">
-                </div>
-
-                <button type="button" class="btn btn-block btn-success">@lang('view.create_account')</button>
+                <form method="post">
+                    <h1>@lang('view.register')</h1>
+                    <p class="text-muted">@lang('view.register_desc')</p>
+                    @csrf
+                    <div class="form-group">
+                        <div class="input-group mb-q">
+                            <span class="input-group-addon"><i class="icon-user"></i></span>
+                            <input type="text" name="name" value="{{ old('name') }}" class="form-control" placeholder="@lang('view.username')">
+                        </div>
+                        @if ($errors->has('name'))
+                            <span class="text-danger">{{ $errors->first('name') }}</span>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group mb-q">
+                            <span class="input-group-addon">@</span>
+                            <input type="text" name="email" value="{{ old('email') }}" class="form-control" placeholder="@lang('view.email')">
+                        </div>
+                        @if ($errors->has('email'))
+                            <span class="text-danger">{{ $errors->first('email') }}</span>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group mb-q">
+                            <span class="input-group-addon"><i class="icon-lock"></i></span>
+                            <input type="password" name="password" value="" class="form-control" placeholder="@lang('view.password')">
+                        </div>
+                        @if ($errors->has('password'))
+                            <span class="text-danger">{{ $errors->first('password') }}</span>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group mb-q">
+                            <span class="input-group-addon"><i class="icon-lock"></i></span>
+                            <input type="password" name="password_confirmation" class="form-control" placeholder="@lang('view.repeat_password')">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-block btn-success">@lang('view.create_account')</button>
+                </form>
             </div>
             <div class="card-footer p-2">
                 <div class="row">

@@ -1,6 +1,7 @@
 <?php
 // ## Admin
-Auth::routes();
+// Auth::routes();
+Route:auth();
 
 Route::group([
 	'middleware' => ['auth:admin']

@@ -12,11 +12,17 @@
                         @csrf
                         <div class="input-group mb-1">
                             <span class="input-group-addon"><i class="icon-user"></i></span>
-                            <input type="text" class="form-control" placeholder="@lang('view.username')">
+                            <input type="text" name="email" value="{{ old('email') }}" class="form-control" placeholder="@lang('view.username')">
+                            @if ($errors->has('email'))
+                                <span class="text-danger">{{ $errors->first('email') }}</span>
+                            @endif
                         </div>
                         <div class="input-group mb-2">
                             <span class="input-group-addon"><i class="icon-lock"></i></span>
-                            <input type="password" class="form-control" placeholder="@lang('view.password')">
+                            <input type="password" name="password" class="form-control" placeholder="@lang('view.password')">
+                            @if ($errors->has('password'))
+                                <span class="text-danger">{{ $errors->first('password') }}</span>
+                            @endif
                         </div>
                         <div class="row">
                             <div class="col-6">

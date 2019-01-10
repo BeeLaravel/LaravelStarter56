@@ -16,4 +16,11 @@ return [
     'create_account' => 'Create Account',
     'facebook' => 'Facebook',
     'twitter' => 'Twitter',
+    'logout' => 'Logout',
+    'account' => 'Account',
+    'settings' => 'Settings',
+    'updates' => 'Updates',
+    'messages' => 'Messages',
+    'tasks' => 'Tasks',
+    'comments' => 'Comments',
 ];

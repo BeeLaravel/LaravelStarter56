@@ -16,4 +16,11 @@ return [
     'create_account' => '创建账号',
     'facebook' => '脸书',
     'twitter' => '推特',
+    'logout' => '退出',
+    'account' => '账户',
+    'settings' => '设置',
+    'updates' => '更新',
+    'messages' => '消息',
+    'tasks' => '任务',
+    'comments' => '评论',
 ];

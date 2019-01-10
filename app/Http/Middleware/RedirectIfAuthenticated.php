@@ -9,10 +9,10 @@ class RedirectIfAuthenticated {
         if ( Auth::guard($guard)->check() ) {
             switch ( $guard ) {
                 case 'admin':
-                    $url = "/admin/";
+                    $url = "/admin/categories";
                 break;
                 case 'backend':
-                    $url = "/backend/";
+                    $url = "/backend/links";
                 break;
                 case 'office':
                     $url = "/office/";

@@ -94,7 +94,7 @@
                         <li><a href="{{ url('/admin/profile/password') }}">修改密码</a></li>
                         <li><a href="{{ url('/admin/profile/email') }}"><span class="badge badge-danger pull-right">2</span> 邮箱</a></li>
                         <li class="divider"></li>
-                        <li><a href="javascript:;" onclick="exit()">退出</a></li>
+                        <li><a href="javascript: void(0);" onclick="javascript: exit()">退出</a></li>
                         <form action="{{ url('/admin/logout') }}" method="POST" id="exit_form">
                             @csrf
                         </form>
