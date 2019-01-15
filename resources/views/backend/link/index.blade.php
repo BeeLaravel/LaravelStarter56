@@ -1,4 +1,10 @@
 @extends('backend.layouts.master')
+@section('styles')
+    <link rel="stylesheet" type="text/css" href="/backend/css/links.css">
+    <style type="text/css">
+        
+    </style>
+@endsection
 @section('page')
 	<div class="container-fluid">
         <div class="animated fadeIn">
@@ -22,62 +28,107 @@
             <div class="card" id="new">
                 <div class="card-header">列表</div>
                 <div class="card-block">
-                    <div class="row text-center">
-                        <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                    <dl class="row text-center">
+                        <dt class="col-xs-4 col-sm-3 col-md-2 row2">
+                            <span>百度</span>
+                        </dt>
+                        <dd class="col-xs-4 col-sm-3 col-md-2">
                             <a href="">
-                            	<h4>百度</h4>
-                            	<p>百度一下，你就知道！</p>
+                                <span class="link-title">百度</span>
+                                <span class="link-info">百度一下，你就知道！</span>
                             </a>
-                        </div>
-                        <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                        </dd>
+                        <dd class="col-xs-4 col-sm-3 col-md-2">
                             <a href="">
-                            	<h4>百度</h4>
-                            	<p>百度一下，你就知道！</p>
+                                <span class="link-title">百度</span>
+                                <span class="link-info">百度一下，你就知道！</span>
                             </a>
-                        </div>
-                        <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                        </dd>
+                        <dd class="col-xs-4 col-sm-3 col-md-2">
                             <a href="">
-                            	<h4>百度</h4>
-                            	<p>百度一下，你就知道！</p>
+                                <span class="link-title">百度</span>
+                                <span class="link-info">百度一下，你就知道！</span>
                             </a>
-                        </div>
-                        <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                        </dd>
+                        <dd class="col-xs-4 col-sm-3 col-md-2">
                             <a href="">
-                            	<h4>百度</h4>
-                            	<p>百度一下，你就知道！</p>
+                                <span class="link-title">百度</span>
+                                <span class="link-info">百度一下，你就知道！</span>
                             </a>
-                        </div>
-                        <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                        </dd>
+                        <dd class="col-xs-4 col-sm-3 col-md-2">
                             <a href="">
-                            	<h4>百度</h4>
-                            	<p>百度一下，你就知道！</p>
+                                <span class="link-title">百度</span>
+                                <span class="link-info">百度一下，你就知道！</span>
                             </a>
-                        </div>
-                        <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                        </dd>
+                        <dd class="col-xs-4 col-sm-3 col-md-2">
                             <a href="">
-                            	<h4>百度</h4>
-                            	<p>百度一下，你就知道！</p>
+                                <span class="link-title">百度</span>
+                                <span class="link-info">百度一下，你就知道！</span>
                             </a>
-                        </div>
-                        <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                        </dd>
+                        <dd class="col-xs-4 col-sm-3 col-md-2">
                             <a href="">
-                            	<h4>百度</h4>
-                            	<p>百度一下，你就知道！</p>
+                                <span class="link-title">百度</span>
+                                <span class="link-info">百度一下，你就知道！</span>
                             </a>
-                        </div>
-                        <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                        </dd>
+                        <dd class="col-xs-4 col-sm-3 col-md-2">
                             <a href="">
-                            	<h4>百度</h4>
-                            	<p>百度一下，你就知道！</p>
+                                <span class="link-title">百度</span>
+                                <span class="link-info">百度一下，你就知道！</span>
                             </a>
-                        </div>
-                        <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                        </dd>
+                        <dd class="col-xs-4 col-sm-3 col-md-2">
                             <a href="">
-                            	<h4>百度</h4>
-                            	<p>百度一下，你就知道！</p>
+                                <span class="link-title">百度</span>
+                                <span class="link-info">百度一下，你就知道！</span>
                             </a>
-                        </div>
-                    </div>
+                        </dd>
+                        <dd class="col-xs-4 col-sm-3 col-md-2">
+                            <a href="">
+                                <span class="link-title">百度</span>
+                                <span class="link-info">百度一下，你就知道！</span>
+                            </a>
+                        </dd>
+                        <dd class="col-xs-4 col-sm-3 col-md-2">
+                            <a href="">
+                                <span class="link-title">百度</span>
+                                <span class="link-info">百度一下，你就知道！</span>
+                            </a>
+                        </dd>
+                        <dd class="col-xs-4 col-sm-3 col-md-2">
+                            <a href="">
+                                <span class="link-title">百度</span>
+                                <span class="link-info">百度一下，你就知道！</span>
+                            </a>
+                        </dd>
+                        <dd class="col-xs-4 col-sm-3 col-md-2">
+                            <a href="">
+                                <span class="link-title">百度</span>
+                                <span class="link-info">百度一下，你就知道！</span>
+                            </a>
+                        </dd>
+                        <dd class="col-xs-4 col-sm-3 col-md-2">
+                            <a href="">
+                                <span class="link-title">百度</span>
+                                <span class="link-info">百度一下，你就知道！</span>
+                            </a>
+                        </dd>
+                        <dd class="col-xs-4 col-sm-3 col-md-2">
+                            <a href="">
+                                <span class="link-title">百度</span>
+                                <span class="link-info">百度一下，你就知道！</span>
+                            </a>
+                        </dd>
+                        <dd class="col-xs-4 col-sm-3 col-md-2">
+                            <a href="">
+                                <span class="link-title">百度</span>
+                                <span class="link-info">百度一下，你就知道！</span>
+                            </a>
+                        </dd>
+                    </dl>
                 </div>
             </div>
         </div>

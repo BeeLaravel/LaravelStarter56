@@ -1,0 +1,56 @@
+@import "../layouts/resets.scss";
+@import "../layouts/commons.scss";
+@import "../layouts/animates.scss";
+
+dl.row {
+    display: block;
+
+    dt {
+        &.row2 {
+            height: 150px;
+        }
+    }
+    dt {
+    	float: left;
+	    padding-top: 15px;
+	    padding-left: 10px;
+        padding-right: 10px;
+	    color: #a2a8a2;
+	    font-size: 16px;
+    }
+    dd {
+        float: left;
+	    padding-left: 10px;
+        padding-right: 10px;
+
+        a {
+            display: block;
+            transition: all .2s ease;
+            padding: 10px;
+            border-radius: 5px;
+            min-height: 70px;
+		    max-height: 70px;
+		    overflow: hidden;
+
+            &:hover {
+                background-color: #edf5fa;
+
+                span.link-title, span.link-info {
+					color: #0065a9;
+                }
+            }
+            span.link-title {
+            	display: block;
+                font-size: 1rem;
+                color: #00ad35;
+                white-space: nowrap;
+                overflow: hidden;
+            }
+            span.link-info {
+            	display: block;
+                font-size: 0.75rem;
+                color: #a2a8a2;
+            }
+        }
+    }
+}

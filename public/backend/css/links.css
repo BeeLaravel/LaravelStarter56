@@ -1,0 +1,61 @@
+a:hover {
+  text-decoration: none;
+}
+
+dl.row {
+  display: block;
+}
+
+dl.row dt.row2 {
+  height: 150px;
+}
+
+dl.row dt {
+  float: left;
+  padding-top: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: #a2a8a2;
+  font-size: 16px;
+}
+
+dl.row dd {
+  float: left;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+dl.row dd a {
+  display: block;
+  -webkit-transition: all .2s ease;
+  transition: all .2s ease;
+  padding: 10px;
+  border-radius: 5px;
+  min-height: 70px;
+  max-height: 70px;
+  overflow: hidden;
+}
+
+dl.row dd a:hover {
+  background-color: #edf5fa;
+}
+
+dl.row dd a:hover span.link-title,
+dl.row dd a:hover span.link-info {
+  color: #0065a9;
+}
+
+dl.row dd a span.link-title {
+  display: block;
+  font-size: 1rem;
+  color: #00ad35;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+dl.row dd a span.link-info {
+  display: block;
+  font-size: 0.75rem;
+  color: #a2a8a2;
+}
+

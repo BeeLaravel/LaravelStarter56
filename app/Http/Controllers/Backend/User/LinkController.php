@@ -14,6 +14,9 @@ class LinkController extends Controller {
 
         $menus = level_array($menus);
 
+        $links = Link::where('created_by', 0)
+            ->get();
+        dd($links);
     	return view('backend.link.index', compact('menus'));
     }
     public function show() {
