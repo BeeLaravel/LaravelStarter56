@@ -35,4 +35,4 @@
     <script src="/template/coreui/assets/js/libs/pace.min.js"></script>
     <script src="/template/coreui/assets/js/libs/Chart.min.js"></script>
     <script src="/template/coreui/js/app.js"></script>
-@show
+@endsection

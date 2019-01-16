@@ -167,7 +167,6 @@
                 </ul>
             </div>
         </div>
-
         <div class="col-sm-6 col-lg-3">
             <div class="social-box twitter">
                 <i class="fa fa-twitter"></i>
@@ -186,7 +185,6 @@
                 </ul>
             </div>
         </div>
-
         <div class="col-sm-6 col-lg-3">
             <div class="social-box linkedin">
                 <i class="fa fa-linkedin"></i>
@@ -205,7 +203,6 @@
                 </ul>
             </div>
         </div>
-
         <div class="col-sm-6 col-lg-3">
             <div class="social-box google-plus">
                 <i class="fa fa-google-plus"></i>

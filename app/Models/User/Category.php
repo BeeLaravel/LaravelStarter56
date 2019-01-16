@@ -32,12 +32,12 @@ class Category extends Model {
     }
 
     public function links() { // 链接 一对多
-        return $this->belongsToMany('App\Models\User\Link');
+        return $this->hasMany('App\Models\User\Link');
     }
     public function posts() { // 文章 一对多
-        return $this->belongsToMany('App\Models\User\Post');
+        return $this->hasMany('App\Models\User\Post');
     }
     public function pages() { // 页面 一对多
-        return $this->belongsToMany('App\Models\User\Page');
+        return $this->hasMany('App\Models\User\Page');
     }
 }
