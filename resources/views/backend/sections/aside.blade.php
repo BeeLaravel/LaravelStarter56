@@ -9,7 +9,7 @@
                         <ul class="nav-dropdown-items">
                             @foreach ( $menu_first->children as $menu_second )
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#{{ $menu_second->title }}"><i class="fa fa-external-link"></i> {{ $menu_second->title }}</a>
+                                    <a class="nav-link" href="#{{ $menu_second->slug }}"><i class="fa fa-external-link"></i> {{ $menu_second->title }}</a>
                                 </li>
                             @endforeach
                         </ul>
