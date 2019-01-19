@@ -41,12 +41,14 @@
                                         <span class="link-title">{{ $link->title }}</span>
                                         <span class="link-info">{{ $link->description }}</span>
                                     </a>
-                                    <a href="{{ url('/backend/links/'.$link->id.'/edit') }}" class="edit"><i class="fa fa-edit"></i></a>
-                                    <a data-id="{{ $link->id }}" href="javascript: void(0);" class="delete"><i class="fa fa-trash-o"></i></a>
-                                    <form action="{{ url('/backend/links/'.$link->id) }}" method="POST" name="delete_item_{{ $link->id }}" style="display: none;">
-                                        @csrf
-                                        {{ method_field('DELETE') }}
-                                    </form>
+                                    @if ( auth('backend')->user()->corporation_id == '100' )
+                                        <a href="{{ url('/backend/links/'.$link->id.'/edit') }}" class="edit"><i class="fa fa-edit"></i></a>
+                                        <a data-id="{{ $link->id }}" href="javascript: void(0);" class="delete"><i class="fa fa-trash-o"></i></a>
+                                        <form action="{{ url('/backend/links/'.$link->id) }}" method="POST" name="delete_item_{{ $link->id }}" style="display: none;">
+                                            @csrf
+                                            {{ method_field('DELETE') }}
+                                        </form>
+                                    @endif
                                 </dd>
                             @endforeach
                             @if ( $menu_first->children )
@@ -61,12 +63,14 @@
                                                     <span class="link-title">{{ $link->title }}</span>
                                                     <span class="link-info">{{ $link->description }}</span>
                                                 </a>
-                                                <a href="{{ url('/backend/links/'.$link->id.'/edit') }}" class="edit"><i class="fa fa-edit"></i></a>
-                                                <a data-id="{{ $link->id }}" href="javascript: void(0);" class="delete"><i class="fa fa-trash-o"></i></a>
-                                                <form action="{{ url('/backend/links/'.$link->id) }}" method="POST" name="delete_item_{{ $link->id }}" style="display: none;">
-                                                    @csrf
-                                                    {{ method_field('DELETE') }}
-                                                </form>
+                                                @if ( auth('backend')->user()->corporation_id == '100' )
+                                                    <a href="{{ url('/backend/links/'.$link->id.'/edit') }}" class="edit"><i class="fa fa-edit"></i></a>
+                                                    <a data-id="{{ $link->id }}" href="javascript: void(0);" class="delete"><i class="fa fa-trash-o"></i></a>
+                                                    <form action="{{ url('/backend/links/'.$link->id) }}" method="POST" name="delete_item_{{ $link->id }}" style="display: none;">
+                                                        @csrf
+                                                        {{ method_field('DELETE') }}
+                                                    </form>
+                                                @endif
                                             </dd>
                                         @endforeach
                                     @endif

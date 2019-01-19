@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
@@ -14,34 +13,25 @@ class LoginController extends Controller {
     protected $redirectTo = '/admin/linktag';
     protected $logoutRedirectTo = '/admin/login';
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
+    public function __construct() {
         $this->middleware('guest:admin')->except('logout');
     }
 
-    public function showLoginForm()
-    {
+    public function showLoginForm() {
         $style = [
             'body-class' => 'bg-white',
         ];
         return view('admin.auth.login_v3', compact('style'));
     }
 
-    public function logout(Request $request)
-    {
+    public function logout(Request $request) {
         $this->guard('admin')->logout();
 
         $request->session()->invalidate();
 
         return redirect($this->logoutRedirectTo);
     }
-    protected function guard()
-    {
+    protected function guard() {
         return Auth::guard('admin');
     }
 }
