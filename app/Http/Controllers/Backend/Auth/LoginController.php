@@ -11,8 +11,8 @@ use Illuminate\Support\Facades\Auth;
 class LoginController extends Controller {
     use AuthenticatesUsers;
 
-    // protected $redirectTo = '/backend/links';
-    protected $logoutRedirectTo = '/admin/login';
+    protected $redirectTo = '/backend/links';
+    protected $logoutRedirectTo = '/backend/login';
 
     public function __construct() {
         $this->middleware('guest:backend')->except('logout');
