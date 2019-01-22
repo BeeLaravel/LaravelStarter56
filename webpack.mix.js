@@ -17,7 +17,7 @@ mix
     // ### 项目
     // #### vue cms
     // .sass('resources/assets/sass/cms.scss', 'public/css')
-    .sass('resources/assets/front/apps/link.scss', 'public/css')
+    // .sass('resources/assets/front/apps/link.scss', 'public/css')
 
-    .sass('resources/assets/backend/apps/links.scss', 'public/backend/css')
+    .sass('resources/assets/backend/apps/links.scss', 'public/statics/backend/styles')
 ;

@@ -1,6 +1,5 @@
 @extends('backend.layouts.master')
 @section('styles')
-    <link rel="stylesheet" type="text/css" href="/backend/css/links.css">
     <style type="text/css">
         
     </style>

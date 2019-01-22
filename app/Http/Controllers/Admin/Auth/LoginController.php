@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class LoginController extends Controller {
     use AuthenticatesUsers;
 
-    protected $redirectTo = '/admin/linktag';
+    protected $redirectTo = '/admin/categories';
     protected $logoutRedirectTo = '/admin/login';
 
     public function __construct() {

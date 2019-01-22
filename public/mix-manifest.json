@@ -1,5 +1,4 @@
 {
     "/starter/vue/css/app.css": "/starter/vue/css/app.css",
-    "/css/link.css": "/css/link.css",
-    "/backend/css/links.css": "/backend/css/links.css"
+    "/statics/backend/styles/links.css": "/statics/backend/styles/links.css"
 }

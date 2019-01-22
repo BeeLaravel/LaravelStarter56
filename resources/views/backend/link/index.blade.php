@@ -4,7 +4,7 @@
 @section('styles')
     <link rel="stylesheet" type="text/css" href="{{asset('template/color_admin/plugins/gritter/css/jquery.gritter.css')}}"><!-- jquery.gritter 弹窗 -->
     <link rel="stylesheet" type="text/css" href="{{asset('template/color_admin/plugins/bootstrap-sweetalert-master/dist/sweetalert.css')}}"><!-- bootstrap-sweetalert 弹窗 -->
-    <link rel="stylesheet" type="text/css" href="/backend/css/links.css">
+    <link rel="stylesheet" type="text/css" href="/statics/backend/styles/links.css">
     <style type="text/css">
         
     </style>

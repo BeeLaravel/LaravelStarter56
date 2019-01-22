@@ -17,7 +17,7 @@ return [
         ],
         'backend' => [
             'driver' => 'session',
-            'provider' => 'admins',
+            'provider' => 'backend',
         ],
         'office' => [
             'driver' => 'session',
@@ -36,6 +36,10 @@ return [
         'admins' => [
             'driver' => 'eloquent',
             'model' => App\Models\RBAC\User::class,
+        ],
+        'backend' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Application\BackendUser::class,
         ],
     ],
     'passwords' => [
