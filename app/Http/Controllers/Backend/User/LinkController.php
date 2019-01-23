@@ -8,11 +8,12 @@ use App\Models\User\Category;
 use App\Models\User\Link;
 
 class LinkController extends Controller {
-    public function __construct() {
-    }
-    public function index() {
+    public function __construct() {}
+    public function index(Request $request) {
+        $type = $request->input('type', config('beesoft.links.default_type'));
+
         $menus = Category::where('created_by', 0)
-            ->where('type', 'hospital')
+            ->where('type', $type)
             ->get();
         $menus = level_array($menus);
 
