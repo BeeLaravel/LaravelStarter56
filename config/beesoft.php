@@ -12,6 +12,6 @@ return [
 	],
 
 	'links' => [
-		'default_type' => env('LINKS_DEFAULT_TYPE', 'commons'),
+		'default_type' => env('LINKS_DEFAULT_TYPE', 'commons'), // commons life
 	]
 ];

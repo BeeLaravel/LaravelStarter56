@@ -32,13 +32,7 @@ Route::group([
 	$router->resource('links', 'User\LinkController'); // 链接
 	$router->resource('posts', 'User\PostController'); // 文章
 	$router->resource('pages', 'User\PageController'); // 页面
-	// ### 系统
-	$router->resource('system-categories', 'User\CategoryController'); // 分类
-	$router->resource('system-tags', 'User\TagController'); // 标签
-	$router->resource('system-links', 'User\LinkController'); // 链接
-	$router->resource('system-posts', 'User\PostController'); // 文章
-	$router->resource('system-pages', 'User\PageController'); // 页面
-
+	$router->resource('pictures', 'User\PictureController'); // 图片
 
 	// ### 工具
 	$router->get('compile/index', 'Tool\CompileController@index');
