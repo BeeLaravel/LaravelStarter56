@@ -7,4 +7,6 @@ Route::group([
 ], function ($router) {
 	$router->resource('/', 'User\LinkController'); // 链接
 	$router->resource('links', 'User\LinkController'); // 链接
+	$router->get('pictures/{category}', 'User\PictureController@index')->name('pictures.index');
+	$router->resource('pictures', 'User\PictureController'); // 图片
 });

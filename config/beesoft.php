@@ -12,6 +12,9 @@ return [
 	],
 
 	'links' => [
-		'default_type' => env('LINKS_DEFAULT_TYPE', 'commons'), // commons life
+		'default_type' => env('LINKS_DEFAULT_TYPE', 'commons'), // commons links
+	],
+	'pictures' => [
+		'default_type' => env('PICTURES_DEFAULT_TYPE', 'commons'), // commons pictures
 	]
 ];

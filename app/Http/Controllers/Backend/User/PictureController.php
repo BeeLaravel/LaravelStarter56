@@ -2,25 +2,31 @@
 namespace App\Http\Controllers\Backend\User;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\User\LinkRequest as CurrentRequest;
+use App\Http\Requests\User\PictureRequest as CurrentRequest;
 
 use App\Models\User\Category;
-use App\Models\User\Link as CurrentModel;
+use App\Models\User\Picture as CurrentModel;
 
-class LinkController extends Controller {
-    protected $slug = 'links';
+class PictureController extends Controller {
+    protected $slug = 'pictures';
 
     public function __construct() {}
 
-    public function index(Request $request) {
+    public function index($category='', Request $request) {
         $type = $request->input('type', $this->getDefaultType());
 
         $menus = Category::where('created_by', 0)
             ->where('type', $type)
             ->get();
         $menus = level_array($menus);
+        array_unshift($menus, new Category);
 
-    	return view($this->getView(), compact('menus'));
+        $category = Category::whereSlug($category)->first();
+        $pictures = CurrentModel::whereCreatedBy(0)
+            ->whereCategoryId($category->id??0)
+            ->get();
+
+    	return view($this->getView(), compact('menus', 'category', 'pictures'));
     }
     public function show() {
     	return 'show';
@@ -45,11 +51,11 @@ class LinkController extends Controller {
         if ( $result ) {
             flash('操作成功', 'success');
 
-            return redirect($this->getUrl()); // 列表
+            return redirect($this->getUrl());
         } else {
             flash('操作失败', 'error');
 
-            return back(); // 继续
+            return back();
         }
     }
     public function edit(int $id) {
@@ -71,11 +77,11 @@ class LinkController extends Controller {
         if ( $result ) {
             flash('操作成功', 'success');
 
-            return redirect($this->getUrl()); // 列表
+            return redirect($this->getUrl());
         } else {
             flash('操作失败', 'error');
 
-            return back(); // 继续
+            return back();
         }
     }
     public function destroy(Request $request, int $id) {
@@ -89,18 +95,4 @@ class LinkController extends Controller {
 
         return redirect($this->getUrl());
     }
-    // public function test() {
-    //     $post = new Post;
-    //     $post
-    //        ->setTranslation('name', 'en', 'hello')
-    //        ->setTranslation('name', 'zh-CN', '你好')
-    //        ->save();
-           
-    //     $post->name;
-    //     $post->getTranslation('name', 'zh-CN');
-
-    //     app()->setLocale('zh-CN');
-
-    //     $post->name;
-    // }
 }

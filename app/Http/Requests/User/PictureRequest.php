@@ -8,11 +8,15 @@ class PictureRequest extends FormRequest {
         return true;
     }
     public function rules() {
-        return [
+        $data = [
             'title' => 'required',
-            'image' => 'required',
             'sort' => 'bail|integer|min:0|max:255',
         ];
+
+        $actions = explode('.', $this->route()->action['as']);
+        if ( end($actions) == 'store' ) $data['image'] = 'required';
+
+        return $data;
     }
     public function messages() {
         return [];

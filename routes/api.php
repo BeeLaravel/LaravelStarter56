@@ -46,7 +46,15 @@ $api = app('Dingo\Api\Routing\Router');
 // });
 
 // $api->group(['middleware' => ['auth:api']], function ($api) {
-	$api->version('v1', function ($api) { // Vote
+	$api->version('v1', function ($api) {
+		$api->group([ // 用户 User
+	    	'prefix' => 'user',
+	    ], function ($api) {
+	    	$api->resource('links', '\App\Http\Controllers\Api\User\LinkController'); // 链接 Links
+	    	$api->get('pictures/{category}', '\App\Http\Controllers\Api\User\PictureController@index');
+	    	$api->resource('pictures', '\App\Http\Controllers\Api\User\PictureController'); // 图片 Pictures
+		});
+
 		// 投票 Vote
 	    $api->resource('votes', '\App\Http\Controllers\Api\Vote\VoteController'); // 投票 Vote
 	    $api->resource('vote_users', '\App\Http\Controllers\Api\Vote\UserController'); // 用户 User
@@ -67,6 +75,7 @@ $api = app('Dingo\Api\Routing\Router');
 	    	$api->get('category_items/{parent_id}', '\App\Http\Controllers\Api\Structure\CategoryItemController@index');
 	    	$api->resource('category_items', '\App\Http\Controllers\Api\Structure\CategoryItemController'); // 分类 项
 		});
+
 	});
 // });
 

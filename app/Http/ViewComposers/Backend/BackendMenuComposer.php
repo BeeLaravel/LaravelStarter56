@@ -2,14 +2,12 @@
 namespace App\Http\ViewComposers;
 
 use Illuminate\Contracts\View\View;
-use App\Models\System\Menu;
+use App\Models\User\Menu;
 
 class BackendMenuComposer {
-    protected $menu;
-
     public function compose(View $view) {
-    	$menu_array = Menu::find(1)->items()->get()->toArray();
-        $view->with('menus', $this->sortTreeList($menu_array));
+    	// $menu_array = Menu::find(1)->items()->get()->toArray();
+     //    $view->with('menus', $this->sortTreeList($menu_array));
     }
     public function sortTreeList($menu_array=[]) {
         $tree = $temp = [];

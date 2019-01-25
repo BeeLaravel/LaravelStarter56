@@ -6,7 +6,7 @@ Auth::routes();
 Route::get('bbs', 'BBS\PageController@root')->name('front.bbs.root');
 
 Route::group([
-	'prefix' => 'link'
+	'prefix' => 'links'
 ], function ($router) {
 	Route::get('/', ['as' => 'link', 'uses' => 'Link\IndexController@index']);
 });

@@ -67,7 +67,7 @@ class PictureController extends Controller {
             if ( $model ) {
                 foreach ( $model as $item ) {
                     $item->button = $item->getActionButtons('pictures');
-                    $item->image = '<img src="/storage/'.$item->image.'" style="height: 100px;">';
+                    $item->image = '<a href="/storage/'.$item->image.'" target="__black"><img src="/storage/'.$item->image.'" style="height: 100px; display: block; margin: 0 auto;"></a>';
                 }
             }
 
@@ -188,7 +188,15 @@ class PictureController extends Controller {
     }
     public function update(PictureRequest $request, int $id) {
         $item = Picture::find($id);
-        $result = $item->update($request->all());
+
+        $data = $request->all();
+        if ( $image = $request->file('image') ) {
+            $image_path = $image->store('public/pictures');
+            $data['image'] = substr($image_path, '7');
+        } else {
+            unset($data['image']);
+        }
+        $result = $item->update($data);
 
         if ( $result ) {
             $tags = $request->input('tags', []);
