@@ -10,16 +10,20 @@
                         <h1>@lang('view.login')</h1>
                         <p class="text-muted">@lang('view.login_desc')</p>
                         @csrf
-                        <div class="input-group mb-1">
-                            <span class="input-group-addon"><i class="icon-user"></i></span>
-                            <input type="text" name="email" value="{{ old('email') }}" class="form-control" placeholder="@lang('view.username')">
+                        <div class="mb-1">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="icon-user"></i></span>
+                                <input type="text" name="email" value="{{ old('email') }}" class="form-control" placeholder="@lang('view.username')">
+                            </div>
                             @if ($errors->has('email'))
                                 <span class="text-danger">{{ $errors->first('email') }}</span>
                             @endif
                         </div>
-                        <div class="input-group mb-2">
-                            <span class="input-group-addon"><i class="icon-lock"></i></span>
-                            <input type="password" name="password" class="form-control" placeholder="@lang('view.password')">
+                        <div class="mb-2">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="icon-lock"></i></span>
+                                <input type="password" name="password" class="form-control" placeholder="@lang('view.password')">
+                            </div>
                             @if ($errors->has('password'))
                                 <span class="text-danger">{{ $errors->first('password') }}</span>
                             @endif

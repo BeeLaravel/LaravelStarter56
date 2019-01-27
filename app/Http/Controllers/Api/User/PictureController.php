@@ -14,19 +14,21 @@ class PictureController extends Controller { // 案例
         $page_size = $request->query('page_size', 10);
 
         $created_by = $request->query('created_by', 0);
-
         $category = Category::whereSlug($category)->first();
 
         $model = new CurrentModel;
         
-        $return = $model
+        $model = $model
             ->whereCreatedBy($created_by)
-            ->whereCategoryId($category->id??0)
-            ->orderBy($order_column, $order_direction)
+            ->whereCategoryId($category->id??0);
+
+        if ( $keyword = $request->query('keyword') ) $model = $model->where('title', $keyword)->orWhere('description', $keyword);
+
+        $model = $model->orderBy($order_column, $order_direction)
             ->orderBy('id', 'desc')
             ->paginate($page_size);
 
-        return $this->response->paginator($return, new CurrentTransformer);
+        return $this->response->paginator($model, new CurrentTransformer);
     }
     public function show($id) {
         $item = CurrentModel::findOrFail($id);

@@ -11,7 +11,7 @@
                 <div class="card">
                     <div class="card-header">
                         <strong>链接库</strong>
-                        <small>添加</small>
+                        <small>编辑</small>
                     </div>
                     <div class="card-block">
                         @if ( $errors->any() )

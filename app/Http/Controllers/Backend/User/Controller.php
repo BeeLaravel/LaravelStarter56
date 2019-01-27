@@ -9,8 +9,15 @@ class Controller extends \App\Http\Controllers\Backend\Controller {
     	if ( !$this->slug ) return new Exception();
     }
 
-    protected function getUrl($action='index') {
-        return $this->perfix.'/'.$this->slug;
+    protected function getUrl($action='index', $param=[]) {
+        if ( is_array($action) ) {
+            $param = $action;
+            $action = '';
+        } else if ( $action=='index' ) {
+            $action = '';
+        }
+
+        return $this->perfix.'/'.$this->slug.'/'.$action.'?'.http_build_query($param);
     }
     protected function getView() {
     	$actions = explode('.', request()->route()->action['as']);

@@ -20,4 +20,5 @@ mix
     // .sass('resources/assets/front/apps/link.scss', 'public/css')
 
     .sass('resources/assets/backend/apps/links.scss', 'public/statics/backend/styles')
+    .sass('resources/assets/backend/apps/pictures.scss', 'public/statics/backend/styles')
 ;
