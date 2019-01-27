@@ -25,7 +25,7 @@ class LinkController extends Controller {
     public function show() {
     	return 'show';
     }
-    public function create() {
+    public function create(Request $request) {
         $type = $request->input('type', $this->getDefaultType());
 
         $menus = Category::where('created_by', 0)
