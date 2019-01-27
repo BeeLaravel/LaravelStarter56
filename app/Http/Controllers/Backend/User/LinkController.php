@@ -52,7 +52,7 @@ class LinkController extends Controller {
             return back(); // 继续
         }
     }
-    public function edit(int $id) {
+    public function edit(int $id, Request $request) {
         $type = $request->input('type', $this->getDefaultType());
 
         $menus = Category::where('created_by', 0)
