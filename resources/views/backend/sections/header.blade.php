@@ -7,7 +7,7 @@
         </li>
         @foreach ( $application_menus as $item )
             <li class="nav-item px-1">
-                <a class="nav-link" href="{{ url('backend'.$item->slug) }}">{{ $item->title }}</a>
+                <a class="nav-link" href="{{ url($item->slug) }}">{{ $item->title }}</a>
             </li>
         @endforeach
     </ul>
