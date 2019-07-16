@@ -5,15 +5,11 @@
         <li class="nav-item">
             <a class="nav-link navbar-toggler sidebar-toggler" href="#">☰</a>
         </li>
-        <li class="nav-item px-1">
-            <a class="nav-link" href="#">Dashboard</a>
-        </li>
-        <li class="nav-item px-1">
-            <a class="nav-link" href="#">Users</a>
-        </li>
-        <li class="nav-item px-1">
-            <a class="nav-link" href="#">Settings</a>
-        </li>
+        @foreach ( $application_menus as $item )
+            <li class="nav-item px-1">
+                <a class="nav-link" href="{{ url($item->slug) }}">{{ $item->title }}</a>
+            </li>
+        @endforeach
     </ul>
     <ul class="nav navbar-nav ml-auto">
         <li class="nav-item hidden-md-down">

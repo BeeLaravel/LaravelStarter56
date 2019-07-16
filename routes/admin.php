@@ -19,6 +19,7 @@ Route::group([
 		$router->patch('avatar', 'Profile\IndexController@updateAvatar'); // 修改头像
 		$router->patch('password', 'Profile\IndexController@updatePassword'); // 修改密码
 	});
+	$router->resource('/', 'User\CategoryController'); // 首页 分类
 	// ### RBAC
 	$router->get('corporation/export', 'RBAC\CorporationController@export'); // 导出
 	$router->get('corporation/download/{type}', 'RBAC\CorporationController@download'); // 下载
@@ -27,9 +28,14 @@ Route::group([
 	$router->resource('roles', 'RBAC\RoleController'); // 角色
 	$router->resource('administrators', 'RBAC\UserController'); // 用户
 	// ### 用户
+	$router->resource('menus', 'User\MenuController', ['except' => ['show']]); // 菜单
+	$router->get('menus/{menu_id}', 'User\MenuItemController@index'); // 菜单项 列表
+	$router->resource('menu_items', 'User\MenuItemController', ['except' => ['index', 'create']]); // 菜单项
+	$router->get('menu_items/create/{menu_id}', 'User\MenuItemController@create'); // 菜单项 创建
 	$router->resource('categories', 'User\CategoryController'); // 分类
 	$router->resource('tags', 'User\TagController'); // 标签
 	$router->resource('links', 'User\LinkController'); // 链接
+	$router->resource('pictures', 'User\PictureController'); // 图片
 	$router->resource('posts', 'User\PostController'); // 文章
 	$router->resource('pages', 'User\PageController'); // 页面
 

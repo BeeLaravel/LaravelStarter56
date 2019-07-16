@@ -77,7 +77,7 @@
     <!-- <script type="text/javascript" src="{{ asset('assets/vendor/bootstrap/bootstrap-switch/js/bootstrap-switch.min.js') }}"></script> --><!-- bootstrap-switch -->
     <!-- <script type="text/javascript" src="https://js.pusher.com/4.1/pusher.min.js"></script> -->
 
-    <script type="text/javascript" src="{{ asset('statics/js/comment.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('statics/admin/scripts/user/comment.list.js') }}"></script>
 
     <script type="text/javascript" >
         $(function(){

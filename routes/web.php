@@ -47,7 +47,7 @@ Route::group([
 });
 
 Route::group([ // 案例
-	'prefix' => 'case'
+	'prefix' => 'cases'
 ], function ($router) {
 	Route::get('/batch-upload', ['as' => 'upload', 'uses' => 'Resource\ImageController@getUpload']);
 	Route::get('/{id}/edit', ['as' => 'case', 'uses' => 'Project\Cases\IndexController@edit']);

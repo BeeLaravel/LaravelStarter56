@@ -4,9 +4,24 @@ namespace App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\Admin\ActionButtonTrait;
 
 class MenuItem extends Model {
+    use SoftDeletes;
+    use ActionButtonTrait;
+
 	protected $table = 'user_menu_items';
+    protected $fillable = [
+        'title',
+        'slug',
+        'icon',
+        'menu_id',
+        'parent_id',
+        'description',
+        'created_by',
+        'sort',
+    ];
 
     protected static function boot() {
         parent::boot();

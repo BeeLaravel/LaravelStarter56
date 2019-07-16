@@ -27,7 +27,7 @@ class LoginController extends Controller {
     public function logout(Request $request) {
         $this->guard('backend')->logout();
 
-        $request->session()->invalidate();
+        // $request->session()->invalidate();
 
         return redirect($this->logoutRedirectTo);
     }
