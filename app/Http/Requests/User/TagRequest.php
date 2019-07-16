@@ -17,3 +17,4 @@ class TagRequest extends FormRequest {
         return [];
     }
 }
+

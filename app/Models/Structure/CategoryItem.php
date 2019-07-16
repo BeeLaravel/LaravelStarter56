@@ -19,6 +19,6 @@ class CategoryItem extends Model {
     }
     // #### 
     public function links() { // 链接 一对多 反向
-        return $this->hasMany('App\Models\Link\Link', 'category_id');
+        return $this->hasMany('App\Models\User\Link', 'category_id');
     }
 }

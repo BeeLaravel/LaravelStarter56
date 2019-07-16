@@ -66,7 +66,7 @@
     <script type="text/javascript" src="{{ asset('template/color_admin/plugins/DataTables/media/js/dataTables.bootstrap.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('template/color_admin/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js') }}"></script>
 
-    <script type="text/javascript" src="{{ asset('admin/js/user/post.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('statics/js/user/post.js') }}"></script>
     <script src="{{ asset('template/color_admin/js/apps.min.js') }}"></script>
 
     <script type="text/javascript" >
