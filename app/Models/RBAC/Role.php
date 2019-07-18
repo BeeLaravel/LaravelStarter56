@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models\RBAC;
 
 use Illuminate\Database\Eloquent\Model;
@@ -7,19 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\Admin\ActionButtonTrait;
 
-// RBAC 角色
-class Role extends Model
-{
+class Role extends Model { // RBAC 角色
     use SoftDeletes;
     use ActionButtonTrait;
 
     protected $table = 'rbac_roles';
-
     protected $fillable = [
         'slug',
         'title',
         'description',
-        'parent_id',
+        'sort',
+        'created_by',
+        'created_at',
+        'updated_at',
+        'deleted_at',
     ];
     protected $hidden = [];
 

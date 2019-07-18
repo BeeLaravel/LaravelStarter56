@@ -21,12 +21,17 @@ Route::group([
 	});
 	$router->resource('/', 'User\CategoryController'); // 首页 分类
 	// ### RBAC
-	$router->get('corporation/export', 'RBAC\CorporationController@export'); // 导出
-	$router->get('corporation/download/{type}', 'RBAC\CorporationController@download'); // 下载
-	$router->resource('corporations', 'RBAC\CorporationController'); // 公司
-	$router->resource('permissions', 'RBAC\PermissionController'); // 权限
+	$router->resource('permissions', 'RBAC\PermissionController'); // 结点
 	$router->resource('roles', 'RBAC\RoleController'); // 角色
 	$router->resource('administrators', 'RBAC\UserController'); // 用户
+	// ### 架构
+	$router->get('corporation/export', 'Architecture\CorporationController@export'); // 导出
+	$router->get('corporation/download/{type}', 'Architecture\CorporationController@download'); // 下载
+	$router->resource('corporations', 'Architecture\CorporationController'); // 公司
+	$router->resource('sites', 'Architecture\SiteController'); // 站点
+	$router->resource('departments', 'Architecture\DepartmentController'); // 部门
+	// ### 用户信息
+	
 	// ### 用户
 	$router->resource('menus', 'User\MenuController', ['except' => ['show']]); // 菜单
 	$router->get('menus/{menu_id}', 'User\MenuItemController@index'); // 菜单项 列表

@@ -1,21 +1,24 @@
 <?php
-namespace App\Models\RBAC;
+namespace App\Models\Architecture;
 
 use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\Admin\ActionButtonTrait;
 
-class Permission extends Model { // RBAC - 结点
+class Department extends Model { // 架构 - 公司
     use SoftDeletes;
     use ActionButtonTrait;
 
-    protected $table = 'rbac_permissions';
+    protected $table = 'architecture_departments';
     protected $fillable = [
-        'parent_id',
-    	'slug',
+        'slug',
         'title',
         'description',
+        'address',
+        'tel',
+        'postcode',
+        'parent_id',
         'sort',
         'created_by',
         'created_at',
@@ -23,9 +26,10 @@ class Permission extends Model { // RBAC - 结点
         'deleted_at',
     ];
 
+    // 属性
     // 关联
-    public function roles() { // 角色
-        return $this->belongsToMany('App\Models\RBAC\Role');
+    public function users() { // 员工
+        return $this->hasMany('App\Models\RBAC\User');
     }
     public function creater() { // 创建人
         return $this->belongsTo('App\Models\RBAC\User', 'created_by');

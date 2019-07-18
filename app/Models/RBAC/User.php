@@ -4,8 +4,7 @@ namespace App\Models\RBAC;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-// RBAC - 用户
-class User extends Authenticatable {
+class User extends Authenticatable { // RBAC - 用户
     use Notifiable;
 
     protected $table = 'rbac_users';
@@ -22,13 +21,13 @@ class User extends Authenticatable {
 
     // 关联
     public function corporation() { // 公司
-        return $this->belongsTo('App\Models\RBAC\Corporation');
+        return $this->belongsTo('App\Models\Architecture\Corporation');
     }
     public function roles() { // 角色
-        return $this->belongsToMany('App\Models\RBAC\User', 'created_by');
+        return $this->belongsToMany('App\Models\Architecture\User', 'created_by');
     }
     public function creater() { // 创建人
-        return $this->belongsTo('App\Models\RBAC\User', 'created_by');
+        return $this->belongsTo('App\Models\Architecture\User', 'created_by');
     }
 
     public function profile() { // 个人信息 一对一

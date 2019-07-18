@@ -5,11 +5,10 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Traits\Admin\ActionButtonTrait;
 
-// RBAC 用户信息
-class Profile extends Model {
+class Profile extends Model { // RBAC 用户信息
     use ActionButtonTrait;
 
-    protected $table = 'user_profiles';
+    protected $table = 'rbac_profiles';
     protected $primaryKey = 'user_id';
     protected $touches = ['user'];
 

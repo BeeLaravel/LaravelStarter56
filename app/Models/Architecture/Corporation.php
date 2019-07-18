@@ -1,19 +1,16 @@
 <?php
-
-namespace App\Models\RBAC;
+namespace App\Models\Architecture;
 
 use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\Admin\ActionButtonTrait;
 
-// RBAC - 公司
-class Corporation extends Model
-{
+class Corporation extends Model { // 架构 - 公司
     use SoftDeletes;
     use ActionButtonTrait;
 
-    protected $table = 'rbac_corporations';
+    protected $table = 'architecture_corporations';
     protected $fillable = [
         'slug',
         'title',
@@ -21,7 +18,12 @@ class Corporation extends Model
         'address',
         'tel',
         'postcode',
+        'parent_id',
         'sort',
+        'created_by',
+        'created_at',
+        'updated_at',
+        'deleted_at',
     ];
 
     // 属性
