@@ -35,7 +35,7 @@ return [
         ],
         'admins' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Self\User::class,
+            'model' => App\Models\RBAC\User::class,
         ],
         'backend' => [
             'driver' => 'eloquent',

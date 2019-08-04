@@ -2,15 +2,24 @@
 namespace App\Http\Controllers\Admin\RBAC;
 
 use App\Models\RBAC\User as ThisModel;
+use App\Models\Architecture\Corporation;
+use App\Models\Architecture\Site;
+use App\Models\Architecture\Department;
+use App\Models\RBAC\Role;
+use App\Models\Architecture\UserSite;
+use App\Models\Architecture\UserDepartment;
+use App\Models\RBAC\UserRole;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\RBAC\UserRequest as ThisRequest;
+
+use Hash;
 
 class UserController extends Controller {
     private $baseInfo = [
         'slug' => 'users',
         'title' => '用户',
-        'description' => '角色列表',
+        'description' => '用户列表',
         'link' => '/admin/users',
         'parent_title' => 'RBAC',
         'parent_link' => '/admin/users',
@@ -18,8 +27,9 @@ class UserController extends Controller {
     ];
     private $show = [
         'id',
-        'slug',
-        'title',
+        'email',
+        'phone',
+        'name',
         'description',
         'created_at',
         'updated_at',
@@ -56,11 +66,15 @@ class UserController extends Controller {
             if ( $search['value'] ) { // 搜索
                 if ( $search['regex'] == 'true' ) { // 正则匹配
                     $model = $model->where('slug', 'like', "%{$search['value']}%")
-                        ->orWhere('title', 'like', "%{$search['value']}%")
+                        ->orWhere('email', 'like', "%{$search['value']}%")
+                        ->orWhere('phone', 'like', "%{$search['value']}%")
+                        ->orWhere('name', 'like', "%{$search['value']}%")
                         ->orWhere('description', 'like', "%{$search['value']}%");
                 } else { // 完全匹配
                     $model = $model->where('slug', $search['value'])
-                        ->orWhere('title', $search['value'])
+                        ->orWhere('email', $search['value'])
+                        ->orWhere('phone', $search['value'])
+                        ->orWhere('name', $search['value'])
                         ->orWhere('description', $search['value']);
                 }
             }
@@ -71,6 +85,20 @@ class UserController extends Controller {
 
             if ( $model ) {
                 foreach ( $model as $item ) {
+                    $item->corporation_title = $item->corporation_id ? $item->corporation->title : '(未设置)';
+
+                    $sites = [];
+                    foreach ( $item->sites as $site ) {
+                        $sites[] = $site->title;
+                    }
+                    $item->site_titles = $sites ? implode(';', $sites) : '(未设置站点)';
+
+                    $departments = [];
+                    foreach ( $item->departments as $department ) {
+                        $departments[] = $department->title;
+                    }
+                    $item->department_titles = $departments ? implode(';', $departments) : '(未设置部门)';
+
                     $item->button = $item->getActionButtons($this->baseInfo['slug']);
                 }
             }
@@ -89,12 +117,36 @@ class UserController extends Controller {
         }
     }
     public function create() {
-        return view($this->baseInfo['view_path'].'create', $this->baseInfo);
+        $corporation_array = Corporation::where('created_by', auth('admin')->user()->id)->get();
+        $corporations = level_array($corporation_array);
+        $corporations = plain_array($corporations, 0, '==');
+
+        $sites = Site::get();
+        $departments = Department::get();
+        $roles = Role::get();
+
+        return view($this->baseInfo['view_path'].'create', array_merge($this->baseInfo, compact('corporations', 'sites', 'departments', 'roles')));
     }
     public function store(ThisRequest $request) {
         $result = ThisModel::create(array_merge($request->all(), [
+            'password' => Hash::make($request->input('password')),
             'created_by' => auth('admin')->user()->id,
         ]));
+
+        if ( $result ) {
+            $roles = $request->input('roles', []);
+            $user_roles = [];
+            if ( $roles ) {
+                foreach ( $roles as $role ) {
+                    $user_roles[] = [
+                        'user_id' => $result->id,
+                        'role_id' => $role,
+                    ];
+                }
+            }
+
+            UserRole::insert($user_roles);
+        }
 
         if ( $result ) {
             flash('操作成功', 'success');
@@ -110,11 +162,76 @@ class UserController extends Controller {
     public function edit(int $id) {
         $item = ThisModel::find($id);
 
-        return view($this->baseInfo['view_path'].'edit', array_merge($this->baseInfo, compact('item')));
+        $item['sites'] = UserSite::where('user_id', $id)->pluck('site_id')->toArray();
+        $item['departments'] = UserDepartment::where('user_id', $id)->pluck('department_id')->toArray();
+        $item['roles'] = UserRole::where('user_id', $id)->pluck('role_id')->toArray();
+
+        $corporation_array = Corporation::where('created_by', auth('admin')->user()->id)->get();
+        $corporations = level_array($corporation_array);
+        $corporations = plain_array($corporations, 0, '==');
+
+        $sites = Site::get();
+        $departments = Department::get();
+        $roles = Role::get();
+
+        return view($this->baseInfo['view_path'].'edit', array_merge($this->baseInfo, compact('item', 'corporations', 'sites', 'departments', 'roles')));
     }
     public function update(ThisRequest $request, int $id) {
         $item = ThisModel::find($id);
-        $result = $item->update($request->all());
+
+        $request_data = $request->all();
+
+        if ( $request_data['password'] ) {
+            $request_data['password'] = Hash::make($request_data['password']);
+        } else {
+            unset($request_data['password']);
+        }
+
+        $result = $item->update($request_data);
+
+        if ( $result ) {
+            $sites = $request->input('sites', []);
+            $user_sites = [];
+            if ( $sites ) {
+                foreach ( $sites as $site ) {
+                    $user_sites[] = [
+                        'user_id' => $id,
+                        'site_id' => $site,
+                    ];
+                }
+            }
+            
+            UserSite::where('user_id', $id)->delete();
+            UserSite::insert($user_sites);
+
+            $departments = $request->input('departments', []);
+            $user_departments = [];
+            if ( $departments ) {
+                foreach ( $departments as $department ) {
+                    $user_departments[] = [
+                        'user_id' => $id,
+                        'department_id' => $department,
+                    ];
+                }
+            }
+            
+            UserDepartment::where('user_id', $id)->delete();
+            UserDepartment::insert($user_departments);
+
+            $roles = $request->input('roles', []);
+            $user_roles = [];
+            if ( $roles ) {
+                foreach ( $roles as $role ) {
+                    $user_roles[] = [
+                        'user_id' => $id,
+                        'role_id' => $role,
+                    ];
+                }
+            }
+            
+            UserRole::where('user_id', $id)->delete();
+            UserRole::insert($user_roles);
+        }
 
         if ( $result ) {
             flash('操作成功', 'success');

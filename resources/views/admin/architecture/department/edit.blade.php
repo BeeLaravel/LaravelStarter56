@@ -57,6 +57,31 @@
                                 <textarea class="form-control" name="description" placeholder="描述" id="description">{{ $item['description'] }}</textarea>
                             </div>
                         </div>
+                        <div class="form-group"><!-- 地址 -->
+                            <label class="control-label col-md-4 col-sm-4" for="address">地址 :</label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control" type="text" name="address" value="{{ $item['address'] }}" placeholder="地址" id="address" />
+                            </div>
+                        </div>
+                        <div class="form-group"><!-- 电话 -->
+                            <label class="control-label col-md-4 col-sm-4" for="tel">电话 :</label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control" type="text" name="tel" value="{{ $item['tel'] }}" placeholder="电话" id="tel" />
+                            </div>
+                        </div>
+                        <div class="form-group"><!-- 公司 -->
+                            <label class="control-label col-md-4 col-sm-4" for="corporation_id">公司 :</label>
+                            <div class="col-md-6 col-sm-6">
+                                <select name="corporation_id" placeholder="公司" class="form-control" id="corporation_id">
+                                    <option value="0">未知</option>
+                                    @if ( $corporations )
+                                        @foreach ( $corporations as $id => $title )
+                                            <option value="{{ $id }}" @if ( $id==$item['corporation_id'] ) selected="selected" @endif>{{ $title }}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
+                            </div>
+                        </div>
                         <div class="form-group"><!-- 父级 -->
                             <label class="control-label col-md-4 col-sm-4" for="parent_id">父级 :</label>
                             <div class="col-md-6 col-sm-6">
@@ -71,7 +96,7 @@
                             </div>
                         </div>
                         <div class="form-group"><!-- 排序 -->
-                            <label class="control-label col-md-4 col-sm-4" for="sort">排序 :</label>
+                            <label class="control-label col-md-4 col-sm-4" for="sort">排序 * :</label>
                             <div class="col-md-6 col-sm-6">
                                 <input class="form-control" type="number" name="sort" value="{{ $item['sort'] }}" placeholder="排序" data-parsley-required="true" id="sort" />
                             </div>

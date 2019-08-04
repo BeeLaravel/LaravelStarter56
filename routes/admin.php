@@ -19,31 +19,35 @@ Route::group([
 		$router->patch('avatar', 'Profile\IndexController@updateAvatar'); // 修改头像
 		$router->patch('password', 'Profile\IndexController@updatePassword'); // 修改密码
 	});
-	$router->resource('/', 'User\CategoryController'); // 首页 分类
+	// $router->resource('/', 'User\CategoryController'); // 首页 分类
 	// ### RBAC
 	$router->resource('permissions', 'RBAC\PermissionController'); // 结点
 	$router->resource('roles', 'RBAC\RoleController'); // 角色
-	$router->resource('administrators', 'RBAC\UserController'); // 用户
+	$router->resource('users', 'RBAC\UserController'); // 用户
 	// ### 架构
-	$router->get('corporation/export', 'Architecture\CorporationController@export'); // 导出
-	$router->get('corporation/download/{type}', 'Architecture\CorporationController@download'); // 下载
+	// $router->get('corporations/export', 'Architecture\CorporationController@export'); // 导出
+	// $router->get('corporations/download/{type}', 'Architecture\CorporationController@download'); // 下载
 	$router->resource('corporations', 'Architecture\CorporationController'); // 公司
 	$router->resource('sites', 'Architecture\SiteController'); // 站点
 	$router->resource('departments', 'Architecture\DepartmentController'); // 部门
+	// ### 工作流
+	$router->resource('places', 'Workflow\PlaceController'); // 状态
+	$router->resource('transitions', 'Workflow\TransitionController'); // 过渡
 	// ### 用户信息
 	
-	// ### 用户
-	$router->resource('menus', 'User\MenuController', ['except' => ['show']]); // 菜单
-	$router->get('menus/{menu_id}', 'User\MenuItemController@index'); // 菜单项 列表
-	$router->resource('menu_items', 'User\MenuItemController', ['except' => ['index', 'create']]); // 菜单项
-	$router->get('menu_items/create/{menu_id}', 'User\MenuItemController@create'); // 菜单项 创建
-	$router->resource('categories', 'User\CategoryController'); // 分类
-	$router->resource('tags', 'User\TagController'); // 标签
-	$router->resource('links', 'User\LinkController'); // 链接
-	$router->resource('pictures', 'User\PictureController'); // 图片
-	$router->resource('posts', 'User\PostController'); // 文章
-	$router->resource('pages', 'User\PageController'); // 页面
-
+	// ### Category 分类
+	$router->resource('menus', 'Category\MenuController', ['except' => ['show']]); // 菜单
+	$router->get('menus/{menu_id}', 'Category\MenuItemController@index'); // 菜单项 列表
+	$router->resource('menu_items', 'Category\MenuItemController', ['except' => ['index', 'create']]); // 菜单项
+	$router->get('menu_items/create/{menu_id}', 'Category\MenuItemController@create'); // 菜单项 创建
+	$router->resource('categories', 'Category\CategoryController'); // 分类
+	$router->resource('tags', 'Category\TagController'); // 标签
+	// ### Application
+	$router->resource('pages', 'Application\PageController'); // 页面
+	$router->resource('posts', 'Application\PostController'); // 文章
+	$router->resource('links', 'Application\LinkController'); // 链接
+	$router->resource('pictures', 'Application\PictureController'); // 图片
+	$router->resource('comments', 'Application\CommentController'); // 评论
 	// ### 工具
 	$router->get('compile/index', 'Tool\CompileController@index');
 });

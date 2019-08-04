@@ -13,7 +13,7 @@ class PermissionController extends Controller {
         'description' => '结点列表',
         'link' => '/admin/permissions',
         'parent_title' => 'RBAC',
-        'parent_link' => '/admin/roles',
+        'parent_link' => '/admin/users',
         'view_path' => 'admin.rbac.permission.',
     ];
     private $show = [
@@ -71,6 +71,7 @@ class PermissionController extends Controller {
 
             if ( $model ) {
                 foreach ( $model as $item ) {
+                    $item->parent_title = $item->parent_id ? $item->parent->title : '(未设置)';
                     $item->button = $item->getActionButtons($this->baseInfo['slug']);
                 }
             }
@@ -89,7 +90,11 @@ class PermissionController extends Controller {
         }
     }
     public function create() {
-        return view($this->baseInfo['view_path'].'create', $this->baseInfo);
+        $parent_array = ThisModel::where('created_by', auth('admin')->user()->id)->get();
+        $parents = level_array($parent_array);
+        $parents = plain_array($parents, 0, '==');
+
+        return view($this->baseInfo['view_path'].'create', array_merge($this->baseInfo, compact('parents')));
     }
     public function store(ThisRequest $request) {
         $result = ThisModel::create(array_merge($request->all(), [
@@ -110,7 +115,11 @@ class PermissionController extends Controller {
     public function edit(int $id) {
         $item = ThisModel::find($id);
 
-        return view($this->baseInfo['view_path'].'edit', array_merge($this->baseInfo, compact('item')));
+        $parent_array = ThisModel::where('created_by', auth('admin')->user()->id)->get();
+        $parents = level_array($parent_array);
+        $parents = plain_array($parents, 0, '==');
+
+        return view($this->baseInfo['view_path'].'edit', array_merge($this->baseInfo, compact('item', 'parents')));
     }
     public function update(ThisRequest $request, int $id) {
         $item = ThisModel::find($id);

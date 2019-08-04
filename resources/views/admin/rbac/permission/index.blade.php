@@ -1,8 +1,8 @@
 @extends('admin.layouts.base')
 
 @section('styles')
-    <link rel="stylesheet" type="text/css" href="{{asset('template/color_admin/plugins/gritter/css/jquery.gritter.css')}}"><!-- jquery.gritter 弹窗 -->
-    <link rel="stylesheet" type="text/css" href="{{asset('template/color_admin/plugins/bootstrap-sweetalert-master/dist/sweetalert.css')}}"><!-- bootstrap-sweetalert 弹窗 -->
+    <link rel="stylesheet" type="text/css" href="{{asset('template/color_admin/plugins/gritter/css/jquery.gritter.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('template/color_admin/plugins/bootstrap-sweetalert-master/dist/sweetalert.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('template/color_admin/plugins/DataTables/media/css/dataTables.bootstrap.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('template/color_admin/plugins/DataTables/extensions/Responsive/css/responsive.bootstrap.min.css')}}">
 @endsection
@@ -38,7 +38,8 @@
                                 <th>ID</th>
                                 <th>标识</th>
                                 <th>标题</th>
-                                <th>描述</th>
+                                <!-- <th>描述</th> -->
+                                <th>父级</th>
                                 <th>创建时间</th>
                                 <th>更新时间</th>
                                 <th>操作</th>
@@ -61,7 +62,7 @@
     <script type="text/javascript" src="{{ asset('statics/admin/scripts/rbac/permission.js') }}"></script>
     <script src="{{ asset('template/color_admin/js/apps.min.js') }}"></script>
 
-    <script type="text/javascript" >
+    <script type="text/javascript">
         $(function(){
             App.init();
 

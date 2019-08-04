@@ -2,6 +2,8 @@
 namespace App\Http\Controllers\Admin\RBAC;
 
 use App\Models\RBAC\Role as ThisModel;
+use App\Models\RBAC\Permission;
+use App\Models\RBAC\RolePermission;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\RBAC\RoleRequest as ThisRequest;
@@ -13,7 +15,7 @@ class RoleController extends Controller {
         'description' => '角色列表',
         'link' => '/admin/roles',
         'parent_title' => 'RBAC',
-        'parent_link' => '/admin/roles',
+        'parent_link' => '/admin/users',
         'view_path' => 'admin.rbac.role.',
     ];
     private $show = [
@@ -89,12 +91,28 @@ class RoleController extends Controller {
         }
     }
     public function create() {
-        return view($this->baseInfo['view_path'].'create', $this->baseInfo);
+        $permission_array = Permission::get();
+        $permissions = level_array($permission_array);
+
+        return view($this->baseInfo['view_path'].'create', array_merge($this->baseInfo, compact('permissions')));
     }
     public function store(ThisRequest $request) {
         $result = ThisModel::create(array_merge($request->all(), [
             'created_by' => auth('admin')->user()->id,
         ]));
+
+        if ( $result ) {
+            $permissions = $request->input('permissions', []);
+            $role_permissions = [];
+            foreach ( $permissions as $permission ) {
+                $role_permissions[] = [
+                    'role_id' => $result->id,
+                    'permission_id' => $permission,
+                ];
+            }
+
+            RolePermission::insert($role_permissions);
+        }
 
         if ( $result ) {
             flash('操作成功', 'success');
@@ -110,11 +128,30 @@ class RoleController extends Controller {
     public function edit(int $id) {
         $item = ThisModel::find($id);
 
-        return view($this->baseInfo['view_path'].'edit', array_merge($this->baseInfo, compact('item')));
+        $item['permissions'] = RolePermission::where('role_id', $id)->pluck('permission_id')->toArray();
+
+        $permission_array = Permission::get();
+        $permissions = level_array($permission_array);
+
+        return view($this->baseInfo['view_path'].'edit', array_merge($this->baseInfo, compact('item', 'permissions')));
     }
     public function update(ThisRequest $request, int $id) {
         $item = ThisModel::find($id);
         $result = $item->update($request->all());
+
+        if ( $result ) {
+            $permissions = $request->input('permissions', []);
+            $role_permissions = [];
+            foreach ( $permissions as $permission ) {
+                $role_permissions[] = [
+                    'role_id' => $id,
+                    'permission_id' => $permission,
+                ];
+            }
+            
+            RolePermission::where('role_id', $id)->delete();
+            RolePermission::insert($role_permissions);
+        }
 
         if ( $result ) {
             flash('操作成功', 'success');
@@ -128,6 +165,10 @@ class RoleController extends Controller {
     }
     public function destroy(Request $request, int $id) {
         $result = ThisModel::destroy($id);
+
+        if ( $result ) {
+            RolePermission::where('role_id', $id)->delete();
+        }
 
         if ( $result ) {
             flash('删除成功', 'success');

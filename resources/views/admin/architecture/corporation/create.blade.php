@@ -56,6 +56,24 @@
                                 <textarea class="form-control" name="description" placeholder="描述" id="description">{{old('description')}}</textarea>
                             </div>
                         </div>
+                        <div class="form-group"><!-- 地址 -->
+                            <label class="control-label col-md-4 col-sm-4" for="address">地址 :</label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control" type="text" name="address" value="{{ old('address') }}" placeholder="地址" id="address" />
+                            </div>
+                        </div>
+                        <div class="form-group"><!-- 电话 -->
+                            <label class="control-label col-md-4 col-sm-4" for="tel">电话 :</label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control" type="text" name="tel" value="{{ old('tel') }}" placeholder="电话" id="tel" />
+                            </div>
+                        </div>
+                        <div class="form-group"><!-- 邮编 -->
+                            <label class="control-label col-md-4 col-sm-4" for="postcode">邮编 :</label>
+                            <div class="col-md-6 col-sm-6">
+                                <input class="form-control" type="text" name="postcode" value="{{ old('postcode') }}" placeholder="邮编" id="postcode" />
+                            </div>
+                        </div>
                         <div class="form-group"><!-- 父级 -->
                             <label class="control-label col-md-4 col-sm-4" for="parent_id">父级 :</label>
                             <div class="col-md-6 col-sm-6">
@@ -70,7 +88,7 @@
                             </div>
                         </div>
                         <div class="form-group"><!-- 排序 -->
-                            <label class="control-label col-md-4 col-sm-4" for="sort">排序 :</label>
+                            <label class="control-label col-md-4 col-sm-4" for="sort">排序 * :</label>
                             <div class="col-md-6 col-sm-6">
                                 <input class="form-control" type="number" name="sort" value="{{ old('sort')??config('beesoft.sort_default') }}" placeholder="排序" data-parsley-required="true" id="sort" />
                             </div>

@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Admin\Architecture;
 
 use App\Models\Architecture\Site as ThisModel;
+use App\Models\Architecture\Corporation;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\Architecture\SiteRequest as ThisRequest;
@@ -71,6 +72,8 @@ class SiteController extends Controller {
 
             if ( $model ) {
                 foreach ( $model as $item ) {
+                    $item->parent_title = $item->parent_id ? $item->parent->title : '(未设置)';
+                    $item->corporation_title = $item->corporation->title;
                     $item->button = $item->getActionButtons($this->baseInfo['slug']);
                 }
             }
@@ -93,7 +96,11 @@ class SiteController extends Controller {
         $parents = level_array($parent_array);
         $parents = plain_array($parents, 0, '==');
 
-        return view($this->baseInfo['view_path'].'create', array_merge($this->baseInfo, compact('parents')));
+        $corporation_array = Corporation::where('created_by', auth('admin')->user()->id)->get();
+        $corporations = level_array($corporation_array);
+        $corporations = plain_array($corporations, 0, '==');
+
+        return view($this->baseInfo['view_path'].'create', array_merge($this->baseInfo, compact('parents', 'corporations')));
     }
     public function store(ThisRequest $request) {
         $result = ThisModel::create(array_merge($request->all(), [
@@ -118,7 +125,11 @@ class SiteController extends Controller {
         $parents = level_array($parent_array);
         $parents = plain_array($parents, 0, '==');
 
-        return view($this->baseInfo['view_path'].'edit', array_merge($this->baseInfo, compact('item', 'parents')));
+        $corporation_array = Corporation::where('created_by', auth('admin')->user()->id)->get();
+        $corporations = level_array($corporation_array);
+        $corporations = plain_array($corporations, 0, '==');
+
+        return view($this->baseInfo['view_path'].'edit', array_merge($this->baseInfo, compact('item', 'parents', 'corporations')));
     }
     public function update(ThisRequest $request, int $id) {
         $item = ThisModel::find($id);

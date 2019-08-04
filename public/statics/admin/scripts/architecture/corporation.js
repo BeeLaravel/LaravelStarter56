@@ -48,8 +48,14 @@ $(function(){
             {"data": "slug", "name": "slug", "orderable": true},
             {"data": "title", "name": "title", "orderable": true},
             {"data": "description", "name": "description", "orderable": true},
-            {"data": "created_at", "name": "created_at", "orderable": true},
-            {"data": "updated_at", "name": "updated_at", "orderable": true},
+            // {"data": "address", "name": "address", "orderable": true},
+            {"data": "tel", "name": "tel", "orderable": true},
+            // {"data": "postcode", "name": "postcode", "orderable": true},
+            {"data": "parent_title", "name": "parent_title", "orderable": true},
+            // {"data": "sort", "name": "sort", "orderable": true},
+            // {"data": "creater_name", "name": "creater_name", "orderable": true},
+            // {"data": "created_at", "name": "created_at", "orderable": true},
+            // {"data": "updated_at", "name": "updated_at", "orderable": true},
             {"data": "button", "name": "button", 'type': 'html', "orderable": false}
         ]
     });

@@ -13,7 +13,7 @@ class CorporationController extends Controller {
         'description' => '公司列表',
         'link' => '/admin/corporations',
         'parent_title' => '架构',
-        'parent_link' => '/admin/users',
+        'parent_link' => '/admin/departments',
         'view_path' => 'admin.architecture.corporation.',
     ];
     private $show = [
@@ -71,6 +71,8 @@ class CorporationController extends Controller {
 
             if ( $model ) {
                 foreach ( $model as $item ) {
+                    $item->parent_title = $item->parent_id ? $item->parent->title : '(未设置)';
+                    $item->creater_name = $item->created_by ? $item->creater->name : '(未设置)';
                     $item->button = $item->getActionButtons($this->baseInfo['slug']);
                 }
             }

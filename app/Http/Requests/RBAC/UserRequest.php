@@ -9,9 +9,9 @@ class UserRequest extends FormRequest {
     }
     public function rules() {
         return [
-            'slug' => 'required',
-            'title' => 'required',
-            'sort' => 'bail|integer|min:0|max:255',
+            'phone' => 'required',
+            'email' => 'required',
+            'name' => 'required',
         ];
     }
     public function messages() {

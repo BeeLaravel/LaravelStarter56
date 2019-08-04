@@ -407,7 +407,7 @@ var handleThemePageStructureControl = function() {
             $('.theme-list [data-theme]').closest('li').removeClass('active');
             $('.theme-list [data-theme="'+ $.cookie('theme') +'"]').closest('li').addClass('active');
         }
-        var cssFileSrc = 'assets/css/theme/' + $.cookie('theme') + '.css';
+        var cssFileSrc = '/template/color_admin/css/theme/' + $.cookie('theme') + '.css';
         $('#theme').attr('href', cssFileSrc);
     }
     
