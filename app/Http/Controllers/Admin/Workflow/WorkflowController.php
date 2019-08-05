@@ -1,26 +1,26 @@
 <?php
-namespace App\Http\Controllers\Admin\Category;
+namespace App\Http\Controllers\Admin\Workflow;
 
-use App\Models\Category\Tag as ThisModel;
+use App\Models\Workflow\Workflow as ThisModel;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\Category\TagRequest;
+use App\Http\Requests\Workflow\WorkflowRequest;
 
-class TagController extends Controller {
+class WorkflowController extends Controller {
     private $baseInfo = [
-        'slug' => 'tags',
-        'title' => '标签',
-        'description' => '标签列表',
-        'link' => '/admin/tags',
-        'parent_title' => '分类',
-        'parent_link' => '/admin/menus',
-        'view_path' => 'admin.category.tag.',
+        'slug' => 'workflows',
+        'title' => '工作流',
+        'description' => '工作流列表',
+        'link' => '/admin/workflows',
+        'parent_title' => '工作流',
+        'parent_link' => '/admin/workflows',
+        'view_path' => 'admin.workflow.workflow.',
     ];
     private $show = [
         'id',
         'title',
-        'slug',
         'type',
+        'url',
         'created_at',
         'updated_at',
     ];
@@ -57,11 +57,11 @@ class TagController extends Controller {
 
             if ( $search['value'] ) { // 搜索
                 if ( $search['regex'] == 'true' ) { // 正则匹配
-                    $model = $model->where('slug', 'like', "%{$search['value']}%")
+                    $model = $model->where('url', 'like', "%{$search['value']}%")
                         ->orWhere('title', 'like', "%{$search['value']}%")
                         ->orWhere('description', 'like', "%{$search['value']}%");
                 } else { // 完全匹配
-                    $model = $model->where('slug', $search['value'])
+                    $model = $model->where('url', $search['value'])
                         ->orWhere('title', $search['value'])
                         ->orWhere('description', $search['value']);
                 }
@@ -73,9 +73,7 @@ class TagController extends Controller {
 
             if ( $model ) {
                 foreach ( $model as $item ) {
-                    $item->parent_name = $item->parent_id ? $item->parent->title : '顶级';
-                    $item->user_name = $item->created_by ? $item->user->name : '未知';
-                    $item->button = $item->getActionButtons($this->baseInfo['slug']);
+                    $item->button = $item->getActionButtons($this->ThisModel['slug']);
                 }
             }
 
@@ -86,21 +84,17 @@ class TagController extends Controller {
                 'data' => $model,
             ];
         } else {
-            $types = auth('admin')->user()->profile->tags;
-            $types = json_decode($types, true);
+            $search = [
+                'type' => '',
+            ];
 
-            $search = [];
-
-            return view($this->baseInfo['view_path'].'index', array_merge($this->baseInfo, compact('types', 'search')));
+            return view($this->baseInfo['view_path'].'index', array_merge($this->baseInfo, compact('search')));
         }
     }
     public function create(Request $request) {
-        $types = auth('admin')->user()->profile->tags;
-        $types = json_decode($types, true);
-
-        return view($this->baseInfo['view_path'].'create', array_merge($this->baseInfo, compact('types')));
+        return view($this->baseInfo['view_path'].'create', array_merge($this->baseInfo, []));
     }
-    public function store(TagRequest $request) {
+    public function store(LinkRequest $request) {
         $result = ThisModel::create(array_merge($request->all(), [
             'created_by' => auth('admin')->user()->id,
         ]));
@@ -108,34 +102,31 @@ class TagController extends Controller {
         if ( $result ) {
             flash('操作成功', 'success');
 
-            return redirect($this->baseInfo['link']);
+            return redirect($this->baseInfo['link']); // 列表
         } else {
             flash('操作失败', 'error');
 
-            return back();
+            return back(); // 继续
         }
     }
     public function show(int $id) {}
     public function edit(int $id) {
-        $types = auth('admin')->user()->profile->tags;
-        $types = json_decode($types, true);
-
         $item = ThisModel::find($id);
 
-        return view($this->baseInfo['view_path'].'edit', array_merge($this->baseInfo, compact('types', 'item')));
+        return view($this->baseInfo['view_path'].'edit', array_merge($this->baseInfo, compact('item')));
     }
-    public function update(TagRequest $request, int $id) {
-        $items = ThisModel::find($id);
-        $result = $items->update($request->all());
+    public function update(LinkRequest $request, int $id) {
+        $item = ThisModel::find($id);
+        $result = $item->update($request->all());
 
         if ( $result ) {
             flash('操作成功', 'success');
 
-            return redirect($this->baseInfo['link']);
+            return redirect($this->baseInfo['link']); // 列表
         } else {
             flash('操作失败', 'error');
 
-            return back();
+            return back(); // 继续
         }
     }
     public function destroy(Request $request, int $id) {

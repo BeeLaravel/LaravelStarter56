@@ -78,7 +78,7 @@ class PostController extends Controller {
 
             if ( $model ) {
                 foreach ( $model as $item ) {
-                    $item->button = $item->getActionButtons('posts');
+                    $item->button = $item->getActionButtons($this->baseInfo['slug']);
                 }
             }
 

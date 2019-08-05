@@ -76,7 +76,7 @@ class CategoryController extends Controller {
             if ( $model ) {
                 foreach ( $model as $item ) {
                     $item->title = $item->children_count ? "<a href='".url($this->baseInfo['link']).'?'.http_build_query(['parent_id' => $item->id])."'>".$item->title." (".$item->children_count.")</a>" : $item->title;
-                    $item->button = $item->getActionButtons('categories');
+                    $item->button = $item->getActionButtons($this->baseInfo['slug']);
                 }
             }
 

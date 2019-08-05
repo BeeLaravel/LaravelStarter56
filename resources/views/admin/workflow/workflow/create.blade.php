@@ -11,7 +11,7 @@
         <li><a href="{{url('/admin')}}">首页</a></li>
         <li><a href="{{url($parent_link)}}">{{$parent_title}}</a></li>
         <li><a href="{{url($link)}}">{{$title}}</a></li>
-        <li class="active">编辑</li>
+        <li class="active">新增</li>
     </ol>
     <h1 class="page-header">{{$title}} <small>{{$description}}</small></h1>
     <div class="row">
@@ -24,9 +24,9 @@
                         <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
                         <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                     </div>
-                    <h4 class="panel-title">编辑</h4>
+                    <h4 class="panel-title">新增</h4>
                 </div>
-                @if ( count($errors)>0 )
+                @if ( $errors->any() )
                     <div class="alert alert-danger">
                         <ul>
                             @foreach ( $errors->all() as $error )
@@ -36,26 +36,24 @@
                     </div>
                 @endif
                 <div class="panel-body panel-form">
-                    <form class="form-horizontal form-bordered" action="{{ url($link.'/'.$item['id']) }}" method="POST" enctype="multipart/form-data">
+                    <form class="form-horizontal form-bordered" action="{{ url($link) }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        {{ method_field('PATCH') }}
-                        <input type="hidden" name="id" value="{{$item['id']}}">
-                        <div class="form-group">
+                        <div class="form-group"><!-- 标题 -->
                             <label class="control-label col-md-3 col-sm-3" for="title">标题 * :</label>
                             <div class="col-md-8 col-sm-8">
-                                <input class="form-control" type="text" name="title" value="{{ $item['title'] }}" placeholder="标题" data-parsley-required="true" id="title" />
+                                <input class="form-control" type="text" name="title" value="{{ old('title') }}" placeholder="标题" data-parsley-required="true" id="title" />
                             </div>
                         </div>
                         <div class="form-group"><!-- 标识 -->
                             <label class="control-label col-md-3 col-sm-3" for="slug">标识 * :</label>
                             <div class="col-md-8 col-sm-8">
-                                <input class="form-control" type="text" name="slug" value="{{ $item['slug'] }}" placeholder="标识" data-parsley-required="true" id="slug" />
+                                <input class="form-control" type="text" name="slug" value="{{ old('slug') }}" placeholder="标识" data-parsley-required="true" id="slug" />
                             </div>
                         </div>
                         <div class="form-group"><!-- 内容 -->
                             <label class="control-label col-md-3 col-sm-3" for="url">内容 * :</label>
                             <div class="col-md-8 col-sm-8">
-                                <textarea name="content" class="form-control" id='myEditor' data-parsley-required="true">{{ $item['content']['content'] }}</textarea>
+                                <textarea name="content" class="form-control" id='myEditor' data-parsley-required="true">{{ old('content') }}</textarea>
                             </div>
                         </div>
                         <div class="form-group"><!-- 类型 -->
@@ -64,20 +62,20 @@
                                 <select class="form-control" name="type" id="type">
                                     @if ( $types )
                                         @foreach ( $types as $key => $value )
-                                            <option value="{{ $key }}" @if ( ($item['type']??'Other')==$key ) selected="selected" @endif>{{ $value }}</option>
+                                            <option value="{{ $key }}" @if ( (old('type')??'Other')==$key ) selected="selected" @endif>{{ $value }}</option>
                                         @endforeach
                                     @endif
                                 </select>
                             </div>
                         </div>
                         {{--<div class="form-group">--}}<!-- 分类 -->
-                            {{--<label class="control-label col-md-3 col-sm-3" for="category_id">分类 * :</label>--}}
+                            {{--<label class="control-label col-md-3 col-sm-3" for="parent_id">分类 * :</label>--}}
                             {{--<div class="col-md-8 col-sm-8">--}}
-                                {{--<select name="category_id" value="{{ $item['category_id'] }}" placeholder="分类" class="form-control" id="category_id">--}}
+                                {{--<select name="parent_id" value="{{ old('parent_id') }}" placeholder="分类" class="form-control" id="parent_id">--}}
                                     {{--<option value="0">未分类</option>--}}
                                     {{--@if ( $tags )--}}
                                         {{--@foreach ( $tags as $id => $title )--}}
-                                            {{--<option value="{{ $id }}" @if ( $item['category_id']==$id ) selected="selected" @endif>{{ $title }}</option>--}}
+                                            {{--<option value="{{ $id }}">{{ $title }}</option>--}}
                                         {{--@endforeach--}}
                                     {{--@endif--}}
                                 {{--</select>--}}
@@ -98,16 +96,15 @@
                         <div class="form-group"><!-- 描述 -->
                             <label class="control-label col-md-3 col-sm-3" for="description">描述 :</label>
                             <div class="col-md-8 col-sm-8">
-                                <textarea class="form-control" name="description" placeholder="描述" id="description">{{ $item['description'] }}</textarea>
+                                <textarea class="form-control" name="description" placeholder="描述" id="description">{{old('description')}}</textarea>
                             </div>
                         </div>
                         <div class="form-group"><!-- 排序 -->
                             <label class="control-label col-md-3 col-sm-3" for="sort">排序 :</label>
                             <div class="col-md-8 col-sm-8">
-                                <input class="form-control" type="number" name="sort" value="{{ $item['sort']??config('beesoft.sort_default') }}" placeholder="排序" data-parsley-required="true" id="sort" />
+                                <input class="form-control" type="number" name="sort" value="{{ old('sort')??config('beesoft.sort_default') }}" placeholder="排序" data-parsley-required="true" id="sort" />
                             </div>
                         </div>
-
                         <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3"></label>
                             <div class="col-md-8 col-sm-8">
@@ -127,7 +124,7 @@
     <script src="{{ asset('template/color_admin/plugins/jquery-tag-it/js/tag-it.min.js')}} "></script>
     <!-- <script src="{{ asset('template/color_admin/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js')}} "></script> -->
     <!-- <script src="{{ asset('template/color_admin/plugins/bootstrap-tagsinput/bootstrap-tagsinput-typeahead.js')}} "></script> -->
-
+    
     @include('editor::head')
 
     <script src="{{ asset('template/color_admin/js/apps.min.js') }}"></script>

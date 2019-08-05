@@ -75,7 +75,7 @@ class PictureController extends Controller {
 
             if ( $model ) {
                 foreach ( $model as $item ) {
-                    $item->button = $item->getActionButtons('pictures');
+                    $item->button = $item->getActionButtons($this->baseInfo['slug']);
                     $item->image = '<a href="/storage/'.$item->image.'" target="__black"><img src="/storage/'.$item->image.'" style="height: 100px; display: block; margin: 0 auto;"></a>';
                 }
             }

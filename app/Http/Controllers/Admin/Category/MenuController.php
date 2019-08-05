@@ -74,8 +74,8 @@ class MenuController extends Controller {
 
             if ( $model ) {
                 foreach ( $model as $item ) {
-                    $item->title = "<a href='".url('/admin/menus/'.$item->id)."'>".$item->title."</a>";
-                    $item->button = $item->getActionButtons('menus');
+                    $item->title = "<a href='".url($this->baseInfo['link'].'/'.$item->id)."'>".$item->title."</a>";
+                    $item->button = $item->getActionButtons($this->baseInfo['slug']);
                 }
             }
 

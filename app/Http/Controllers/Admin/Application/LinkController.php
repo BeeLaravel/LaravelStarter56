@@ -75,7 +75,7 @@ class LinkController extends Controller {
 
             if ( $model ) {
                 foreach ( $model as $item ) {
-                    $item->button = $item->getActionButtons('links');
+                    $item->button = $item->getActionButtons($this->baseInfo['slug']);
                 }
             }
 

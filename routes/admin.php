@@ -31,6 +31,7 @@ Route::group([
 	$router->resource('sites', 'Architecture\SiteController'); // 站点
 	$router->resource('departments', 'Architecture\DepartmentController'); // 部门
 	// ### 工作流
+	$router->resource('workflow', 'Workflow\WorkflowController'); // 工作流
 	$router->resource('places', 'Workflow\PlaceController'); // 状态
 	$router->resource('transitions', 'Workflow\TransitionController'); // 过渡
 	// ### 用户信息

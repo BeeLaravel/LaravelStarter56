@@ -36,7 +36,7 @@
                     </div>
                 @endif
                 <div class="panel-body panel-form">
-                    <form class="form-horizontal form-bordered" action="{{ url('/admin/pages/'.$item['id']) }}" method="POST" enctype="multipart/form-data">
+                    <form class="form-horizontal form-bordered" action="{{ url($link.'/'.$item['id']) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         {{ method_field('PATCH') }}
                         <input type="hidden" name="id" value="{{$item['id']}}">

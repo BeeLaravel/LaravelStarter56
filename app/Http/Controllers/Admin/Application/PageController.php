@@ -77,7 +77,7 @@ class PageController extends Controller {
 
             if ( $model ) {
                 foreach ( $model as $item ) {
-                    $item->button = $item->getActionButtons('pages');
+                    $item->button = $item->getActionButtons($this->baseInfo['slug']);
                 }
             }
 

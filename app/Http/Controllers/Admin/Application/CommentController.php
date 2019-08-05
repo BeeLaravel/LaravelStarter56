@@ -69,7 +69,7 @@ class CommentController extends Controller {
             if ( $model ) {
                 foreach ( $model as $item ) {
                     // $item->user_name = $item->created_by ? $item->user->name : '未知';
-                    $item->button = $item->getActionButtons('pages');
+                    $item->button = $item->getActionButtons($this->baseInfo['slug']);
                 }
             }
 
