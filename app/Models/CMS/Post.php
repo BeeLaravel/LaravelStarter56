@@ -1,15 +1,15 @@
 <?php
-
 namespace App\Models\CMS;
 
 use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Translatable\HasTranslations;
 use App\Traits\Admin\ActionButtonTrait;
 
-class Post extends Model
-{
+class Post extends Model {
     use SoftDeletes;
+    use HasTranslations;
     use ActionButtonTrait;
 
     protected $table = 'cms_posts';
@@ -22,6 +22,9 @@ class Post extends Model
         'sort',
         'user_id',
         'category_id',
+    ];
+    public $translatable = [
+        'title'
     ];
 
     public function category() { // 分类

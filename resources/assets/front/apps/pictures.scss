@@ -1,0 +1,14 @@
+@import "../commons/reset.scss";
+@import "../commons/common.scss";
+@import "../commons/animate.scss";
+
+.item {
+	a {
+		i {
+			width: 20px;
+			height: 20px;
+			text-align: center;
+			line-height: 20px;
+		}
+	}
+}

@@ -1,0 +1,29 @@
+@import "../layouts/resets.scss";
+@import "../layouts/commons.scss";
+@import "../layouts/animates.scss";
+
+.item {
+    a.edit, a.delete {
+        width: 18px;
+        height: 20px;
+        text-align: center;
+        line-height: 20px;
+        position: absolute;
+        top: 0;
+        display: none;
+    }
+    a.edit {
+        right: 18px;
+        top: 1px;
+    }
+    a.delete {
+        right: 0;
+    }
+    &:hover {
+        box-shadow: 0 1px 5px #ccc;
+
+        a.edit, a.delete {
+            display: inline-block;
+        }
+    }
+}

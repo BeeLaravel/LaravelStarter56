@@ -1,5 +1,5 @@
-@extends('admin.layout.page')
-@section('stylesheet')
+@extends('admin.layouts.page')
+@section('styles')
     <link href="{{asset('template/color_admin/plugins/ionicons/css/ionicons.min.css')}}" rel="stylesheet" />
 @endsection
 @section('page')
@@ -30,10 +30,8 @@
         </div>
     </div>
 @endsection
-@section('script')
-	<!-- ================== BEGIN PAGE LEVEL JS ================== -->
-	<script src="{{asset('template/color_admin/js/apps.min.js')}}"></script>
-	<!-- ================== END PAGE LEVEL JS ================== -->
+@section('scripts')
+	<script src="{{ asset('template/color_admin/js/apps.min.js') }}"></script>
 	
 	<script>
 		$(document).ready(function() {

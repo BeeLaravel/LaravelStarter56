@@ -285,33 +285,33 @@
                 callback();
             }
         },
-        _requestData: function(callback) {
+        _requestData: function(callback) { // 加载数据
             var self = this,
-                options = this.options,
-                maxPage = options.maxPage,
-                curPage = options.state.curPage++, // cur page
-                path = options.path,
-                dataType = options.dataType,
-                params = options.params,
-                headers = options.headers,
-                pageurl;
+                options = this.options, // 选项
+                maxPage = options.maxPage, // 最大页
+                curPage = options.state.curPage++, // 当前页
+                path = options.path, // 请求路径
+                dataType = options.dataType, // 数据类型
+                params = options.params, // 参数
+                headers = options.headers, // 头部
+                pageurl; // 当前页路径
 
-            if ( maxPage !== undefined && curPage > maxPage ){
-                options.state.isBeyondMaxPage = true;
-                options.callbacks.loadingFinished(this.$loading, options.state.isBeyondMaxPage);
+            if ( maxPage !== undefined && curPage > maxPage ) { // 有最大页 且 当前页大于最大页
+                options.state.isBeyondMaxPage = true; // 已达最大页
+                options.callbacks.loadingFinished(this.$loading, options.state.isBeyondMaxPage); // 加载结束
                 return;
             }
 
-            pageurl = (typeof path === 'function') ? path(curPage) : path.join(curPage);
+            pageurl = (typeof path === 'function') ? path(curPage) : path.join(curPage); // 当前页
 
             this._debug('heading into ajax', pageurl+$.param(params));
 
-            options.callbacks.loadingStart(this.$loading);
+            options.callbacks.loadingStart(this.$loading); // 开始加载
 
-            options.state.isDuringAjax = true;
-            options.state.isProcessingData = true;
+            options.state.isDuringAjax = true; // 在加载数据中
+            options.state.isProcessingData = true; // 处理数据中
 
-            $.ajax({
+            $.ajax({ // 加载数据
                 url: pageurl,
                 data: params,
                 headers: headers,
@@ -325,14 +325,14 @@
                 }
             });
         },
-        _handleResponse: function(data, callback) {
+        _handleResponse: function(data, callback) { // 处理正确的加载数据
             var self = this,
                 options = this.options,
-                content = $.trim(options.callbacks.renderData(data, options.dataType)),
+                content = $.trim(options.callbacks.renderData(data, options.dataType)), // 渲染数据
                 $content = $(content),
                 checkImagesLoaded = options.checkImagesLoaded;
 
-            if ( !checkImagesLoaded ) {
+            if ( !checkImagesLoaded ) { // 不检查图片是否已加载
                self.append($content, callback);
                self.options.callbacks.loadingFinished(self.$loading, self.options.state.isBeyondMaxPage);
             } else {
@@ -342,7 +342,7 @@
                 });
             }
         },
-        _responeseError: function(xhr) { // ok
+        _responeseError: function(xhr) { // 加载失败
             this.$loading.hide();
             this.options.callbacks.loadingError(this.$message, xhr);
 

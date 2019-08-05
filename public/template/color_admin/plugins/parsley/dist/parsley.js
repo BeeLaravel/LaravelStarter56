@@ -94,7 +94,7 @@
     // Supported inputs by default
     inputs: 'input, textarea, select',
     // Excluded inputs by default
-    excluded: 'input[type=button], input[type=submit], input[type=reset], input[type=hidden]',
+    excluded: 'input[type=button], input[type=submit], input[type=reset], input[type=hidden], input[type=checkbox][data-render=switchery]',
     // Stop validating field on highest priority failing constraint
     priorityEnabled: true,
     // ### UI

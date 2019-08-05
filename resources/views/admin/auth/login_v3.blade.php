@@ -1,5 +1,5 @@
-@extends('admin.layout.page')
-@section('stylesheet')
+@extends('admin.layouts.page')
+@section('styles')
     <link href="{{asset('template/color_admin/plugins/ionicons/css/ionicons.min.css')}}" rel="stylesheet" />
     <link href="{{asset('template/color_admin/plugins/parsley/src/parsley.css')}}" rel="stylesheet" />
 @endsection
@@ -60,12 +60,10 @@
         </div>
     </div>
 @endsection
-@section('script')
-	<!-- ================== BEGIN PAGE LEVEL JS ================== -->
+@section('scripts')
     <script src="{{ asset('template/color_admin/plugins/parsley/dist/parsley.min.js') }}"></script>
     <script src="{{ asset('template/color_admin/plugins/parsley/src/i18n/zh_cn.js') }}"></script>
 	<script src="{{ asset('template/color_admin/js/apps.min.js') }}"></script>
-	<!-- ================== END PAGE LEVEL JS ================== -->
 
 	<script>
 		$(document).ready(function() {

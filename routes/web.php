@@ -47,7 +47,7 @@ Route::group([
 });
 
 Route::group([ // 案例
-	'prefix' => 'case'
+	'prefix' => 'cases'
 ], function ($router) {
 	Route::get('/batch-upload', ['as' => 'upload', 'uses' => 'Resource\ImageController@getUpload']);
 	Route::get('/{id}/edit', ['as' => 'case', 'uses' => 'Project\Cases\IndexController@edit']);
@@ -59,4 +59,21 @@ Route::group([ // 微信
 ], function ($router) {
 	Route::get('/official', ['as' => 'official', 'uses' => 'Wechat\Official\IndexController@index']);
 	Route::get('/personal', ['as' => 'personal', 'uses' => 'Wechat\Personal\IndexController@index']);
+});
+
+Route::group([ // 测试
+	'prefix' => 'test'
+], function ($router) {
+	Route::get('/system', ['as' => 'system', 'uses' => 'Test\System\IndexController@index']);
+
+	Route::get('/info', ['as' => 'info', 'uses' => 'Test\System\IndexController@info']);
+	Route::get('/version', ['as' => 'version', 'uses' => 'Test\System\IndexController@version']);
+	Route::get('/extensions', ['as' => 'extensions', 'uses' => 'Test\System\IndexController@extensions']);
+	Route::get('/extension/{extension?}', ['as' => 'extension', 'uses' => 'Test\System\IndexController@extension']);
+	Route::get('/classes', ['as' => 'classes', 'uses' => 'Test\System\IndexController@classes']);
+	Route::get('/class/{class?}', ['as' => 'class', 'uses' => 'Test\System\IndexController@class']);
+	Route::get('/class_methods/{class?}', ['as' => 'class_methods', 'uses' => 'Test\System\IndexController@class_methods']);
+	Route::get('/class_vars/{class?}', ['as' => 'class_vars', 'uses' => 'Test\System\IndexController@class_vars']);
+	Route::get('/functions/{type?}', ['as' => 'functions', 'uses' => 'Test\System\IndexController@functions']);
+	Route::get('/function/{function?}', ['as' => 'function', 'uses' => 'Test\System\IndexController@function']);
 });

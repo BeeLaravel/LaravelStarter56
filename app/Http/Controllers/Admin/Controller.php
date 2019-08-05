@@ -1,12 +1,8 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
-
-class Controller extends \App\Http\Controllers\Controller
-{
+class Controller extends \App\Http\Controllers\Controller {
     public function __construct() {
-    	$this->middleware('auth:admin');
+    	// $this->middleware('auth:admin');
     }
 }

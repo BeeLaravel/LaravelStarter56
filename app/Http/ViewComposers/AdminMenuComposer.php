@@ -2,7 +2,8 @@
 namespace App\Http\ViewComposers;
 
 use Illuminate\Contracts\View\View;
-use App\Models\System\Menu;
+
+use App\Models\Category\Menu;
 
 class AdminMenuComposer {
     protected $menu;

@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 class GeneratePassword extends Command {
     protected $signature = 'tool:genpass
         {--length=10 : Password Length}';
-    protected $description = 'Generate Password';
+    protected $description = 'Generate Password 生成密码';
 
     public function __construct() {
         parent::__construct();

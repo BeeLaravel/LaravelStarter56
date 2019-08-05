@@ -1,6 +1,5 @@
 {
-    "/starter/element/js/app.js": "/starter/element/js/app.js",
     "/starter/vue/css/app.css": "/starter/vue/css/app.css",
-    "/starter/element/css/app.css": "/starter/element/css/app.css",
-    "/css/link.css": "/css/link.css"
+    "/statics/backend/styles/links.css": "/statics/backend/styles/links.css",
+    "/statics/backend/styles/pictures.css": "/statics/backend/styles/pictures.css"
 }

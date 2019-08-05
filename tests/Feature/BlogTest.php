@@ -1,20 +1,11 @@
 <?php
-
 namespace Tests\Feature;
 
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class BlogTest extends TestCase
-{
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function testExample()
-    {
+class BlogTest extends \Tests\TestCase {
+    public function testExample() {
         $this->assertTrue(true);
     }
 }

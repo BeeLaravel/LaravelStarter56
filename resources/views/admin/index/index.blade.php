@@ -1,5 +1,5 @@
 @extends('template.color_admin.layouts.base')
-@section('stylesheet')
+@section('styles')
     <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
     <link href="{{asset('template/color_admin/plugins/jquery-jvectormap/jquery-jvectormap-1.2.2.css')}}" rel="stylesheet" />
     <link href="{{asset('template/color_admin/plugins/bootstrap-datepicker/css/datepicker.css')}}" rel="stylesheet" />
@@ -64,7 +64,6 @@
         </div>
     </div>
     <div class="row">
-        <!-- begin col-8 -->
         <div class="col-md-8">
             <div class="panel panel-inverse" data-sortable-id="index-1">
                 <div class="panel-heading">
@@ -80,7 +79,6 @@
                     <div id="interactive-chart" class="height-sm"></div>
                 </div>
             </div>
-            
             <ul class="nav nav-tabs nav-tabs-inverse nav-justified nav-justified-mobile" data-sortable-id="index-2">
                 <li class="active"><a href="#latest-post" data-toggle="tab"><i class="fa fa-picture-o m-r-5"></i> <span class="hidden-xs">最近文章</span></a></li>
                 <li class=""><a href="#purchase" data-toggle="tab"><i class="fa fa-shopping-cart m-r-5"></i> <span class="hidden-xs">订单</span></a></li>
@@ -265,7 +263,6 @@
                     </div>
                 </div>
             </div>
-            
             <div class="panel panel-inverse" data-sortable-id="index-4">
                 <div class="panel-heading">
                     <div class="panel-heading-btn">
@@ -295,7 +292,6 @@
                     <a href="javascript:;" class="btn btn-primary btn-sm m-l-5">发表</a>
                 </div>
             </div>
-            
             <div class="panel panel-inverse" data-sortable-id="index-5">
                 <div class="panel-heading">
                     <div class="panel-heading-btn">
@@ -360,8 +356,6 @@
                 </div>
             </div>
         </div>
-        <!-- end col-8 -->
-        <!-- begin col-4 -->
         <div class="col-md-4">
             <div class="panel panel-inverse" data-sortable-id="index-6">
                 <div class="panel-heading">
@@ -417,7 +411,6 @@
                     </table>
                 </div>
             </div>
-            
             <div class="panel panel-inverse" data-sortable-id="index-7">
                 <div class="panel-heading">
                     <div class="panel-heading-btn">
@@ -432,7 +425,6 @@
                     <div id="donut-chart" class="height-sm"></div>
                 </div>
             </div>
-            
             <div class="panel panel-inverse" data-sortable-id="index-8">
                 <div class="panel-heading">
                     <div class="panel-heading-btn">
@@ -490,7 +482,6 @@
                     </ul>
                 </div>
             </div>
-            
             <div class="panel panel-inverse" data-sortable-id="index-9">
                 <div class="panel-heading">
                     <div class="panel-heading-btn">
@@ -505,7 +496,6 @@
                     <div id="world-map" class="height-sm width-full"></div>
                 </div>
             </div>
-            
             <div class="panel panel-inverse" data-sortable-id="index-10">
                 <div class="panel-heading">
                     <div class="panel-heading-btn">
@@ -521,11 +511,9 @@
                 </div>
             </div>
         </div>
-        <!-- end col-4 -->
     </div>
-    <!-- end row -->
 @endsection
-@section('script')
+@section('scripts')
     <!-- ================== BEGIN PAGE LEVEL JS ================== -->
     <script src="{{asset('template/color_admin/plugins/gritter/js/jquery.gritter.js')}}"></script>
     <script src="{{asset('template/color_admin/plugins/flot/jquery.flot.min.js')}}"></script>
