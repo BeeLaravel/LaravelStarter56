@@ -51,6 +51,7 @@
         "walkor/Workerman": "^3.5",
         "wpb/string-blade-compiler": "~3.6",
         "yuanchao/laravel-5-markdown-editor": "dev-master",
+        "symfony/workflow": "^4.3",
         "zedisdog/laravel-schema-extend": "^1.0"
     },
     "require-dev": {
