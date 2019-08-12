@@ -34,6 +34,11 @@ Route::group([
 	$router->resource('workflows', 'Workflow\WorkflowController'); // 工作流
 	$router->resource('places', 'Workflow\PlaceController'); // 状态
 	$router->resource('transitions', 'Workflow\TransitionController'); // 过渡
+	// ### 配置
+	$router->resource('configures', 'Configure\ConfigureController', ['except' => ['show']]); // 配置
+	$router->get('configures/{configure_id}', 'Configure\ConfigureItemController@index'); // 配置项 列表
+	$router->resource('configure-items', 'Configure\ConfigureItemController'); // 配置项
+	$router->resource('configure-templates', 'Configure\ConfigureTemplateController'); // 配置模板
 	// ### 用户信息
 	
 	// ### Category 分类

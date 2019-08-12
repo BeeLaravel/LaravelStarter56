@@ -4,19 +4,19 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2b1a17fab8e03607bf510ffb994e0667",
+    "content-hash": "c218a40af4a787d8ccc374ff8cf50c66",
     "packages": [
         {
             "name": "96qbhy/express",
             "version": "1.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/96qbhy/express.git",
+                "url": "https://github.com/qbhy/express.git",
                 "reference": "65be095483d87bd9bf93e6b64dbecbc3a039ecb0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/96qbhy/express/zipball/65be095483d87bd9bf93e6b64dbecbc3a039ecb0",
+                "url": "https://api.github.com/repos/qbhy/express/zipball/65be095483d87bd9bf93e6b64dbecbc3a039ecb0",
                 "reference": "65be095483d87bd9bf93e6b64dbecbc3a039ecb0",
                 "shasum": ""
             },
@@ -2569,6 +2569,46 @@
             "time": "2018-10-12T19:39:35+00:00"
         },
         {
+            "name": "laravelchen/laravel-editormd",
+            "version": "2.5.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/LaravelChen/laravel-editormd.git",
+                "reference": "b3b25a063bef30f5af8f172ac137cb4bd7d3bca5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/LaravelChen/laravel-editormd/zipball/b3b25a063bef30f5af8f172ac137cb4bd7d3bca5",
+                "reference": "b3b25a063bef30f5af8f172ac137cb4bd7d3bca5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "zgldh/qiniu-laravel-storage": "^0.7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "LaravelChen\\Editormd\\": "src/"
+                },
+                "files": [
+                    "src/helper.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "LaravelChen",
+                    "email": "848407695@qq.com"
+                }
+            ],
+            "description": "laravel-editor-mb",
+            "time": "2017-08-03T04:45:44+00:00"
+        },
+        {
             "name": "laravelcollective/html",
             "version": "v5.6.10",
             "source": {
@@ -3908,6 +3948,52 @@
                 "overtrue"
             ],
             "time": "2019-01-13T14:37:42+00:00"
+        },
+        {
+            "name": "overtrue/laravel-ueditor",
+            "version": "1.2.10",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/overtrue/laravel-ueditor.git",
+                "reference": "f73f6399a21ab8c6635e492b7b5a28caaafa4127"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/overtrue/laravel-ueditor/zipball/f73f6399a21ab8c6635e492b7b5a28caaafa4127",
+                "reference": "f73f6399a21ab8c6635e492b7b5a28caaafa4127",
+                "shasum": ""
+            },
+            "require-dev": {
+                "fabpot/php-cs-fixer": "^1.10"
+            },
+            "suggest": {
+                "overtrue/laravel-filesystem-qiniu": "如果你想要使用七牛云存储，也许你需要安装它哦~"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Overtrue\\LaravelUEditor\\UEditorServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Overtrue\\LaravelUEditor\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "overtrue",
+                    "email": "anzhengchao@gmail.com"
+                }
+            ],
+            "description": "UEditor integration for Laravel.",
+            "time": "2018-12-22T07:40:09+00:00"
         },
         {
             "name": "overtrue/pinyin",
@@ -7832,6 +7918,58 @@
                 "psr-7"
             ],
             "time": "2018-09-05T19:29:37+00:00"
+        },
+        {
+            "name": "zgldh/qiniu-laravel-storage",
+            "version": "v0.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zgldh/qiniu-laravel-storage.git",
+                "reference": "1651af398c46e994df4179cfa41bf80cb025e7e0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zgldh/qiniu-laravel-storage/zipball/1651af398c46e994df4179cfa41bf80cb025e7e0",
+                "reference": "1651af398c46e994df4179cfa41bf80cb025e7e0",
+                "shasum": ""
+            },
+            "require": {
+                "league/flysystem": "^1.0",
+                "php": ">=5.3.3",
+                "qiniu/php-sdk": "^7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "zgldh\\QiniuStorage\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "zgldh",
+                    "role": "Original Developer",
+                    "email": "zgldh@hotmail.com"
+                },
+                {
+                    "name": "abcsun",
+                    "role": "Developer",
+                    "email": "chenglongsun_nj@163.com",
+                    "homepage": "http://github.com/abcsun"
+                }
+            ],
+            "description": "Qiniu Resource (Cloud) Storage SDK for Laravel 5",
+            "keywords": [
+                "cloud",
+                "laravel",
+                "qiniu",
+                "sdk",
+                "storage"
+            ],
+            "time": "2017-07-12T14:34:41+00:00"
         }
     ],
     "packages-dev": [
