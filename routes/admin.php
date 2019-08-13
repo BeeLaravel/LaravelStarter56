@@ -51,6 +51,8 @@ Route::group([
 	// ### Application
 	$router->resource('pages', 'Application\PageController'); // 页面
 	$router->resource('posts', 'Application\PostController'); // 文章
+	$router->get('notes/renew/{id}', 'Application\NoteController@renew'); // 笔记
+	$router->resource('notes', 'Application\NoteController'); // 笔记
 	$router->resource('links', 'Application\LinkController'); // 链接
 	$router->resource('pictures', 'Application\PictureController'); // 图片
 	$router->resource('comments', 'Application\CommentController'); // 评论

@@ -77,3 +77,14 @@ Route::group([ // 测试
 	Route::get('/functions/{type?}', ['as' => 'functions', 'uses' => 'Test\System\IndexController@functions']);
 	Route::get('/function/{function?}', ['as' => 'function', 'uses' => 'Test\System\IndexController@function']);
 });
+
+
+// ### 其他
+Route::post('markdown/editormd/upload', function() { // chenhua/laravel5-markdown-editor 图片上传
+    $info = \Chenhua\MarkdownEditor\MarkdownEditor::upload();
+    return json_encode($info);
+});
+Route::post('markdown/endaEdit/upload', function() { // yuanchao/laravel-5-markdown-editor 图片上传
+    $data = \YuanChao\Editor\EndaEditor::uploadImgFile('uploads/endaEdit'); // uploads/endaEdit uploads/markdown uploads/images
+    return json_encode($data);     
+});

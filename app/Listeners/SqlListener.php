@@ -14,3 +14,19 @@ class SqlListener {
         file_put_contents($filepath, $log, FILE_APPEND);
     }
 }
+// $sql = \DB::table('my_table')->select()->tosql();
+
+// \DB::connection()->enableQueryLog();
+// \DB::table('my_table')->insert($data);
+// $logs = \DB::getQueryLog();
+// dd($logs);
+
+// \DB::listen(function($query) {
+//     $bindings = $query->bindings;
+//     $sql = $query->sql;
+//     foreach ( $bindings as $replace ) {
+//         $value = is_numeric($replace) ? $replace : "'".$replace."'";
+//         $sql = preg_replace('/\?/', $value, $sql, 1);
+//     }
+//     dd($sql);
+// });

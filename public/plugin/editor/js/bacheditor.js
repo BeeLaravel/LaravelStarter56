@@ -1067,7 +1067,7 @@ $(document).ready(function () {\n\
                 width: '100%',
                 top: 0,
                 left: 0,
-                'z-index': 999,
+                'z-index': 1050,
                 'margin-top': 0
             });
             $('.CodeMirror').css('height', $('html').height());
@@ -1165,7 +1165,7 @@ $(document).ready(function () {\n\
                 width: '100%',
                 top: 0,
                 left: 0,
-                'z-index': 999,
+                'z-index': 1050,
                 'margin-top': 0
             });
             $('.CodeMirror').css('height', $(document).height() - 70);
