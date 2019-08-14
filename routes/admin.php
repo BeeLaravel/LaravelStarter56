@@ -34,6 +34,11 @@ Route::group([
 	$router->resource('workflows', 'Workflow\WorkflowController'); // 工作流
 	$router->resource('places', 'Workflow\PlaceController'); // 状态
 	$router->resource('transitions', 'Workflow\TransitionController'); // 过渡
+	// ### 配置
+	$router->resource('configures', 'Configure\ConfigureController', ['except' => ['show']]); // 配置
+	$router->get('configures/{configure_id}', 'Configure\ConfigureItemController@index'); // 配置项 列表
+	$router->resource('configure-items', 'Configure\ConfigureItemController'); // 配置项
+	$router->resource('configure-templates', 'Configure\ConfigureTemplateController'); // 配置模板
 	// ### 用户信息
 	
 	// ### Category 分类
@@ -46,6 +51,8 @@ Route::group([
 	// ### Application
 	$router->resource('pages', 'Application\PageController'); // 页面
 	$router->resource('posts', 'Application\PostController'); // 文章
+	$router->get('notes/renew/{id}', 'Application\NoteController@renew'); // 笔记
+	$router->resource('notes', 'Application\NoteController'); // 笔记
 	$router->resource('links', 'Application\LinkController'); // 链接
 	$router->resource('pictures', 'Application\PictureController'); // 图片
 	$router->resource('comments', 'Application\CommentController'); // 评论
