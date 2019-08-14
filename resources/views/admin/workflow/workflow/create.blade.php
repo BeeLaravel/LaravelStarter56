@@ -50,24 +50,6 @@
                                 <input class="form-control" type="text" name="slug" value="{{ old('slug') }}" placeholder="标识" data-parsley-required="true" id="slug" />
                             </div>
                         </div>
-                        <div class="form-group"><!-- 内容 -->
-                            <label class="control-label col-md-3 col-sm-3" for="url">内容 * :</label>
-                            <div class="col-md-8 col-sm-8">
-                                <textarea name="content" class="form-control" id='myEditor' data-parsley-required="true">{{ old('content') }}</textarea>
-                            </div>
-                        </div>
-                        <div class="form-group"><!-- 类型 -->
-                            <label class="control-label col-md-3 col-sm-3" for="type">类型 * :</label>
-                            <div class="col-md-8 col-sm-8">
-                                <select class="form-control" name="type" id="type">
-                                    @if ( $types )
-                                        @foreach ( $types as $key => $value )
-                                            <option value="{{ $key }}" @if ( (old('type')??'Other')==$key ) selected="selected" @endif>{{ $value }}</option>
-                                        @endforeach
-                                    @endif
-                                </select>
-                            </div>
-                        </div>
                         {{--<div class="form-group">--}}<!-- 分类 -->
                             {{--<label class="control-label col-md-3 col-sm-3" for="parent_id">分类 * :</label>--}}
                             {{--<div class="col-md-8 col-sm-8">--}}
@@ -85,12 +67,6 @@
                             <label class="control-label col-md-3 col-sm-3" for="tags">标签 :</label>
                             <div class="col-md-8 col-sm-8">
                                 <ul id="tags" class="success"></ul>
-                            </div>
-                        </div>
-                        <div class="form-group"><!-- 关键词 -->
-                            <label class="control-label col-md-3 col-sm-3" for="keywords">关键词 :</label>
-                            <div class="col-md-8 col-sm-8">
-                                <ul id="keywords" class="success"></ul>
                             </div>
                         </div>
                         <div class="form-group"><!-- 描述 -->
@@ -124,8 +100,6 @@
     <script src="{{ asset('template/color_admin/plugins/jquery-tag-it/js/tag-it.min.js')}} "></script>
     <!-- <script src="{{ asset('template/color_admin/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js')}} "></script> -->
     <!-- <script src="{{ asset('template/color_admin/plugins/bootstrap-tagsinput/bootstrap-tagsinput-typeahead.js')}} "></script> -->
-    
-    @include('editor::head')
 
     <script src="{{ asset('template/color_admin/js/apps.min.js') }}"></script>
 

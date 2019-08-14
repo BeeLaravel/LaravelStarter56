@@ -6,7 +6,7 @@ use App\Models\Category\Category;
 use App\Models\Category\Tag;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\Application\PictureRequest;
+use App\Http\Requests\Application\PictureRequest as ThisRequest;
 
 class PictureController extends Controller {
     private $baseInfo = [
@@ -108,7 +108,7 @@ class PictureController extends Controller {
 
         return view($this->baseInfo['view_path'].'create', array_merge($this->baseInfo, compact('types', 'categories', 'tags')));
     }
-    public function store(PictureRequest $request) {
+    public function store(ThisRequest $request) {
         // $path = $request->file('avatar')->store('avatars'); // 文件上传
         // $path = $request->file('avatar')->store( // 指定磁盘
         //     'avatars/'.$request->user()->id, 's3'
@@ -192,7 +192,7 @@ class PictureController extends Controller {
 
         return view($this->baseInfo['view_path'].'edit', array_merge($this->baseInfo, compact('types', 'categories', 'tags', 'item')));
     }
-    public function update(PictureRequest $request, int $id) {
+    public function update(ThisRequest $request, int $id) {
         $item = Picture::find($id);
 
         $data = $request->all();

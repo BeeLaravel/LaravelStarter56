@@ -6,7 +6,7 @@ use App\Models\Category\Category;
 use App\Models\Category\Tag;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\Application\LinkRequest;
+use App\Http\Requests\Application\LinkRequest as ThisRequest;
 
 class LinkController extends Controller {
     private $baseInfo = [
@@ -109,7 +109,7 @@ class LinkController extends Controller {
 
         return view($this->baseInfo['view_path'].'create', array_merge($this->baseInfo, compact('types', 'categories', 'tags')));
     }
-    public function store(LinkRequest $request) {
+    public function store(ThisRequest $request) {
         $result = ThisModel::create(array_merge($request->all(), [
             'created_by' => auth('admin')->user()->id,
         ]));
@@ -172,7 +172,7 @@ class LinkController extends Controller {
 
         return view($this->baseInfo['view_path'].'edit', array_merge($this->baseInfo, compact('types', 'categories', 'tags', 'item')));
     }
-    public function update(LinkRequest $request, int $id) {
+    public function update(ThisRequest $request, int $id) {
         $item = ThisModel::find($id);
         $result = $item->update($request->all());
 

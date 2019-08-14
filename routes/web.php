@@ -77,3 +77,9 @@ Route::group([ // 测试
 	Route::get('/functions/{type?}', ['as' => 'functions', 'uses' => 'Test\System\IndexController@functions']);
 	Route::get('/function/{function?}', ['as' => 'function', 'uses' => 'Test\System\IndexController@function']);
 });
+
+Route::group([ // Etcd
+	'domain' => '{company_code}.{main_domain}.{top_domain}'
+], function ($router) {
+	Route::get('/', 'Front\Site\IndexController@index')->name('front.site.index');
+});

@@ -30,7 +30,7 @@ $(document).ready(function(){
 
         "serverSide": true,
         "ajax": {
-            'url': "/admin/links"
+            'url': url
         },
 
         'searchDelay': 300, // 搜索延时
@@ -46,15 +46,9 @@ $(document).ready(function(){
         "columns": [
             {"data": "id", "name": "id"},
             {"data": "title", "name": "title", "orderable": true},
-            {"data": "type", "name": "type", "orderable": true},
-            {"data": "url", "name": "url", "orderable": true},
             {"data": "created_at", "name": "created_at", "orderable": true},
             {"data": "updated_at", "name": "updated_at", "orderable": true},
             {"data": "button", "name": "button", 'type': 'html', "orderable": false}
         ]
-    });
-    $('select[name=type]').change(function(){ // 类型
-        var type = $(this).val();
-        table.column(2).search(type).draw();
     });
 });

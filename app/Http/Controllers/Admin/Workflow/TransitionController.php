@@ -1,10 +1,10 @@
 <?php
 namespace App\Http\Controllers\Admin\Workflow;
 
-use App\Models\Workflow\Transaction as ThisModel;
+use App\Models\Workflow\Transition as ThisModel;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\Workflow\TransactionRequest;
+use App\Http\Requests\Workflow\TransitionRequest as ThisRequest;
 
 class TransitionController extends Controller {
     private $baseInfo = [
@@ -94,7 +94,7 @@ class TransitionController extends Controller {
     public function create(Request $request) {
         return view($this->baseInfo['view_path'].'create', array_merge($this->baseInfo, []));
     }
-    public function store(LinkRequest $request) {
+    public function store(ThisRequest $request) {
         $result = ThisModel::create(array_merge($request->all(), [
             'created_by' => auth('admin')->user()->id,
         ]));
@@ -115,7 +115,7 @@ class TransitionController extends Controller {
 
         return view($this->baseInfo['view_path'].'edit', array_merge($this->baseInfo, compact('item')));
     }
-    public function update(LinkRequest $request, int $id) {
+    public function update(ThisRequest $request, int $id) {
         $item = ThisModel::find($id);
         $result = $item->update($request->all());
 

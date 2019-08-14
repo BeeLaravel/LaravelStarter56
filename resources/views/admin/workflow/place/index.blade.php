@@ -34,8 +34,6 @@
                             <tr>
                                 <th>ID</th>
                                 <th>标题</th>
-                                <th>类型</th>
-                                <th>链接</th>
                                 <th>创建时间</th>
                                 <th>更新时间</th>
                                 <th>操作</th>
@@ -56,6 +54,9 @@
     <script type="text/javascript" src="{{ asset('template/color_admin/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js') }}"></script>
 
     <script src="{{ asset('template/color_admin/js/apps.min.js') }}"></script>
+    <script type="text/javascript">
+        var url = "{!!$link!!}";
+    </script>
     <script type="text/javascript" src="{{ asset('statics/admin/scripts/workflow/place.js') }}"></script>
 
     <script type="text/javascript" >

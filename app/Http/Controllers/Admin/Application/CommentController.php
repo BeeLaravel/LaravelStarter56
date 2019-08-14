@@ -6,7 +6,7 @@ use App\Models\Category\Category;
 use App\Models\Category\Tag;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\Application\CommentRequest;
+use App\Http\Requests\Application\CommentRequest as ThisRequest;
 
 class CommentController extends Controller {
     private $baseInfo = [
@@ -103,7 +103,7 @@ class CommentController extends Controller {
 
         return view($this->baseInfo['view_path'].'create', array_merge($this->baseInfo, compact('types', 'tags')));
     }
-    public function store(PageRequest $request) {
+    public function store(ThisRequest $request) {
         $result = Post::create(array_merge($request->all(), [
             'created_by' => auth('admin')->user()->id,
         ]));
@@ -161,7 +161,7 @@ class CommentController extends Controller {
 
         return view($this->baseInfo['view_path'].'edit', array_merge($this->baseInfo, compact('types', 'tags', 'item')));
     }
-    public function update(PageRequest $request, int $id) {
+    public function update(ThisRequest $request, int $id) {
         $post = ThisModel::find($id);
         $result = $post->update($request->all());
 

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Workflow;
 use App\Models\Workflow\Workflow as ThisModel;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\Workflow\WorkflowRequest;
+use App\Http\Requests\Workflow\WorkflowRequest as ThisRequest;
 
 class WorkflowController extends Controller {
     private $baseInfo = [
@@ -73,7 +73,7 @@ class WorkflowController extends Controller {
 
             if ( $model ) {
                 foreach ( $model as $item ) {
-                    $item->button = $item->getActionButtons($this->ThisModel['slug']);
+                    $item->button = $item->getActionButtons($this->baseInfo['slug']);
                 }
             }
 
@@ -94,7 +94,7 @@ class WorkflowController extends Controller {
     public function create(Request $request) {
         return view($this->baseInfo['view_path'].'create', array_merge($this->baseInfo, []));
     }
-    public function store(LinkRequest $request) {
+    public function store(ThisRequest $request) {
         $result = ThisModel::create(array_merge($request->all(), [
             'created_by' => auth('admin')->user()->id,
         ]));
@@ -115,7 +115,7 @@ class WorkflowController extends Controller {
 
         return view($this->baseInfo['view_path'].'edit', array_merge($this->baseInfo, compact('item')));
     }
-    public function update(LinkRequest $request, int $id) {
+    public function update(ThisRequest $request, int $id) {
         $item = ThisModel::find($id);
         $result = $item->update($request->all());
 

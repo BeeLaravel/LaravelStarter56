@@ -3,7 +3,7 @@ namespace App\Http\Requests\Workflow;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TransactionRequest extends FormRequest {
+class TransitionRequest extends FormRequest {
     public function authorize() {
         return true;
     }
