@@ -62,7 +62,11 @@
                             <label class="control-label col-md-3 col-sm-3" for="url">内容 * :</label>
                             <div class="col-md-8 col-sm-8">
                                 <div id="editor" class="editor">
-                                    <textarea name="content" class="form-control" id='myEditor' data-parsley-required="true" style="display: none;">{{ $item['content'] }}</textarea>
+                                    @if ( $item['content_type']=='ueditor' )
+                                        <script type="text/plain" name="content" id="myEditor">{!! $item['content'] !!}</script>
+                                    @else
+                                        <textarea name="content" class="form-control" id='myEditor' data-parsley-required="true" style="display: none;">{{ $item['content'] }}</textarea>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -114,13 +118,31 @@
 
     <script src="{{ asset('template/color_admin/js/apps.min.js') }}"></script>
     @switch ( $item['content_type'] )
+        @case('html')
+
+        @break
         @case('markdown')
 
+        @break
+        @case('tinymce')
+
+        @break
+        @case('ueditor')
+            @include('vendor.ueditor.assets')
+            <script type="text/javascript">
+                var ue = UE.getEditor('myEditor');
+                ue.ready(function() {
+                    ue.execCommand('serverparam', '_token', '{{ csrf_token() }}');
+                });
+            </script>
         @break
         @case('editormd')
             @include('vendor.markdown.encode', [
                 'editors' => ['editor']
             ])
+        @break
+        @case('endaEdit')
+            @include('vendor.editor.head')
         @break
         @default
             @include('vendor.editor.head')
